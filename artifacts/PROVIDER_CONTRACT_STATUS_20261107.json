@@ -1,0 +1,76 @@
+{
+  "schema": "ganesha.provider-contract-evidence.v1",
+  "status": "PUBLIC_RGS_INTERFACE_MAPPED; PRODUCTION_PROVIDER_CONTRACT_UNVERIFIED",
+  "public_sources": [
+    "https://stake-engine.com/docs/rgs",
+    "https://stake-engine.com/docs/rgs/wallet",
+    "https://github.com/engineio/ts-client"
+  ],
+  "local_sdk_provenance": "qa/R98_SDK_PROVENANCE_RECONCILIATION_20261107.json",
+  "public_wire_contract": {
+    "authenticate": {
+      "path": "/wallet/authenticate",
+      "body": [
+        "sessionID",
+        "language"
+      ]
+    },
+    "play": {
+      "path": "/wallet/play",
+      "body": [
+        "sessionID",
+        "mode",
+        "amount"
+      ]
+    },
+    "event": {
+      "path": "/bet/event",
+      "body": [
+        "sessionID",
+        "event"
+      ]
+    },
+    "end_round": {
+      "path": "/wallet/end-round",
+      "body": [
+        "sessionID"
+      ]
+    }
+  },
+  "idempotency": {
+    "operation_idempotency_key_in_client_wire": false,
+    "local_client_mutation_fencing": "IMPLEMENTED",
+    "provider_atomic_duplicate_suppression": "UNVERIFIED",
+    "timeout_commit_reconciliation": "UNVERIFIED"
+  },
+  "settlement": {
+    "zero_payout_play_closes_round": true,
+    "positive_payout_requires_end_round": true,
+    "server_ledger_atomicity": "UNVERIFIED",
+    "provider_refund_guarantees": "UNVERIFIED",
+    "live_wallet_balance_reconciliation": "UNVERIFIED"
+  },
+  "game_contract": {
+    "scatter_3": 10,
+    "scatter_4": 12,
+    "scatter_5": "embedded EPICBUY_V37 within BASE settlement; no extra debit/Play; disabled without provider-authoritative payload and BASE-unit conversion",
+    "scatter_6_plus": "FAIL_CLOSED",
+    "free_spin_retrigger": "FAIL_CLOSED"
+  },
+  "external_evidence_required": [
+    "Provider/RGS staging endpoint and credentials",
+    "Provider-authoritative Golden Vectors",
+    "server-side idempotency and duplicate Play/EndRound guarantee",
+    "wallet ledger and refund/reversal contract",
+    "authoritative embedded 5-Scatter EPIC Math payload and BASE payout-unit conversion",
+    "Provider-confirmed Free Spin sequencing and replay recovery",
+    "Stake Studio upload permission and review outcome"
+  ],
+  "local_tests": {
+    "R98 SDK wire fixture": "4/4 PASS",
+    "R98 Wild/Scatter": "55/55 PASS",
+    "Full Scratch Python": "446/446 PASS",
+    "Full Scratch Frontend/RGS Node": "33/33 PASS"
+  },
+  "release_conclusion": "Do not claim Provider approval or production settlement readiness from local SDK fixtures."
+}

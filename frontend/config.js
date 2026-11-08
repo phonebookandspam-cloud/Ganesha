@@ -1,0 +1,1 @@
+window.GANESHA_CONFIG = {"roundEndpoint": "http://127.0.0.1:8795", "environment": "local-development", "providerConnected": false, "roundApiEnabled": false, "demoApiEnabled": true, "gameFixtureApiEnabled": true, "runtimeApiEnabled": true};

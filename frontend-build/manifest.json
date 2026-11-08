@@ -1,0 +1,40 @@
+{
+  "schema": "ganesha.frontend-engineering-manifest.v1",
+  "package_kind": "NON_FINANCIAL_ENGINEERING_PREVIEW",
+  "entrypoint": "index.html",
+  "config": "config.js",
+  "provider_sdk": {
+    "package": "stake-engine",
+    "version": "0.1.32",
+    "status": "BETA_READ_ONLY_AUTHENTICATE_ONLY"
+  },
+  "assets": {
+    "symbols": [
+      "assets/a_icon_v14.svg",
+      "assets/chakra_icon_v14.svg",
+      "assets/elephant_icon_v14.svg",
+      "assets/ganesha_wild_v14.svg",
+      "assets/k_icon_v14.svg",
+      "assets/lotus_scatter_v14.svg",
+      "assets/modak_icon_v14.svg",
+      "assets/mouse_icon_v14.svg"
+    ],
+    "background": "assets/ganesha_temple_scene_v14.png",
+    "audio": [
+      { "path": "assets/reel-stop.wav", "source": "assets/sfx/reel-stop.wav" },
+      { "path": "assets/wild-expansion.wav", "source": "assets/sfx/wild-expansion.wav" },
+      { "path": "assets/free-spins.wav", "source": "assets/sfx/free-spins.wav" },
+      { "path": "assets/win.wav", "source": "assets/sfx/win.wav" }
+    ]
+  },
+  "capabilities": {
+    "provider_authenticate": "READ_ONLY",
+    "play": false,
+    "end_round": false,
+    "event": false,
+    "wagering": false,
+    "bonus_buy": false,
+    "outcome_mutation_by_frontend": false
+  },
+  "notice": "Project inventory manifest only. Not a Stake Engine official manifest and not an upload-approval claim."
+}

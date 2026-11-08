@@ -1,0 +1,53 @@
+{
+  "schema": "ganesha.math-buy-mode-audit-addendum.v1",
+  "status": "MATH_DISTRIBUTION_METRICS_RECOMPUTED; CANONICAL_INPUTS_STILL_UNAVAILABLE",
+  "source_index_sha256": "1c9dcf4915a3899a35dc970b1c0f8bc5f5f09c4feb3d387cf5dc4461859ac2dd",
+  "mode_costs_from_index_json": {
+    "BASE": 1.0,
+    "MAGICBUY_V36": 100.0,
+    "EPICBUY_V37": 100.0
+  },
+  "frontend_costs": {
+    "BASE": 1,
+    "MAGICBUY_V36": 100,
+    "EPICBUY_V37": 100
+  },
+  "cost_alignment": "PASS; index.json and R98 Frontend configured costs match for all modes",
+  "pinned_sdk_distribution_results": {
+    "MAGICBUY_V36": {
+      "rtp": 0.965,
+      "variance_x_squared": 62509.4008260656,
+      "standard_deviation_x": 250.01880094518012,
+      "cvar_99_9_x": 2586.466156144935,
+      "max_win_x_base": 50000,
+      "max_win_x_purchase_cost": 500,
+      "max_win_probability": 1e-07,
+      "max_win_frequency_rounds": 10000000
+    },
+    "EPICBUY_V37": {
+      "rtp": 0.965,
+      "variance_x_squared": 80635.81922938059,
+      "standard_deviation_x": 283.9644682515413,
+      "cvar_99_9_x": 2601.726946814079,
+      "max_win_x_base": 50000,
+      "max_win_x_purchase_cost": 500,
+      "max_win_probability": 1e-07,
+      "max_win_frequency_rounds": 10000000
+    }
+  },
+  "weighted_hit_rates_from_frontend_mode_descriptions": {
+    "MAGICBUY_V36": 0.55,
+    "EPICBUY_V37": 0.35,
+    "meaning": "non-zero outcome probability, not cost multiplier"
+  },
+  "interpretation": "The earlier 55% Magic Buy figure is a weighted non-zero outcome rate, not a 55x cost. Both buy modes cost 100x according to index.json and Frontend, and the LUT distributions return 96.5% RTP when divided by cost 100. No 55x mode mismatch exists.",
+  "remaining_blockers": [
+    "BASE payout quantum 45,235 violations",
+    "BASE CVaR99.9 710.548076x > 700x",
+    "4-Scatter Books 1,095 legacy 10-spin",
+    "5-Scatter Books 72 missing provider-authoritative embedded EPIC payload",
+    "1,694 Books contain unauthorized retrigger events",
+    "canonical generator and approved probability inputs missing",
+    "provider Golden Vectors missing"
+  ]
+}

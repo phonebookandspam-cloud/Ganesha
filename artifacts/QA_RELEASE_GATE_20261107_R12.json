@@ -1,0 +1,540 @@
+{
+  "schema": "ganesha-publication-gate.v1",
+  "project": "Ganesha and The Magic \u2014 Full Scratch V1",
+  "status": "BLOCKED",
+  "git_head": "a6e7997e469730f67c10b9f5657c5a1edfbfb2c2",
+  "tracks": {
+    "public_source_repository": {
+      "status": "BLOCKED",
+      "blockers": [
+        "source_complete_and_tracked",
+        "project_license",
+        "asset_redistribution_rights",
+        "build_reproducibility",
+        "signed_release_manifest_and_sbom",
+        "ci_workflow",
+        "security_contact_and_public_terms"
+      ]
+    },
+    "hosted_non_wagering_preview": {
+      "status": "BLOCKED",
+      "blockers": [
+        "source_complete_and_tracked",
+        "project_license",
+        "asset_redistribution_rights",
+        "hosted_privacy_and_operations",
+        "accessibility_and_physical_devices",
+        "security_contact_and_public_terms"
+      ]
+    },
+    "stake_engine_real_money_release": {
+      "status": "BLOCKED",
+      "blockers": [
+        "canonical_math_and_provider_approval",
+        "production_rgs_wallet_contract",
+        "stake_studio_approval_and_activation",
+        "real_money_legal_and_rg_controls",
+        "accessibility_and_physical_devices",
+        "project_license",
+        "asset_redistribution_rights",
+        "signed_release_manifest_and_sbom",
+        "ci_workflow"
+      ]
+    }
+  },
+  "checks": {
+    "source_complete_and_tracked": {
+      "pass": false,
+      "evidence": "filesystem presence and Git tracking are independently classified; no untracked required path is treated as absent",
+      "missing": [
+        "R98_INTEGRATION_STATUS.md",
+        "docs/MATH_AUDIT_PINNED_SDK_20261107.md",
+        "docs/SCATTER_FEATURE_CONTRACT_20261107.md",
+        "docs/SECURITY_REVIEW_BUNDLE_20261104_V15.md",
+        "docs/STAKE_ENGINE_PUBLIC_RGS_CONTRACT_EVIDENCE_20261107.md",
+        "docs/STAKE_STUDIO_REVIEW_RUNBOOK_20261107.md",
+        "frontend/assets/a_icon_v15.svg",
+        "frontend/assets/chakra_icon_v15.svg",
+        "frontend/assets/elephant_icon_v15.svg",
+        "frontend/assets/ganesha_temple_scene_v15.svg",
+        "frontend/assets/ganesha_wild_v15.svg",
+        "frontend/assets/k_icon_v15.svg",
+        "frontend/assets/lotus_scatter_v15.svg",
+        "frontend/assets/modak_icon_v15.svg",
+        "frontend/assets/mouse_icon_v15.svg",
+        "frontend/config.offline.js",
+        "qa_source_completeness.py",
+        "requirements-test.txt",
+        "src/ganesha/game/engine_payout_guard_r1.py",
+        "src/ganesha/rgs/standard_startup_v1.py",
+        "src/ganesha/wallet/financial_evidence_contract_v2.py",
+        "src/ganesha/wallet/settlement_boundary_v2_r2.py",
+        "tests/test_ci_attestation_path_20261105.py",
+        "tests/test_draft_distribution_zero_mass_worker6.py",
+        "tests/test_draft_math_evidence_r4.py",
+        "tests/test_draft_math_max_payout_settlement_v2_r1.py",
+        "tests/test_financial_evidence_boundary_audit_r1.py",
+        "tests/test_financial_evidence_commit_outcome_response_loss_v2_r1.py",
+        "tests/test_financial_evidence_contract_v2_r1.py",
+        "tests/test_financial_evidence_corrupt_prefix_no_append_v2_r1.py",
+        "tests/test_financial_evidence_partial_prefix_immutability_v2_r1.py",
+        "tests/test_financial_evidence_public_projection_v2_r1.py",
+        "tests/test_financial_evidence_same_round_recovery_lease_competition_v1.py",
+        "tests/test_financial_evidence_v2_fault_matrix_r1.py",
+        "tests/test_game_engine_payout_guard_r1.py",
+        "tests/test_game_engine_spin_cap_boundary_worker4.py",
+        "tests/test_game_fixture_evidence_adapter_worker3.py",
+        "tests/test_game_presentation_zero_feature_r2.py",
+        "tests/test_manifest_source_inventory_20261105.py",
+        "tests/test_raw_financial_entrypoints_worker3.py",
+        "tests/test_required_source_baseline_20261105.py",
+        "tests/test_runtime_math_evidence_adapter_r1.py",
+        "tests/test_sbom_completeness_20261104.py",
+        "tests/test_security_nonce.py",
+        "tests/test_security_primitives.py",
+        "tests/test_security_request_envelope_fail_closed_20261107.py",
+        "tests/test_security_verification_inputs_worker24.py",
+        "tests/test_settlement_boundary_v2_r2.py",
+        "tests/test_shared_source_path_policy_20261105.py",
+        "tests/test_source_completeness_baseline_20261105.py",
+        "tests/test_source_completeness_diagnostic.py",
+        "tests/test_source_completeness_symlink_dirs_20261105.py",
+        "tests/test_standard_guarded_concurrent_rounds_v2_r1.py",
+        "tests/test_standard_guarded_recovery_v2_r1.py",
+        "tests/test_standard_guarded_settlement_response_loss_v2_r1.py",
+        "tests/test_standard_startup_bootstrap_worker25.py",
+        "tests/test_standard_startup_cap_lock_worker4.py",
+        "tests/test_wallet_minor_unit_rounding_v2_r1.py",
+        "tests/test_wallet_rgs_presentation_replacement_r1.py",
+        "tools/audit_draft_math_evidence_r4.py",
+        "tools/browser_accessibility_qa_v15.mjs",
+        "tools/browser_audio_keyboard_qa_r1_current_runtime.mjs",
+        "tools/browser_audio_keyboard_qa_r6.mjs",
+        "tools/browser_current_head_qa_r4.mjs",
+        "tools/browser_full_scratch_integration_qa_r1.mjs",
+        "tools/browser_full_scratch_integration_qa_r2.mjs",
+        "tools/browser_full_scratch_integration_qa_r3.mjs",
+        "tools/browser_layout_v2_qa_v15.mjs",
+        "tools/build_frontend_offline.mjs",
+        "tools/run_wallet_load_r1_followup.py",
+        "tools/run_wallet_load_r2_followup.py",
+        "tools/run_wallet_v2_load_r1.py",
+        "tools/run_wallet_v2_load_r2.py",
+        "tools/run_wallet_v2_load_r3.py",
+        "tools/run_wallet_v2_load_r4.py",
+        "tools/run_wallet_v2_load_r5.py",
+        "tools/run_wallet_v2_load_r6.py",
+        "tools/source_path_policy.py",
+        "tools/verify_manifest_source_inventory.py",
+        "tools/verify_sbom_completeness_20261104.py"
+      ],
+      "tracked_missing": [],
+      "tracked_invalid": [],
+      "untracked_required": [
+        "R98_INTEGRATION_STATUS.md",
+        "docs/MATH_AUDIT_PINNED_SDK_20261107.md",
+        "docs/SCATTER_FEATURE_CONTRACT_20261107.md",
+        "docs/SECURITY_REVIEW_BUNDLE_20261104_V15.md",
+        "docs/STAKE_ENGINE_PUBLIC_RGS_CONTRACT_EVIDENCE_20261107.md",
+        "docs/STAKE_STUDIO_REVIEW_RUNBOOK_20261107.md",
+        "frontend/assets/a_icon_v15.svg",
+        "frontend/assets/chakra_icon_v15.svg",
+        "frontend/assets/elephant_icon_v15.svg",
+        "frontend/assets/ganesha_temple_scene_v15.svg",
+        "frontend/assets/ganesha_wild_v15.svg",
+        "frontend/assets/k_icon_v15.svg",
+        "frontend/assets/lotus_scatter_v15.svg",
+        "frontend/assets/modak_icon_v15.svg",
+        "frontend/assets/mouse_icon_v15.svg",
+        "frontend/config.offline.js",
+        "qa_source_completeness.py",
+        "requirements-test.txt",
+        "src/ganesha/game/engine_payout_guard_r1.py",
+        "src/ganesha/rgs/standard_startup_v1.py",
+        "src/ganesha/wallet/financial_evidence_contract_v2.py",
+        "src/ganesha/wallet/settlement_boundary_v2_r2.py",
+        "tests/test_ci_attestation_path_20261105.py",
+        "tests/test_draft_distribution_zero_mass_worker6.py",
+        "tests/test_draft_math_evidence_r4.py",
+        "tests/test_draft_math_max_payout_settlement_v2_r1.py",
+        "tests/test_financial_evidence_boundary_audit_r1.py",
+        "tests/test_financial_evidence_commit_outcome_response_loss_v2_r1.py",
+        "tests/test_financial_evidence_contract_v2_r1.py",
+        "tests/test_financial_evidence_corrupt_prefix_no_append_v2_r1.py",
+        "tests/test_financial_evidence_partial_prefix_immutability_v2_r1.py",
+        "tests/test_financial_evidence_public_projection_v2_r1.py",
+        "tests/test_financial_evidence_same_round_recovery_lease_competition_v1.py",
+        "tests/test_financial_evidence_v2_fault_matrix_r1.py",
+        "tests/test_game_engine_payout_guard_r1.py",
+        "tests/test_game_engine_spin_cap_boundary_worker4.py",
+        "tests/test_game_fixture_evidence_adapter_worker3.py",
+        "tests/test_game_presentation_zero_feature_r2.py",
+        "tests/test_manifest_source_inventory_20261105.py",
+        "tests/test_raw_financial_entrypoints_worker3.py",
+        "tests/test_required_source_baseline_20261105.py",
+        "tests/test_runtime_math_evidence_adapter_r1.py",
+        "tests/test_sbom_completeness_20261104.py",
+        "tests/test_security_nonce.py",
+        "tests/test_security_primitives.py",
+        "tests/test_security_request_envelope_fail_closed_20261107.py",
+        "tests/test_security_verification_inputs_worker24.py",
+        "tests/test_settlement_boundary_v2_r2.py",
+        "tests/test_shared_source_path_policy_20261105.py",
+        "tests/test_source_completeness_baseline_20261105.py",
+        "tests/test_source_completeness_diagnostic.py",
+        "tests/test_source_completeness_symlink_dirs_20261105.py",
+        "tests/test_standard_guarded_concurrent_rounds_v2_r1.py",
+        "tests/test_standard_guarded_recovery_v2_r1.py",
+        "tests/test_standard_guarded_settlement_response_loss_v2_r1.py",
+        "tests/test_standard_startup_bootstrap_worker25.py",
+        "tests/test_standard_startup_cap_lock_worker4.py",
+        "tests/test_wallet_minor_unit_rounding_v2_r1.py",
+        "tests/test_wallet_rgs_presentation_replacement_r1.py",
+        "tools/audit_draft_math_evidence_r4.py",
+        "tools/browser_accessibility_qa_v15.mjs",
+        "tools/browser_audio_keyboard_qa_r1_current_runtime.mjs",
+        "tools/browser_audio_keyboard_qa_r6.mjs",
+        "tools/browser_current_head_qa_r4.mjs",
+        "tools/browser_full_scratch_integration_qa_r1.mjs",
+        "tools/browser_full_scratch_integration_qa_r2.mjs",
+        "tools/browser_full_scratch_integration_qa_r3.mjs",
+        "tools/browser_layout_v2_qa_v15.mjs",
+        "tools/build_frontend_offline.mjs",
+        "tools/run_wallet_load_r1_followup.py",
+        "tools/run_wallet_load_r2_followup.py",
+        "tools/run_wallet_v2_load_r1.py",
+        "tools/run_wallet_v2_load_r2.py",
+        "tools/run_wallet_v2_load_r3.py",
+        "tools/run_wallet_v2_load_r4.py",
+        "tools/run_wallet_v2_load_r5.py",
+        "tools/run_wallet_v2_load_r6.py",
+        "tools/source_path_policy.py",
+        "tools/verify_manifest_source_inventory.py",
+        "tools/verify_sbom_completeness_20261104.py"
+      ],
+      "filesystem_present": true,
+      "tracking_complete": false,
+      "excluded_tracked_source_paths": [
+        "artifacts/BROWSER_SMOKE_20261104.json",
+        "artifacts/BROWSER_SMOKE_20261104.png",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE.json",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE.png",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE_CURRENT_HEAD.json",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE_CURRENT_HEAD.png",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE.json",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE.png",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE_CURRENT_HEAD.json",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE_CURRENT_HEAD.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME.json",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_PAYOUT_INTEGRITY.json",
+        "artifacts/BROWSER_SMOKE_20261104_PAYOUT_INTEGRITY.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_AUTH_MOCK.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_AUTH_MOCK.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_MOBILE.png",
+        "artifacts/BUILD_REPRODUCIBILITY_20261103.json",
+        "artifacts/DRAFT_MATH_INDEPENDENT_CROSSCHECK_20261104.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104_PRE_FIX2_24W.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104_PRE_FIX_24W.json",
+        "artifacts/RC10_SOURCE_RECOVERY_EVIDENCE.json",
+        "artifacts/README.md",
+        "artifacts/math_audit_v1.json",
+        "artifacts/math_audit_v1_draft003_SUPERSEDED.json",
+        "artifacts/math_crosscheck_v1.json",
+        "artifacts/monte_carlo_v1.json",
+        "artifacts/monte_carlo_v1_pre_jackpot_SUPERSEDED.json",
+        "frontend/config.js"
+      ],
+      "excluded_tracked_artifact_paths": [
+        "artifacts/BROWSER_SMOKE_20261104.json",
+        "artifacts/BROWSER_SMOKE_20261104.png",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE.json",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE.png",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE_CURRENT_HEAD.json",
+        "artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE_CURRENT_HEAD.png",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE.json",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE.png",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE_CURRENT_HEAD.json",
+        "artifacts/BROWSER_SMOKE_20261104_FINANCIAL_ROUND_RESTORE_CURRENT_HEAD.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME.json",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_INDEPENDENT_RUNTIME_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_PAYOUT_INTEGRITY.json",
+        "artifacts/BROWSER_SMOKE_20261104_PAYOUT_INTEGRITY.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_AUDIO_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_POLICY_MOBILE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_AUTH_MOCK.json",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_AUTH_MOCK.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_DESKTOP.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_LANDSCAPE.png",
+        "artifacts/BROWSER_SMOKE_20261104_POST_RGS_PREVIEW_MOBILE.png",
+        "artifacts/BUILD_REPRODUCIBILITY_20261103.json",
+        "artifacts/DRAFT_MATH_INDEPENDENT_CROSSCHECK_20261104.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104_PRE_FIX2_24W.json",
+        "artifacts/LOCAL_WALLET_LOAD_20261104_PRE_FIX_24W.json",
+        "artifacts/RC10_SOURCE_RECOVERY_EVIDENCE.json",
+        "artifacts/README.md",
+        "artifacts/math_audit_v1.json",
+        "artifacts/math_audit_v1_draft003_SUPERSEDED.json",
+        "artifacts/math_crosscheck_v1.json",
+        "artifacts/monte_carlo_v1.json",
+        "artifacts/monte_carlo_v1_pre_jackpot_SUPERSEDED.json"
+      ],
+      "counts": {
+        "tracked_missing": 0,
+        "tracked_invalid": 0,
+        "untracked_required": 80
+      }
+    },
+    "source_path_classification_integrity": {
+      "pass": true,
+      "evidence": "all classified source/evidence paths exist and their SHA-256 values match",
+      "source_path_count": 80,
+      "historical_evidence_count": 2,
+      "source_tracking_complete": false,
+      "untracked_source_paths_remain_blocking": 80
+    },
+    "project_license": {
+      "pass": false,
+      "evidence": "LICENSE file and owner-selected terms required"
+    },
+    "asset_redistribution_rights": {
+      "pass": false,
+      "evidence": "asset creator is not established for a_icon_v14.svg"
+    },
+    "license_and_asset_inventory_integrity": {
+      "pass": true,
+      "evidence": "66 npm/10 Python license declarations and all 177 R9 media hashes inventoried; clearance remains separate",
+      "npm_components": 66,
+      "python_components": 10,
+      "r9_media_count": 177,
+      "r9_media_cleared": 0,
+      "project_license_selected": false,
+      "redistribution_clearance": false
+    },
+    "historical_qa_evidence_integrity": {
+      "pass": true,
+      "evidence": "historical repair report matches its one-entry SHA256SUMS record; integrity only",
+      "authority_status": "SUPERSEDED_HISTORICAL_QA_EVIDENCE",
+      "git_tracking": "UNTRACKED_HISTORICAL_EVIDENCE",
+      "release_use": "not current Math, Scatter, Provider or submission authority"
+    },
+    "generated_frontend_snapshot_integrity": {
+      "pass": true,
+      "evidence": "all generated frontend snapshots have exact byte-verified inventories"
+    },
+    "offline_frontend_preview_integrity": {
+      "pass": true,
+      "evidence": "offline frontend outputs are byte-verified and at least one build is bound to current HEAD/current source hashes",
+      "classification": "LOCAL_NON_WAGERING_ENGINEERING_PREVIEW_ONLY",
+      "builds": [
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_SCATTER_R1",
+          "file_count": 19,
+          "tree_sha256": "02eacedccc0a4601f8e338df792bafacacf00ee5e425525b11f424c333fea584",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_SCATTER_R2",
+          "file_count": 19,
+          "tree_sha256": "21e5deaf54331b45db66851aa6b2256a5ec68b88e0821cff9bdcd89486e06b95",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_SCATTER_R3",
+          "file_count": 19,
+          "tree_sha256": "fb7233d8c0641b40bdb5b92bdce70815cf7b15ee39f4c2fb202b1055552b2fc6",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_WILD_MOTION_R1",
+          "file_count": 19,
+          "tree_sha256": "fb5b72505786f0f709a4398daaa89b6a6ae8d2be7423d5c6d67b3ae9aad7c3a1",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_WILD_MOTION_R2",
+          "file_count": 19,
+          "tree_sha256": "46e6bbb316fa783283541aa2e48ee8e7cd74f8cd2bc468ac0566bea482d79416",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261107_WILD_MOTION_R3",
+          "file_count": 19,
+          "tree_sha256": "84528717d74843b3ea23bcda2af5edfe8be8344a08a5741dd54e4d27ac18d1fc",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_R12B_20261107",
+          "file_count": 19,
+          "tree_sha256": "84528717d74843b3ea23bcda2af5edfe8be8344a08a5741dd54e4d27ac18d1fc",
+          "source_binding": "WORKTREE_SOURCE_CHANGED_AFTER_BUILD"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_R12C_20261107",
+          "file_count": 19,
+          "tree_sha256": "9c41f939c1dbcf5fa83bbd43a36686d1d00d9e482a97939bee98299378d0292d",
+          "source_binding": "CURRENT_HEAD_AND_WORKTREE_SOURCE_HASHES_MATCH"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_R12_20261107",
+          "file_count": 19,
+          "tree_sha256": "84528717d74843b3ea23bcda2af5edfe8be8344a08a5741dd54e4d27ac18d1fc",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R3",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R4",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R5",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R6",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R7",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R8",
+          "file_count": 19,
+          "tree_sha256": "3c5992535efe5cae2f4b73b8b9e2e77bf49a8fd3b3cd25cbba6d9f29fd30e1a7",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_REPRO_R9",
+          "file_count": 19,
+          "tree_sha256": "02eacedccc0a4601f8e338df792bafacacf00ee5e425525b11f424c333fea584",
+          "source_binding": "HISTORICAL_OR_UNBOUND_SOURCE_SNAPSHOT"
+        }
+      ]
+    },
+    "sbom_completeness": {
+      "pass": true,
+      "evidence": "R12 CycloneDX SBOM hash, lockfile, build/test requirements and 22-asset inventory revalidated",
+      "component_count": 98,
+      "sha256": "ef7217f2a8de3725589d9d222f091ca440a8ffbe9b7306e59980c84be2dca2d8",
+      "legal_asset_rights_clearance": false
+    },
+    "security_dependency_scan": {
+      "pass": true,
+      "evidence": "R12 pip-audit (35 packages) and npm audit results; dependency scans only",
+      "python_packages": 35,
+      "python_vulnerabilities": 0,
+      "npm_vulnerabilities": 0,
+      "whole_release_security_clearance": false
+    },
+    "build_reproducibility": {
+      "pass": false,
+      "evidence": "build evidence missing, malformed, incomplete, or no longer matches tracked source"
+    },
+    "ci_workflow_definition": {
+      "pass": true,
+      "evidence": "local workflow has full 40-character action pins and Python/Node/npm/Python+Node test/offline-preview/attestation steps",
+      "pinned_action_count": 9,
+      "hosted_execution_verified": false
+    },
+    "local_accessibility_reflow": {
+      "pass": true,
+      "evidence": "local 320 CSS-pixel Chrome reflow/DOM semantics check; not full WCAG AA or physical-device acceptance",
+      "viewport_width": 320,
+      "browser": "Chrome/156.0.8078.81",
+      "full_wcag_aa": false,
+      "physical_device_acceptance": false
+    },
+    "r9_frontend_candidate_integrity": {
+      "pass": true,
+      "evidence": "R9 Frontend-only ZIP hash, 195-file inventory and structural verifier",
+      "sha256": "2ff26b987b7d9b5eb12fe4f0952c8756be29e7b4c623447af0daf9b1815b868c",
+      "file_count": 195,
+      "missing_contract_files": [],
+      "verifier_exit": 0,
+      "complete_math_frontend_submission": false,
+      "studio_uploaded": false
+    },
+    "local_worktree_reproducibility": {
+      "pass": true,
+      "evidence": "two clean filesystem copies reproduce identical wheel and normalized sdist from the current dirty worktree snapshot",
+      "source_files": 248,
+      "wheel_sha256": "705b906d320de0fff6b5059f5e5e5cceb0ee0ee901f3fbf3dafa725b619dd0b4",
+      "normalized_sdist_sha256": "ebbf4271c744da691aa90b3faabc710da5d66ae464345619bb6550f003d45bfd",
+      "exact_tracked_head_clone": false,
+      "hosted_ci_attestation": false
+    },
+    "signed_release_manifest_and_sbom": {
+      "pass": false,
+      "evidence": "an independently approved RELEASE_TRUSTED_KEY_SHA256 environment trust anchor and a unique signed release bundle are required"
+    },
+    "ci_workflow": {
+      "pass": false,
+      "evidence": "requires an exact-HEAD successful main-branch run, verified GitHub attestations, and out-of-band GANESHA_GITHUB_REPOSITORY"
+    },
+    "security_contact_and_public_terms": {
+      "pass": false,
+      "evidence": "responsible operator, security contact and public terms are not identified"
+    },
+    "hosted_privacy_and_operations": {
+      "pass": false,
+      "evidence": "current privacy/security docs are local-preview scope only; no hosted controller, retention or ops proof"
+    },
+    "accessibility_and_physical_devices": {
+      "pass": false,
+      "evidence": "full WCAG 2.2 AA and physical-device acceptance remain unverified"
+    },
+    "canonical_math_and_provider_approval": {
+      "pass": false,
+      "evidence": "original raw Math, canonical generator/inputs/Golden Vectors and Provider Math approval unavailable"
+    },
+    "production_rgs_wallet_contract": {
+      "pass": false,
+      "evidence": "local reference only; production Provider event/ledger/idempotency contract not verified"
+    },
+    "stake_studio_approval_and_activation": {
+      "pass": false,
+      "evidence": "canonical Game ID, upload receipt, iframe and game-specific approval/activation unverified"
+    },
+    "real_money_legal_and_rg_controls": {
+      "pass": false,
+      "evidence": "jurisdiction, operator, age, self-exclusion, limits and compliance controls not approved"
+    }
+  },
+  "scope_note": "The static non-wagering preview is an internal engineering artifact. No public distribution, hosting, Stake submission or real-money use is authorized by this gate report."
+}

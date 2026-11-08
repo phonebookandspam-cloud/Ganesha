@@ -1,0 +1,179 @@
+name: Full Scratch CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ganesha-full-scratch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clean-clone-build-test:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    outputs:
+      tests: ${{ steps.tests.outcome }}
+      package: ${{ steps.package.outcome }}
+      sbom: ${{ steps.sbom.outcome }}
+      manifest: ${{ steps.manifest.outcome }}
+      frontend: ${{ steps.frontend.outcome }}
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set pinned Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13.17"
+
+      - name: Set pinned Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: "22.23.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install pinned build toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --upgrade pip==26.3
+          python -m pip install --disable-pip-version-check -r requirements-build.txt
+          python -m pip install --disable-pip-version-check -r requirements-test.txt
+
+      - name: Install locked npm dependencies
+        run: npm ci
+
+      - name: Audit locked npm dependencies
+        run: npm audit --audit-level=low
+
+      - name: Verify required source completeness
+        run: make source-completeness
+
+      - name: Test source checkout
+        id: tests
+        run: |
+          mkdir -p dist
+          set -o pipefail
+          make test 2>&1 | tee dist/test.log
+
+      - name: Build and verify fail-closed offline frontend preview
+        id: frontend
+        run: npm run build:frontend:offline -- --output artifacts/FRONTEND_BUILD_OFFLINE_CI_${{ github.sha }}
+
+      - name: Build wheel and normalized source distribution
+        id: package
+        run: make package
+
+      - name: Generate CycloneDX SBOM
+        id: sbom
+        run: make sbom
+
+      - name: Create source and artifact manifest
+        id: manifest
+        run: make release-manifest
+
+      - name: Upload unsigned build outputs
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ganesha-full-scratch-build-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
+
+  attest-release:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: clean-clone-build-test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - name: Checkout exact source commit
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Download unsigned build outputs
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: ganesha-full-scratch-build-${{ github.sha }}
+          path: dist/
+
+      - name: Resolve exact release manifest path
+        id: release_manifest_path
+        run: echo "path=dist/$(git rev-parse --short HEAD)/RELEASE_MANIFEST.json" >> "$GITHUB_OUTPUT"
+
+      - name: Attest release manifest provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8
+        with:
+          subject-path: ${{ steps.release_manifest_path.outputs.path }}
+
+      - name: Verify GitHub manifest provenance
+        id: verify_manifest_attestation
+        run: gh attestation verify "dist/$(git rev-parse --short HEAD)/RELEASE_MANIFEST.json" --repo "$GITHUB_REPOSITORY"
+
+      - name: Record exact CI run evidence
+        env:
+          TEST_OUTCOME: ${{ needs.clean-clone-build-test.outputs.tests }}
+          PACKAGE_OUTCOME: ${{ needs.clean-clone-build-test.outputs.package }}
+          SBOM_OUTCOME: ${{ needs.clean-clone-build-test.outputs.sbom }}
+          MANIFEST_OUTCOME: ${{ needs.clean-clone-build-test.outputs.manifest }}
+          FRONTEND_OUTCOME: ${{ needs.clean-clone-build-test.outputs.frontend }}
+          MANIFEST_ATTESTATION_OUTCOME: ${{ steps.verify_manifest_attestation.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          evidence = {
+              "schema": "ganesha-ci-evidence.v1",
+              "source_commit": os.environ["GITHUB_SHA"],
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "workflow": os.environ["GITHUB_WORKFLOW"],
+              "workflow_ref": os.environ["GITHUB_WORKFLOW_REF"],
+              "event_name": os.environ["GITHUB_EVENT_NAME"],
+              "ref": os.environ["GITHUB_REF"],
+              "run_id": os.environ["GITHUB_RUN_ID"],
+              "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+              "release_manifest_path": "dist/" + subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip() + "/RELEASE_MANIFEST.json",
+              "run_url": os.environ["GITHUB_SERVER_URL"] + "/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + os.environ["GITHUB_RUN_ID"],
+              "step_outcomes": {
+                  "tests": os.environ.get("TEST_OUTCOME"),
+                  "package": os.environ.get("PACKAGE_OUTCOME"),
+                  "sbom": os.environ.get("SBOM_OUTCOME"),
+                  "manifest": os.environ.get("MANIFEST_OUTCOME"),
+                  "frontend": os.environ.get("FRONTEND_OUTCOME"),
+              },
+              "manifest_attestation_verification": "VERIFIED_BY_GITHUB" if os.environ.get("MANIFEST_ATTESTATION_OUTCOME") == "success" else "NOT_VERIFIED",
+          }
+          with open("dist/CI_EVIDENCE.json", "w", encoding="utf-8") as stream:
+              json.dump(evidence, stream, indent=2, sort_keys=True)
+              stream.write("\n")
+          PY
+
+      - name: Attest CI run evidence provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8
+        with:
+          subject-path: dist/CI_EVIDENCE.json
+
+      - name: Verify CI run evidence provenance
+        run: gh attestation verify dist/CI_EVIDENCE.json --repo "$GITHUB_REPOSITORY"
+
+      - name: Upload attested release evidence bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ganesha-full-scratch-attested-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30

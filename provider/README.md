@@ -1,0 +1,1 @@
+Provider adapter boundary. Do not insert credentials, infer Stake approval, or claim production compatibility from local mocks. Record exact provider contract version and approval references when supplied.

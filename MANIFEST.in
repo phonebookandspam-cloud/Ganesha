@@ -1,0 +1,25 @@
+include README.md
+include docs/license-status.md
+include PRIVACY.md
+include RESPONSIBLE_GAMBLING.md
+include SECURITY.md
+include DISCLAIMER.md
+include PUBLICATION_CHECKLIST.md
+include Makefile
+include qa_source_completeness.py
+include requirements-build.txt
+include requirements-test.txt
+include package.json
+include package-lock.json
+recursive-include docs *.md
+recursive-include frontend *.html *.css *.js *.md *.json *.svg *.png
+recursive-include frontend *.wav
+exclude frontend/config.js
+recursive-include provider *.md
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include tools *.mjs
+include qa_release_gate.py
+include artifacts/BASELINE.md
+prune artifacts/*.sqlite
+prune artifacts/*.db

@@ -1,0 +1,157 @@
+{
+  "schema": "ganesha.pinned-math-sdk-audit.v1",
+  "status": "BLOCKED_CANONICAL_INPUTS_AND_BASE_VALIDATOR_FAILURE",
+  "pinned_sdk": {
+    "repository": "https://github.com/engineio/math-sdk",
+    "commit": "141b4e89065ac4400769709a919259a923430c4d",
+    "commit_message": "Merge pull request #123 from engineio/verif-scripts — verifcation studio sync",
+    "commit_date": "2026-11-02T15:41:12+11:00",
+    "validator_path": "utils/rgs_verification.py",
+    "validator_sha256": "d2cf6abbd84cf1c293b7b71e2a2996f5e2fa643b41dde036b61fca95bbef0521",
+    "validator_rule": "payout must be integer >= 0; positive payout >= 10; every payout % 10 == 0"
+  },
+  "audited_math_source": {
+    "path": "qa/work_20261028_r98_integrated_cycle/worktree/math",
+    "source_classification": "historical R98/R54 shared Books+LUT candidate; not canonical approved generator source",
+    "r54_r98_math_files_byte_identical": true,
+    "files": {
+      "books_BASE.jsonl.zst": {
+        "sha256": "6de7a9c8d47da103803f2508d316cd61d0adc44917eeae361ad00ff2b93040a2",
+        "bytes": 11194045
+      },
+      "lookUpTable_BASE_0.csv": {
+        "sha256": "b97c65f8936bfdaa818bc0e5432f9be13393a7ca9abecc44b531c9ed49a6e8f6",
+        "bytes": 1749593
+      },
+      "books_MAGICBUY_V36.jsonl.zst": {
+        "sha256": "c3d9417a6495ab25fa4806986fd3be82b1184169927f7ca184e6beba8994cbec",
+        "bytes": 3311622
+      },
+      "lookUpTable_MAGICBUY_V36_0.csv": {
+        "sha256": "04257b4bbeefbd5729d75a39f15b812a40e177672c4588daa5fb45eb30fe917b",
+        "bytes": 1852484
+      },
+      "books_EPICBUY_V37.jsonl.zst": {
+        "sha256": "cd84aa1291535f04d2294309b655a522b17529336d2f8f877705f085f193c20f",
+        "bytes": 4313485
+      },
+      "lookUpTable_EPICBUY_V37_0.csv": {
+        "sha256": "826df2e3bc4959a865e4293d0d645145656789a98ee7f0ab2356c89ac346e126",
+        "bytes": 1835617
+      }
+    }
+  },
+  "payout_quantum": {
+    "BASE": {
+      "lut_rows": 100000,
+      "violations": 45235,
+      "official_pinned_validator": "FAIL",
+      "reason": "Payout values must be in increments of 10",
+      "examples": [
+        25,
+        225,
+        2175,
+        125,
+        75,
+        375
+      ]
+    },
+    "MAGICBUY_V36": {
+      "lut_rows": 100000,
+      "violations": 0,
+      "official_pinned_validator": "PASS"
+    },
+    "EPICBUY_V37": {
+      "lut_rows": 100000,
+      "violations": 0,
+      "official_pinned_validator": "PASS"
+    }
+  },
+  "books_lut_consistency": {
+    "BASE": {
+      "books": 100000,
+      "book_events": 636986,
+      "payout_array_match": "PASS"
+    },
+    "MAGICBUY_V36": {
+      "books": 100000,
+      "book_events": 4400000,
+      "payout_array_match": "PASS"
+    },
+    "EPICBUY_V37": {
+      "books": 100000,
+      "book_events": 4400000,
+      "payout_array_match": "PASS"
+    },
+    "interpretation": "Payout array consistency does not cure invalid payout quantum or invalid feature semantics."
+  },
+  "base_weighted_distribution": {
+    "total_weight": 1000000000000,
+    "unique_payouts": 5285,
+    "rtp": 0.965,
+    "variance_x_squared": 1314.0310658240137,
+    "standard_deviation_x": 36.249566422565856,
+    "cvar_99_9_x": 710.5480764122,
+    "cvar_limit_x": 700,
+    "cvar_status": "FAIL",
+    "maximum_win_x": 50000,
+    "maximum_win_probability": 1e-07,
+    "maximum_win_frequency_rounds": 10000000
+  },
+  "scatter_book_audit": {
+    "base_books": 100000,
+    "scatter_distribution": {
+      "0": 26935,
+      "1": 40406,
+      "2": 24184,
+      "3": 7308,
+      "4": 1095,
+      "5": 72,
+      "6_plus": 0
+    },
+    "four_scatter_books": {
+      "count": 1095,
+      "declared_free_spins": 10,
+      "required_free_spins": 12,
+      "status": "FAIL"
+    },
+    "five_scatter_books": {
+      "count": 72,
+      "declared_free_spins": 10,
+      "embedded_epic_payload_present": false,
+      "status": "FAIL_CLOSED_REQUIRED"
+    },
+    "retrigger_books": {
+      "count": 1694,
+      "retrigger_events": 1694,
+      "status": "FAIL_CLOSED_REQUIRED"
+    },
+    "unique_books_incompatible_with_current_user_contract": 2613,
+    "method": "Decompressed Books and counted numeric symbol id 1 (LotusScatter) in each 3x5 reveal board; checked freeSpinStart.spins and retrigger event presence."
+  },
+  "payout_precision_authority_conflict": {
+    "pinned_validator": "requires payout % 10 == 0",
+    "sdk_book_writer": "src/state/books.py stores int(round(payout_multiplier * 100, 0))",
+    "public_math_docs_example": "payoutMultiplier 1150 represents 11.5x",
+    "upstream_issue": "https://github.com/engineio/math-sdk/issues/121",
+    "issue_status_as_of_2026_11_07": "OPEN; asks whether values 1,6,11 or only multiples of 10 are accepted",
+    "resolution": "UNRESOLVED; do not round, rescale, or mutate existing payout values without provider-authoritative precision confirmation"
+  },
+  "canonical_generation": {
+    "generator_source_found": false,
+    "approved_reel_strips_found": false,
+    "approved_probability_inputs_found": false,
+    "approved_paytable_paylines_found": false,
+    "approved_rng_seed_derivation_found": false,
+    "provider_golden_vectors_found": false,
+    "provider_embedded_epic_payload_found": false,
+    "books_lut_regenerated": false
+  },
+  "decision": "Do not upload or activate this Math package. Preserve Books/LUT bytes. The official pinned validator rejects BASE LUT. Even if payout precision is clarified, CVaR exceeds 700x, 4-Scatter Books award 10 instead of 12, 5-Scatter Books lack embedded EPIC authority, and retriggers are forbidden. Canonical source/input recovery and approved regeneration are required.",
+  "evidence_references": [
+    "https://github.com/engineio/math-sdk/commit/141b4e89065ac4400769709a919259a923430c4d",
+    "https://github.com/engineio/math-sdk/issues/121",
+    "https://stake-engine.com/docs/math/game-state-structure/events",
+    "https://stake-engine.com/docs/faq/math/what-files-are-required"
+  ]
+}

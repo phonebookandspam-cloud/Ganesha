@@ -1,0 +1,21 @@
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+.env
+*.py[cod]
+artifacts/*.tmp
+artifacts/ganesha-preview-*.png
+
+artifacts/*.sqlite
+artifacts/*.sqlite-*
+artifacts/*.db
+
+artifacts/*_draft_only.json
+.DS_Store
+
+# Local build outputs
+/frontend-build/
+build/
+dist/
+*.egg-info/

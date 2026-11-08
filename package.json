@@ -1,0 +1,19 @@
+{
+  "name": "ganesha-full-scratch-v1-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:frontend": "vite build && node tools/verify_frontend_build.mjs",
+    "build:frontend:offline": "node tools/build_frontend_offline.mjs",
+    "test:frontend-rgs": "node --test tests/frontend-rgs-adapter.test.mjs tests/frontend-presentation-contract.test.mjs tests/stake-engine-sdk-contract.test.mjs tests/stake-rgs-lifecycle.test.mjs"
+  },
+  "dependencies": {
+    "stake-engine": "0.1.32"
+  },
+  "devDependencies": {
+    "vite": "6.4.5"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "schema": "ganesha.stake.submission-status.v6",
+  "created_local": "2026-11-07",
+  "overall_status": "BLOCKED_NOT_UPLOAD_READY",
+  "base_status_artifact": "artifacts/STAKE_SUBMISSION_STATUS_20261107.json",
+  "base_status_sha256": "71fdba316afb1dacba4cd853812a0c8deab4f33c9798ad9bfe8f699bb5d0c66c",
+  "latest_regression": {
+    "python_unittest": {
+      "status": "PASS",
+      "tests": 446,
+      "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+      "log": "/tmp/ganesha-python-suite-final.log"
+    },
+    "frontend_rgs_node": {
+      "status": "PASS",
+      "tests": 33,
+      "command": "npm run test:frontend-rgs",
+      "log": "/tmp/ganesha-node-suite-final.log"
+    },
+    "r98_wild_scatter_contract": {
+      "status": "PASS",
+      "checks": 59,
+      "command": "node qa/R98_WILD_SCATTER_CONTRACT_20261107.cjs"
+    },
+    "r98_replay_contract": {
+      "status": "PASS",
+      "checks": 24,
+      "command": "node qa/R98_REPLAY_CONTRACT_20261107.cjs"
+    },
+    "r98_sdk_wire_fixture": {
+      "status": "PASS",
+      "checks": 4,
+      "command": "node qa/R98_SDK_WIRE_CONTRACT_20261107.cjs"
+    },
+    "security_focused": {
+      "status": "PASS",
+      "tests": 17,
+      "new_tests": 5
+    },
+    "financial_boundary_coverage": {
+      "status": "PASS",
+      "scope": "Included in 446/446 Python suite: per-spin/round cap, BASE initial cap, GuardedWallet and Wallet independent checks, refund, settlement recovery and financial evidence."
+    },
+    "sbom_completeness": {
+      "status": "PASS",
+      "npm_components": 66,
+      "python_build_components": 9,
+      "assets": 22,
+      "required_wavs": 4,
+      "sbom": "artifacts/SBOM_STAKE_CANDIDATE_20261107_R9.cdx.json",
+      "sbom_sha256": "5644264ed27b10838a52102776cadd36a392a8d8531f902be68b70353b1a692f"
+    },
+    "r9_frontend_package": {
+      "directory_verification": "PASS",
+      "zip_verification": "PASS",
+      "directory_zip_identical": true,
+      "file_count": 195,
+      "zip_sha256": "2ff26b987b7d9b5eb12fe4f0952c8756be29e7b4c623447af0daf9b1815b868c",
+      "source_index_sha256": "81f626cdc03d4a2bf9312afd2cf914761470637ffb62666a95a10eb2e0726a66"
+    },
+    "local_worktree_build": {
+      "status": "PASS_LOCAL_SNAPSHOT_NOT_GIT_ATTESTED",
+      "evidence": "artifacts/WORKTREE_BUILD_REPRODUCIBILITY_20261107_R11.json",
+      "sha256": "b79ece9edfd8a4e348df7f869f79b92350be3d9b485f56a2b6514fd50415c8b5",
+      "wheel_and_normalized_sdist_byte_identical": true
+    },
+    "dependency_security": {
+      "npm_project": "0 known advisories",
+      "official_sdk_npm": "0 known advisories",
+      "python_build_environment": "6 known advisories in pip26.0.1 (4) and setuptools82.0.1 (2)",
+      "evidence": "artifacts/SECURITY_DEPENDENCY_AUDIT_20261107_R10.json"
+    }
+  },
+  "security_change": {
+    "file": "src/ganesha/security/verification.py",
+    "sha256": "75bc46c4923331761bf45c3ddd6ec3b30aa9cc6340592bc85c8af2a9118360bf",
+    "test_file": "tests/test_security_request_envelope_fail_closed_20261107.py",
+    "test_sha256": "7ae62be0eec7ff5bb2789e36342d27a01c5ca39cfef83abbd9f2ed15a0a34d8d",
+    "invariant": "malformed signature types/length/hex and non-canonical payload fail closed without exception or nonce consumption"
+  },
+  "sbom": {
+    "path": "artifacts/SBOM_STAKE_CANDIDATE_20261107_R9.cdx.json",
+    "sha256": "5644264ed27b10838a52102776cadd36a392a8d8531f902be68b70353b1a692f",
+    "verification_path": "artifacts/SBOM_STAKE_CANDIDATE_20261107_R9_VERIFY.json",
+    "verification": "PASS",
+    "components": {
+      "npm": 66,
+      "python_build": 9,
+      "assets": 22
+    }
+  },
+  "sdk_provenance": {
+    "status": "UPSTREAM_NPM_PACKAGE_SIGNATURE_VERIFIED; VENDORED_CLIENT_IS_LOCAL_FORK_NOT_OFFICIAL_BINARY",
+    "evidence_path": "/Users/Shared/Ganesha_and_The_Magic_V49_USER_MUSIC/qa/work_20261028_r98_integrated_cycle/worktree/qa/R98_SDK_PROVENANCE_RECONCILIATION_20261107.json",
+    "evidence_sha256": "8cb810b35b952b4846c4876d2980dc8a5c7506f9e669f02649c84d3d77693549",
+    "vendor_sha256": "f7f07e9982ecd1390d71e1473098cafc7bf295a15ab14f6738644dbe365903af",
+    "vendor_byte_identical_to_official_binary": false,
+    "license": "ISC for SDK package only; not project/assets"
+  },
+  "r98_frontend": {
+    "source_front_index_sha256": "81f626cdc03d4a2bf9312afd2cf914761470637ffb62666a95a10eb2e0726a66",
+    "package_directory": "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107",
+    "directory_verification": "PASS",
+    "zip_path": "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107.zip",
+    "zip_verification": "PASS",
+    "zip_sha256": "2ff26b987b7d9b5eb12fe4f0952c8756be29e7b4c623447af0daf9b1815b868c",
+    "file_count": 195,
+    "sdk_provenance_included": true,
+    "math_contract_disclosure_included": true,
+    "scatter_paytable_contract_included": true,
+    "replay_contract_included": true,
+    "status": "ENGINEERING_CANDIDATE_NOT_APPROVED"
+  },
+  "math": {
+    "canonical_source_json_available": false,
+    "canonical_generator_and_approved_probability_inputs_available": false,
+    "provider_golden_vectors_available": false,
+    "stake_math_package": "NOT_BUILT",
+    "reason": "Refuse to fabricate or edit compressed Books/LUT without canonical source and approved inputs.",
+    "known_unresolved_findings": {
+      "base_lut_payout_quantum_violations": 45235,
+      "base_cvar_99_9_percent_x": 710.548076,
+      "base_cvar_limit_x": 700,
+      "base_scatter_contract_violations": 1167,
+      "base_scatter_contract_violations_breakdown": {
+        "legacy_four_scatter_books_still_declaring_10_spins": 1095,
+        "five_scatter_books_missing_provider_embedded_epic_payload_and_base_unit_conversion": 72,
+        "interpretation": "Historical 1,167 count reclassified under current approved 3=>10 / 4=>12 / 5 fail-closed contract; this is not a canonical Books repair or fresh scan."
+      }
+    },
+    "canonical_source_trace": {
+      "repo_internal_recovery": "COMPLETED_NO_CANONICAL_SOURCE_FOUND",
+      "canonical_generator_input_manifest_available": false,
+      "approved_probability_inputs_available": false,
+      "provider_golden_vectors_available": false,
+      "books_lut_regeneration": "NOT_PERFORMED_FAIL_CLOSED"
+    }
+  },
+  "provider_and_approval": {
+    "stake_studio_upload": "NOT_PERFORMED",
+    "provider_rgs_contract": "NOT_VERIFIED",
+    "math_approval": "NOT_VERIFIED",
+    "frontend_approval": "NOT_VERIFIED",
+    "asset_redistribution_rights": "NOT_VERIFIED",
+    "legal_and_responsible_gambling_controls": "NOT_VERIFIED"
+  },
+  "release_gate": {
+    "status": "BLOCKED",
+    "command": "python3 qa_release_gate.py",
+    "exit_code": 2,
+    "evidence_artifact": "artifacts/QA_RELEASE_GATE_20261107_R10.json",
+    "evidence_sha256": "df2aa910cd15c5f6644cc557202d42c29888d242a5bd8bcb60b83d077f60668e",
+    "untracked_required_source_paths": 81,
+    "blockers": [
+      "81 required source paths remain untracked; existing index intentionally not broadly staged",
+      "project LICENSE and owner-selected terms absent",
+      "asset creator/redistribution rights unresolved (a_icon_v14.svg)",
+      "exact-HEAD clean-clone build evidence still absent; local worktree reproducibility alone is insufficient",
+      "6 known build-tool dependency advisories; fixed pip/setuptools releases not present in configured index",
+      "trusted owner signing key and signed release bundle absent",
+      "exact-HEAD hosted CI run and GitHub attestations absent",
+      "canonical Math generator/approved inputs/Golden Vectors absent",
+      "BASE payout quantum 45,235 violations and CVaR 710.548076x >700x",
+      "4-Scatter 1,095 legacy 10-spin Books; 5-Scatter 72 unsupported Books; 1,694 retrigger Books",
+      "production Provider Wallet atomic idempotency/ledger/refund contract and Golden Vectors unavailable",
+      "Stake Studio upload/review not performed",
+      "real-money legal/Responsible Gambling approval missing",
+      "WCAG 2.2 AA and physical-device acceptance incomplete"
+    ]
+  },
+  "preservation": {
+    "full_scratch_head": "a6e7997e469730f67c10b9f5657c5a1edfbfb2c2",
+    "staged_paths": 100,
+    "unstaged_tracked_paths": 75,
+    "untracked_status_entries": 511,
+    "commit_created": false,
+    "reset_clean_checkout": false,
+    "broad_stage": false,
+    "R4_R5_R6_R7_R8_R9_preserved": true,
+    "R45_R54_preserved": true,
+    "original_tools_normalize_sdist_restored_byte_identical_to_index": true
+  },
+  "revision": "R11",
+  "math_audit": {
+    "status": "BLOCKED",
+    "main_report": "artifacts/MATH_AUDIT_PINNED_SDK_20261107.json",
+    "main_report_sha256": "1a1faaaf99d12f123eb7ee07ad4ce63549c3e8d31edd7d116b9db8346c6735a3",
+    "buy_mode_addendum": "artifacts/MATH_BUY_MODE_AUDIT_ADDENDUM_20261107.json",
+    "buy_mode_addendum_sha256": "62bb946d926922511248e98b6b2672fb1c824c3aaa0cca6233d459c7b03b37cf",
+    "pinned_sdk_commit": "141b4e89065ac4400769709a919259a923430c4d",
+    "base_lut_quantum_violations": 45235,
+    "base_cvar_99_9_x": 710.5480764122,
+    "base_cvar_limit_x": 700,
+    "four_scatter_legacy_10_spin_books": 1095,
+    "five_scatter_unsupported_embedded_epic_books": 72,
+    "retrigger_books": 1694,
+    "unique_books_incompatible_with_user_contract": 2613,
+    "magicbuy_rtp_at_cost100": 0.965,
+    "epicbuy_rtp_at_cost100": 0.965,
+    "canonical_generator_approved_inputs_golden_vectors": "NOT_FOUND",
+    "math_package_generated": false
+  },
+  "provider_contract": {
+    "status": "PUBLIC_RGS_INTERFACE_MAPPED; PRODUCTION_PROVIDER_CONTRACT_UNVERIFIED",
+    "path": "artifacts/PROVIDER_CONTRACT_STATUS_20261107.json",
+    "sha256": "5b9d748714c875051778e08403e4d31ad493346cc0e4d4f93173af88111442d3",
+    "operation_idempotency_key_in_sdk_wire": false,
+    "provider_atomicity_refund_and_ledger_guarantees": "UNVERIFIED",
+    "embedded_5_scatter_epic_payload": "MISSING"
+  },
+  "release_evidence_index": {
+    "path": "artifacts/RELEASE_EVIDENCE_INDEX_20261107_R11.json"
+  },
+  "studio_runbook": {
+    "path": "docs/STAKE_STUDIO_REVIEW_RUNBOOK_20261107.md",
+    "status": "PREPARED_NOT_EXECUTED"
+  },
+  "build_reproducibility": {
+    "local_worktree": "PASS",
+    "evidence": "artifacts/WORKTREE_BUILD_REPRODUCIBILITY_20261107_R11.json",
+    "source_binding": "current worktree source digest, not exact HEAD clean-clone or hosted CI attestation",
+    "gate_status": "BLOCKED"
+  },
+  "security_audit": {
+    "status": "BLOCKED_BUILD_TOOL_VULNERABILITIES",
+    "evidence": "artifacts/SECURITY_DEPENDENCY_AUDIT_20261107_R11.json",
+    "evidence_sha256": "a8b10f5cc51dd2287e021d076e24b129f75ac393742d55e8d32393fc848f5424",
+    "pip_audit": "6 known advisories in pip26.0.1 (4) and setuptools82.0.1 (2); fixed releases not available in configured index",
+    "npm_audit": "0 known advisories for project and official SDK package"
+  }
+}

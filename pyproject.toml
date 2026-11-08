@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools==84.1.0", "wheel==0.48.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ganesha-full-scratch-v1"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+license-files = []
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,132 @@
+{
+  "schema": "ganesha.release-evidence-index.v4",
+  "created": "2026-11-07",
+  "revision": "R11",
+  "overall_status": "BLOCKED_NOT_UPLOAD_READY",
+  "evidence": {
+    "artifacts/STAKE_SUBMISSION_STATUS_20261107_R11.json": {
+      "sha256": "8a1a7b3dc3946b1541752e2220894d3efe97ca0d23ffb3761ae43084515ce1d4",
+      "bytes": 10768
+    },
+    "artifacts/QA_RELEASE_GATE_20261107_R10.json": {
+      "sha256": "df2aa910cd15c5f6644cc557202d42c29888d242a5bd8bcb60b83d077f60668e",
+      "bytes": 8319
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107.zip": {
+      "sha256": "2ff26b987b7d9b5eb12fe4f0952c8756be29e7b4c623447af0daf9b1815b868c",
+      "bytes": 18232862
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/manifest.json": {
+      "sha256": "76fa3cb5c867241e246ac1d7296d2efe0a67b4daf331fe3da75536af665e1b52",
+      "bytes": 6255
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/UPLOAD_MANIFEST.json": {
+      "sha256": "c676a098e5d258b1efbabbf513a7a0dbd2cf45745c530c72250a97abb2e5d144",
+      "bytes": 33318
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/SDK_PROVENANCE_RECONCILIATION.json": {
+      "sha256": "8cb810b35b952b4846c4876d2980dc8a5c7506f9e669f02649c84d3d77693549",
+      "bytes": 4001
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/MATH_CONTRACT_STATUS.json": {
+      "sha256": "a174512b6b794db2f988a9f2aa539bad882d19b5822312893e9a9df02efdc203",
+      "bytes": 1496
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/SCATTER_PAYTABLE_CONTRACT.json": {
+      "sha256": "bf6b4b77fd159ccbc15e67d88b9777c7438dcc2ffdb63ae59e084cd1804335f1",
+      "bytes": 818
+    },
+    "artifacts/STAKE_FRONTEND_R98_PRODUCTION_ONLY_R9_20261107/REPLAY_CONTRACT_STATUS.json": {
+      "sha256": "9c9dfb37a9e9b9f6fb9e95a87896e0d3cce32903cda529b0d4bdf6faf7a80eb4",
+      "bytes": 1773
+    },
+    "artifacts/MATH_AUDIT_PINNED_SDK_20261107.json": {
+      "sha256": "1a1faaaf99d12f123eb7ee07ad4ce63549c3e8d31edd7d116b9db8346c6735a3",
+      "bytes": 5900
+    },
+    "artifacts/MATH_BUY_MODE_AUDIT_ADDENDUM_20261107.json": {
+      "sha256": "62bb946d926922511248e98b6b2672fb1c824c3aaa0cca6233d459c7b03b37cf",
+      "bytes": 2091
+    },
+    "artifacts/PROVIDER_CONTRACT_STATUS_20261107.json": {
+      "sha256": "5b9d748714c875051778e08403e4d31ad493346cc0e4d4f93173af88111442d3",
+      "bytes": 2478
+    },
+    "artifacts/SBOM_STAKE_CANDIDATE_20261107_R9.cdx.json": {
+      "sha256": "5644264ed27b10838a52102776cadd36a392a8d8531f902be68b70353b1a692f",
+      "bytes": 105847
+    },
+    "artifacts/SBOM_STAKE_CANDIDATE_20261107_R9_VERIFY.json": {
+      "sha256": "c640b7d6ca7f0aa1f718a7915be82924202b51dd66a584442a70df2a6a73bf2e",
+      "bytes": 233
+    },
+    "artifacts/SECURITY_DEPENDENCY_AUDIT_20261107_R11.json": {
+      "sha256": "a8b10f5cc51dd2287e021d076e24b129f75ac393742d55e8d32393fc848f5424",
+      "bytes": 3166
+    },
+    "artifacts/PIP_AUDIT_BUILD_ENV_20261107_R10.json": {
+      "sha256": "72044216e984bb4c6ae94333fcff2bb87e9392582012714fd08da0670d4473e1",
+      "bytes": 6091
+    },
+    "artifacts/NPM_AUDIT_20261107_R9.json": {
+      "sha256": "e4e4f27061197cf4581b09422d8f1c9e8a3c0f78f91f04d268db2ee86b8f526a",
+      "bytes": 361
+    },
+    "artifacts/WORKTREE_BUILD_REPRODUCIBILITY_20261107_R11.json": {
+      "sha256": "b79ece9edfd8a4e348df7f869f79b92350be3d9b485f56a2b6514fd50415c8b5",
+      "bytes": 9804
+    },
+    "artifacts/SECURITY_AUDIT_SUPERSESSION_NOTE_20261107_R10.md": {
+      "sha256": "961fd566a3cd3dedf990d56fb67232a217288455d77ec675c1f693d336afe222",
+      "bytes": 816
+    },
+    "artifacts/SECURITY_AUDIT_SUPERSESSION_NOTE_20261107_R11.md": {
+      "sha256": "9e4537fde8c9490bf5fc12be20f1590f3b1ee1ac66b30fee39f7a03103dcee70",
+      "bytes": 450
+    },
+    "artifacts/BUILD_REPRODUCIBILITY_SUPERSESSION_NOTE_20261107_R11.md": {
+      "sha256": "33d6612f0382b65fc9cf60f538a11b0ac357e589d1df755ad2798d99b9ee8abe",
+      "bytes": 848
+    },
+    "docs/MATH_AUDIT_PINNED_SDK_20261107.md": {
+      "sha256": "e2b2918f84db17a145ea19e0ab7ca0120d22a8c6528154391d7ea1a1054fd605",
+      "bytes": 4691
+    },
+    "docs/STAKE_ENGINE_PUBLIC_RGS_CONTRACT_EVIDENCE_20261107.md": {
+      "sha256": "7a8f7fe5d05b1eafe6e76dcf378217023a37663e5767926eb5bc89438a1306a9",
+      "bytes": 4316
+    },
+    "docs/STAKE_STUDIO_REVIEW_RUNBOOK_20261107.md": {
+      "sha256": "c75e6b62498195722ca49a4bb4c17f2c5a1cef431d6c2887f5d2042a3c0d932c",
+      "bytes": 8619
+    },
+    "docs/license-status.md": {
+      "sha256": "4c5154a15768cbcf06b9fcd9733473dba4a5a8f0471b85f832c5ad00818a80a9",
+      "bytes": 3831
+    }
+  },
+  "test_results": {
+    "python": "446/446 PASS",
+    "frontend_rgs_node": "33/33 PASS",
+    "R98 Wild/Scatter": "59/59 PASS",
+    "R98 Replay": "24/24 PASS",
+    "R98 SDK wire fixture": "4/4 PASS",
+    "SBOM completeness": "PASS",
+    "R9 Frontend directory+ZIP": "PASS, 195 files, byte-identical",
+    "local worktree Python build": "PASS, wheel+normalized sdist byte-identical",
+    "npm project audit": "0 known advisories",
+    "official SDK npm audit": "0 known advisories",
+    "Python build dependency audit": "6 known advisories"
+  },
+  "critical_blockers": [
+    "canonical Math generator/approved inputs/Provider Golden Vectors",
+    "BASE payout quantum 45,235 and CVaR 710.548076x >700x",
+    "4-Scatter 1,095 legacy 10-spin Books; 5-Scatter 72 unsupported Books; 1,694 retrigger Books",
+    "production Provider atomic idempotency/ledger/refund contract",
+    "6 build-tool advisories in pip/setuptools; fixed releases unavailable in configured index",
+    "project license and asset redistribution rights",
+    "trusted release signature and exact-HEAD hosted CI attestation",
+    "real-money legal/Responsible Gambling and physical accessibility acceptance",
+    "Stake Studio upload and review"
+  ]
+}
