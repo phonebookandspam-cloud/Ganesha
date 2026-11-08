@@ -10,7 +10,7 @@ The browser page includes a **scripted visual demo**: DEMO SPIN calls a loopback
 
 ## Authority boundary
 
-The current V1 math and feature configuration is a hypothetical draft, not a transcription of the original user-supplied Math. The later RC10 authority reconciliation resolves the BASE Scatter boundary as exactly 3 Lotus Scatter awarding 10 Free Spins; 4/5 do not award that exact-3 feature; other 4/5 behavior, 6+ behavior and retrigger remain unspecified. Draft-005 instead introduced progressive 3/4/5 awards, retriggers, new probability weights, new Buy prices and a Divine Jackpot. Those values are not approved for the Stake title. See [`docs/authority-boundary.md`](docs/authority-boundary.md).
+The current V1 math and feature configuration is a hypothetical draft, not a transcription of the original user-supplied Math. The 2026-11-07 user instruction supersedes the earlier RC10 Exact-3-only Scatter interpretation: 3 Scatter awards 10 Free Spins; 4 Scatter awards 12 Free Spins; 5 Scatter selects the existing `EPICBUY_V37` sequence embedded in the already-paid BASE round (no second debit or Play); 6+ Scatter and retriggers fail closed. Five-Scatter financial execution remains disabled until the Provider-authoritative embedded payload and BASE-unit conversion are recovered and verified. See [`docs/SCATTER_FEATURE_CONTRACT_20261107.md`](docs/SCATTER_FEATURE_CONTRACT_20261107.md) for the current rule and [`docs/authority-boundary.md`](docs/authority-boundary.md) for historical source reconciliation and remaining blockers.
 
 The original 2026-09-27 user Math JSON raw bytes are not currently available in this workspace. Its exact reel strips, paylines and paytable must not be reconstructed from generated Books, LUTs, artwork or this draft.
 
@@ -34,6 +34,7 @@ The 8-symbol art inventory in this preview is a proposed visual set. The origina
 - `provider`: integration boundary documentation only; no production adapter or credentials
 - `tests`: local unit/integration tests for this prototype
 - `docs`: architecture, authority boundary, draft Math and release gates
+- `.agents/skills`: project-specific Stake Engine, Math audit and RGS integration instructions for coding agents; see [`docs/skill-adoption/README.md`](docs/skill-adoption/README.md)
 
 ## Publication status
 

@@ -2,6 +2,8 @@
 
 Status: `BLOCKED_FROM_STAKE_RELEASE`.
 
+> **Current Scatter-rule supersession (2026-11-07):** This document preserves the earlier RC10 Exact-3 authority reconciliation as historical evidence. Its statements below that treat 4/5 Scatter as unspecified are superseded by [`SCATTER_FEATURE_CONTRACT_20261107.md`](SCATTER_FEATURE_CONTRACT_20261107.md), which records the later explicit user instruction: 3 = 10 Free Spins; 4 = 12 Free Spins; 5 = existing `EPICBUY_V37` embedded in the paid BASE round, with no second debit/Play and BASE settlement; 6+ and retriggers fail closed. Five-Scatter financial execution remains blocked until the exact Provider-authoritative payload and BASE-unit conversion are verified. This supersession does not make the draft Math canonical or upload-ready.
+
 ## Confirmed user-authority constraints from the later RC10 reconciliation
 
 Source: `qa/work_20261101_ver1_release_candidate_rc10/worktree/qa/RC10_MATH_USER_AUTHORITY_RECONCILIATION_20261101.json` (2026-11-01), with supporting Markdown beside it.
@@ -52,7 +54,7 @@ Official source reviewed 2026-11-04: https://stake-engine.com/docs/approval-guid
 1. Reattach the original 2026-09-27 user Math JSON or exact source file; record raw bytes and SHA-256.
 2. Recover the exact approved symbol set, reel strips, 20 paylines and paytable.
 3. Obtain approved probability models and all mode-specific input files.
-4. Obtain authoritative Scatter 4/5 alternative behavior, 6+ policy, retrigger, Wild expansion/multiplier and Buy rules.
+4. Obtain the Provider-authoritative five-Scatter embedded EPIC payload and BASE-unit conversion; independently verify the already user-authorized 3/4/5/6+ Scatter and no-retrigger contract against Provider Math.
 5. Obtain the canonical generator, version, source hash, RNG derivation and Provider-approved Golden Vectors.
 6. Bind all inputs to a source manifest and approval references before generating or changing Books/LUT.
 
