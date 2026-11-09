@@ -155,4 +155,32 @@ class GameFixtureSessionStore:
             stops = [(0, 0, 0, 0, 0)] * 12
             outcome = engine.resolve_base_round((0, 0, 0, 0, 0), stops)
             events = build_presentation_events(session["round_id"], outcome)
-            state = replay_events(session["round_id
+            state = replay_events(session["round_id"], events)
+            if state["status"] != "COMPLETED" or state["feature_spins_played"] != 12:
+                raise GameFixtureSessionError("fixture GameEngine did not complete the expected 4-Scatter/12-Free-Spins sequence")
+
+            response = {
+                "contract": "ganesha.game.presentation", "schema_version": 1,
+                "session_contract": CONTRACT, "session_schema_version": SCHEMA_VERSION,
+                "session_id": session_id, "round_id": session["round_id"],
+                "classification": "TEST_FIXTURE_ONLY", "financial_effects": False,
+                "events": events, "state": state,
+            }
+            session["events"] = events
+            session["state"] = state
+            session["completed"] = True
+            session["requests"][request_id] = response
+            return _clone(response)
+
+    def snapshot(self, session_id):
+        with self._lock:
+            session = self._sessions.get(session_id)
+            if session is None:
+                raise GameFixtureSessionError("unknown game fixture session")
+            return {
+                "contract": "ganesha.game.presentation", "schema_version": 1,
+                "session_contract": CONTRACT, "session_schema_version": SCHEMA_VERSION,
+                "session_id": session_id, "round_id": session["round_id"],
+                "classification": "TEST_FIXTURE_ONLY", "financial_effects": False,
+                "events": _clone(session["events"]), "state": _clone(session["state"]),
+            }

@@ -47,4 +47,4 @@ The contract derives Scatter count from the raw stopped board and does not trust
 - BASE display cells must exactly equal the raw stopped board. Feature display cells must equal the raw board except that each explicitly expanded Wild reel (which must contain an original WILD) is rendered as three WILD cells; no other display mutation is accepted.
 - Every feature round-payout projection must equal min(previous_round_total + this_spin_payout, configured_round_cap). The reducer updates cap state from that arithmetic, rejects further feature reels after the cap, and verifies the final cap flag against the final total.
 
-- A Wild expansion event mus
+- A Wild expansion event must follow all five feature reel stops and precede its multiplier event; the reducer accepts only the exact multiplier derived from the expanded Wild reel count. A multiplier cannot appear without a preceding Wild expansion.
