@@ -31,7 +31,7 @@
     }
   ],
   "gate_required_untracked_source_count": 0,
-  "git_head": "aaf59f967b45effb96fb6ead20093794b7e722e5",
+  "git_head": "d133f313d94e3dc121cb93fda9ecc8ec104e1a00",
   "historical_qa_authority": "SUPERSEDED_HISTORICAL_QA_EVIDENCE; its Scatter interpretation predates the current user-authorized contract",
   "historical_qa_checksum_valid": true,
   "historical_qa_evidence_count": 2,

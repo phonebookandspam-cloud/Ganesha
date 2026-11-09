@@ -2,12 +2,11 @@
   "schema": "ganesha-publication-gate.v1",
   "project": "Ganesha and The Magic \u2014 Full Scratch V1",
   "status": "BLOCKED",
-  "git_head": "fee21d160d15adf508d6edc6f99263c76e787ab5",
+  "git_head": "d133f313d94e3dc121cb93fda9ecc8ec104e1a00",
   "tracks": {
     "public_source_repository": {
       "status": "BLOCKED",
       "blockers": [
-        "source_path_classification_integrity",
         "project_license",
         "asset_redistribution_rights",
         "local_worktree_reproducibility",
@@ -20,10 +19,8 @@
     "hosted_non_wagering_preview": {
       "status": "BLOCKED",
       "blockers": [
-        "source_path_classification_integrity",
         "project_license",
         "asset_redistribution_rights",
-        "offline_frontend_preview_integrity",
         "local_accessibility_reflow",
         "local_worktree_reproducibility",
         "hosted_privacy_and_operations",
@@ -104,8 +101,12 @@
       }
     },
     "source_path_classification_integrity": {
-      "pass": false,
-      "evidence": "release path classification report is malformed"
+      "pass": true,
+      "evidence": "all classified source/evidence paths exist and their SHA-256 values match",
+      "source_path_count": 0,
+      "historical_evidence_count": 2,
+      "source_tracking_complete": true,
+      "untracked_source_paths_remain_blocking": 0
     },
     "project_license": {
       "pass": false,
@@ -137,8 +138,59 @@
       "evidence": "all generated frontend snapshots have exact byte-verified inventories"
     },
     "offline_frontend_preview_integrity": {
-      "pass": false,
-      "evidence": "offline frontend outputs are byte-verified, but no build is bound to current HEAD and current source hashes"
+      "pass": true,
+      "evidence": "offline frontend outputs are byte-verified and at least one build is bound to current HEAD/current source hashes",
+      "classification": "LOCAL_NON_WAGERING_ENGINEERING_PREVIEW_ONLY",
+      "builds": [
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R2",
+          "file_count": 19,
+          "tree_sha256": "0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R3",
+          "file_count": 19,
+          "tree_sha256": "0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R4",
+          "file_count": 19,
+          "tree_sha256": "0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R5",
+          "file_count": 19,
+          "tree_sha256": "0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R6",
+          "file_count": 19,
+          "tree_sha256": "0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R7",
+          "file_count": 19,
+          "tree_sha256": "d4012cb7c0c8b4741af9239cee2b5e0f6b3e7cdb3e16d9d369fb3413dfb5ef64",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R8",
+          "file_count": 19,
+          "tree_sha256": "d4012cb7c0c8b4741af9239cee2b5e0f6b3e7cdb3e16d9d369fb3413dfb5ef64",
+          "source_binding": "PREVIOUS_COMMIT_SNAPSHOT"
+        },
+        {
+          "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R8",
+          "file_count": 19,
+          "tree_sha256": "d4012cb7c0c8b4741af9239cee2b5e0f6b3e7cdb3e16d9d369fb3413dfb5ef64",
+          "source_binding": "CURRENT_HEAD_AND_WORKTREE_SOURCE_HASHES_MATCH"
+        }
+      ]
     },
     "sbom_completeness": {
       "pass": true,

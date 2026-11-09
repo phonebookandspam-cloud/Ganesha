@@ -1,0 +1,135 @@
+{
+  "schema": "ganesha.frontend-offline-build-integrity.v1",
+  "classification": "LOCAL_NON_WAGERING_ENGINEERING_BUILD_NOT_PROVIDER_APPROVAL",
+  "output": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R8",
+  "git_head": "d133f313d94e3dc121cb93fda9ecc8ec104e1a00",
+  "git_tree": "4dbe899b6a1bf697c72f6b38c2f71cb365400b21",
+  "source_worktree_dirty": true,
+  "source_worktree_status_sha256": "778b8e1375a8bb2458a85423bb62302ec2290d277288625178e36a28b6f9d9b3",
+  "file_count": 19,
+  "tree_sha256": "d4012cb7c0c8b4741af9239cee2b5e0f6b3e7cdb3e16d9d369fb3413dfb5ef64",
+  "toolchain": {
+    "node": "v22.14.0",
+    "vite": "6.4.5",
+    "declared_vite": "6.4.5"
+  },
+  "source_sha256": {
+    "frontend/README.md": "0151394ce6a22f789dfe4d0edce117740588f3c5b17ad6904460b382cb7aab4d",
+    "frontend/app.js": "f77aa8de83ef2e9b7fbdfa6e64aef3ea622326580c88159d1ea67c5571cf0790",
+    "frontend/assets/ASSET_PROVENANCE.json": "c9e3c410303f8ef1ea5030c3d5efc84479964da5b8cfd93b4b385e77c5f598e1",
+    "frontend/assets/a_icon_v14.svg": "52ec7807215fee632065d35de58b7416614c62180f78623f674307c7c53049dc",
+    "frontend/assets/a_icon_v15.svg": "09e8f469deaf184d7a0abe1f054a30be62c4c817a6ff8b1cc17a7dfb620dcf9a",
+    "frontend/assets/chakra_icon_v14.svg": "bb060d9d063cb5b066d16380aa96002052daaa81b90de217cabd06ca2367b087",
+    "frontend/assets/chakra_icon_v15.svg": "52e3bc7e6f7da2adbd7db8915a4db96e2ef2ae56a1f2a45081c17eeb45b64a1e",
+    "frontend/assets/elephant_icon_v14.svg": "f3e94a99fb78098dfbe645d6b5df3c8d1fa01d549a1dd0a05b611a9107752c55",
+    "frontend/assets/elephant_icon_v15.svg": "123ed31e51337d0e689eae7324c9c6705ef1a592ad00c3d95607b1cf9a48e36a",
+    "frontend/assets/ganesha_temple_scene_v14.png": "56efcc597727c857c4b3f3b5f17a2c89be5ae0c8982150db9c7aa40332917a71",
+    "frontend/assets/ganesha_temple_scene_v15.svg": "f5900d4a84eb074c9f24911b70f93d914752236000aba4390da2d49f0d50d8fb",
+    "frontend/assets/ganesha_wild_v14.svg": "97860c112b1fd59b52157df787e4e5855feabf8725b0e403c44a4c18b1663bc1",
+    "frontend/assets/ganesha_wild_v15.svg": "79645dacb64f1519aa82161219b660df0603989657446efd0a6d538c54de81ff",
+    "frontend/assets/k_icon_v14.svg": "8539c4fc623aa92bd0fdbc1000dcc932ff4c56479727a55fd97032d27cb7f123",
+    "frontend/assets/k_icon_v15.svg": "14e6a347563d95f649248e853fcea7e5e27ddf25605317d20cde5974f9defbc9",
+    "frontend/assets/lotus_scatter_v14.svg": "2231132e90fcc4e8b549735e8212b2b1fa0ce3fa6c87cbca53102d3c11387194",
+    "frontend/assets/lotus_scatter_v15.svg": "a3e88cdbeb47ff644c18d11f45317d6d8baf92abaca8869862a690ff56eda888",
+    "frontend/assets/modak_icon_v14.svg": "5d267a0dc79940868b2c4e7be5e3eafcf6846d38e817c785f590a9228c547a65",
+    "frontend/assets/modak_icon_v15.svg": "085a5f50c03f4bef13c3baee0c41a7084435ef702f55d0b4dc1f4211c2b01c5f",
+    "frontend/assets/mouse_icon_v14.svg": "e76675540c51bfef91a639d8c22cc9a32c32be8dcd6fe7eb4f7feea57f0d53ba",
+    "frontend/assets/mouse_icon_v15.svg": "a5752a928ffd3f9470f2f845bcc36802fadc6d5106f1565133d5ac0cf0e1a713",
+    "frontend/assets/sfx/free-spins.wav": "0ab8844a55378fe059c43fef6011ab0b2210b10a72eacd0f27a5c52430c08916",
+    "frontend/assets/sfx/reel-stop.wav": "39903d82362db7de4c61d9126f7bdd9bf6d7a60344f52e11bf5f7476be6f0853",
+    "frontend/assets/sfx/wild-expansion.wav": "a0d99ed2b5106c63b17f5c0b9ec32116ee794b0a5e90848dbba17c7848c63148",
+    "frontend/assets/sfx/win.wav": "0de547e043339a0463e7b0209e1e6cd71f9b75659a09f2873f6442e50ddf3c18",
+    "frontend/config.js": "4ad363571b620d6eaf40823ca3e6c83ed04fbe53feaab1cba3cb584aa2feba8e",
+    "frontend/config.offline.js": "f4324520d578fba8401481a82b72a54ab190aedde67eb2ec7d7c2aee5c827a8c",
+    "frontend/index.html": "eb27b02c3478ee833f5361f305db7d3addafd9dae09616d981fa243e2aa77990",
+    "frontend/layout-v2.css": "fba9a64384a03faf26ff1dc4a54fc3f67fcd81f820c64b51e2eb521072928c63",
+    "frontend/manifest.json": "c500d52477486f28db8eba45482d897fe857ecbbc9720f58e9180b233ba09bc7",
+    "frontend/presentation-contract.js": "d201ed946fd9dbd462fc85e5f15622155a58114dd0b9f407a5a585facf60198a",
+    "frontend/stake-rgs-adapter.js": "73e23e52b89fc422e9cce7bfbda735abef4735a49fb4b200acef209e51a66975",
+    "frontend/style.css": "f956b8ea09ad028b7687aa0b09a52fc336311bc08579ce7272f81840cc8777cc",
+    "package-lock.json": "0da378d9a1f9f16b3b5491bfdca74cc67c3c6d2258bab01f9bb0f935bb6318c0",
+    "package.json": "7380a9583c12160c194027b8e156f717393e9be4f07c78a22527ad36f883f1bd",
+    "tools/build_frontend_offline.mjs": "5bbf0af3232380f6c4e39c154ee9261cf990bb7a194ad738ad3f69f58553ee6f",
+    "tools/verify_frontend_build.mjs": "01f65a376c5f5a824b535ccc98d3be1335e670c41f84062f55fd9283e4610ee7",
+    "vite.config.js": "59ce7a839cf46d20a5c4220ac4cfbf5c0b3db0b20b036e52fccf19a2d5855bf6"
+  },
+  "files": {
+    "assets/a_icon_v15.svg": {
+      "bytes": 752,
+      "sha256": "09e8f469deaf184d7a0abe1f054a30be62c4c817a6ff8b1cc17a7dfb620dcf9a"
+    },
+    "assets/chakra_icon_v15.svg": {
+      "bytes": 977,
+      "sha256": "52e3bc7e6f7da2adbd7db8915a4db96e2ef2ae56a1f2a45081c17eeb45b64a1e"
+    },
+    "assets/elephant_icon_v15.svg": {
+      "bytes": 1637,
+      "sha256": "123ed31e51337d0e689eae7324c9c6705ef1a592ad00c3d95607b1cf9a48e36a"
+    },
+    "assets/free-spins.wav": {
+      "bytes": 81188,
+      "sha256": "0ab8844a55378fe059c43fef6011ab0b2210b10a72eacd0f27a5c52430c08916"
+    },
+    "assets/ganesha_temple_scene_v15.svg": {
+      "bytes": 2996,
+      "sha256": "f5900d4a84eb074c9f24911b70f93d914752236000aba4390da2d49f0d50d8fb"
+    },
+    "assets/ganesha_wild_v15.svg": {
+      "bytes": 2705,
+      "sha256": "79645dacb64f1519aa82161219b660df0603989657446efd0a6d538c54de81ff"
+    },
+    "assets/index-DNasfM1Z.js": {
+      "bytes": 42600,
+      "sha256": "550a3e177438f36299cf51440ae22465083ba63b672ceffa09cc2f8ab315dfb8"
+    },
+    "assets/index.css": {
+      "bytes": 30069,
+      "sha256": "d285ed20662847e3c6dfe0fbea623c091d289042d965d622bb4de9be16136451"
+    },
+    "assets/k_icon_v15.svg": {
+      "bytes": 725,
+      "sha256": "14e6a347563d95f649248e853fcea7e5e27ddf25605317d20cde5974f9defbc9"
+    },
+    "assets/lotus_scatter_v15.svg": {
+      "bytes": 1915,
+      "sha256": "a3e88cdbeb47ff644c18d11f45317d6d8baf92abaca8869862a690ff56eda888"
+    },
+    "assets/modak_icon_v15.svg": {
+      "bytes": 1066,
+      "sha256": "085a5f50c03f4bef13c3baee0c41a7084435ef702f55d0b4dc1f4211c2b01c5f"
+    },
+    "assets/mouse_icon_v15.svg": {
+      "bytes": 1638,
+      "sha256": "a5752a928ffd3f9470f2f845bcc36802fadc6d5106f1565133d5ac0cf0e1a713"
+    },
+    "assets/reel-stop.wav": {
+      "bytes": 14156,
+      "sha256": "39903d82362db7de4c61d9126f7bdd9bf6d7a60344f52e11bf5f7476be6f0853"
+    },
+    "assets/stake-rgs-adapter-CNj5fLs8.js": {
+      "bytes": 16643,
+      "sha256": "28f3f8b35887a2cd7caa48a81efc12897a30360d24f11d24faf40748c07f69bb"
+    },
+    "assets/wild-expansion.wav": {
+      "bytes": 68840,
+      "sha256": "a0d99ed2b5106c63b17f5c0b9ec32116ee794b0a5e90848dbba17c7848c63148"
+    },
+    "assets/win.wav": {
+      "bytes": 63548,
+      "sha256": "0de547e043339a0463e7b0209e1e6cd71f9b75659a09f2873f6442e50ddf3c18"
+    },
+    "config.js": {
+      "bytes": 297,
+      "sha256": "f4324520d578fba8401481a82b72a54ab190aedde67eb2ec7d7c2aee5c827a8c"
+    },
+    "index.html": {
+      "bytes": 15879,
+      "sha256": "ca5b4dd67d7db92b070bb2ea168dff7de7f7b582cc2ca0ae04f89df3511ffd67"
+    },
+    "manifest.json": {
+      "bytes": 1357,
+      "sha256": "c500d52477486f28db8eba45482d897fe857ecbbc9720f58e9180b233ba09bc7"
+    }
+  },
+  "revalidation_note": "Revalidated against the published safe-branch HEAD without rebuilding: all declared source_sha256 values match current worktree bytes; output inventory/tree SHA are independently rechecked by qa_release_gate.py. This is not Provider approval."
+}
