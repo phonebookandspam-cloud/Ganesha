@@ -1,32 +1,32 @@
 {
-  "schema": "ganesha.release-deliverables-index.v1",
-  "git_branch": "integration/ganesha-full-release-2026-11-09",
-  "source_head": "4e31a70cd57dfe8a41f2357114a6f11732827e23",
-  "deliverables": [
-    {
-      "name": "math",
-      "folder": "math",
-      "file_count": 4,
-      "expanded_bytes": 25137,
-      "zip": "Ganesha-Math-BLOCKED-Evidence.zip",
-      "zip_bytes": 9628,
-      "zip_sha256": "a52878d4a083304a1b88436d6f2379442398884bfb469b9202e4fd3b24999bbf",
-      "manifest": "MATH_FILE_MANIFEST.json",
-      "sha256_list": "MATH_SHA256SUMS.txt",
-      "status": "BLOCKED_NOT_A_STAKE_UPLOAD_PACKAGE"
-    },
-    {
-      "name": "front",
-      "folder": "front",
-      "file_count": 19,
-      "expanded_bytes": 348988,
-      "zip": "Ganesha-Front-R8-Engineering-Preview.zip",
-      "zip_bytes": 240956,
-      "zip_sha256": "bf2948430d8d2a0a356b24c375a5c810ca2f766841e8900191415a22bf893c45",
-      "manifest": "FRONT_FILE_MANIFEST.json",
-      "sha256_list": "FRONT_SHA256SUMS.txt",
-      "status": "ENGINEERING_PREVIEW_ONLY_NOT_STAKE_UPLOAD_READY"
-    }
-  ],
-  "publication_note": "The publication commit is separate from the source_head used to build the packages."
-}
+2	  "schema": "ganesha.release-deliverables-index.v1",
+3	  "git_branch": "integration/ganesha-full-release-2026-11-09",
+4	  "source_head": "4e31a70cd57dfe8a41f2357114a6f11732827e23",
+5	  "deliverables": [
+6	    {
+7	      "name": "math",
+8	      "folder": "math",
+9	      "file_count": 4,
+10	      "expanded_bytes": 25185,
+11	      "zip": "Ganesha-Math-BLOCKED-Evidence.zip",
+12	      "zip_bytes": 9628,
+13	      "zip_sha256": "a52878d4a083304a1b88436d6f2379442398884bfb469b9202e4fd3b24999bbf",
+14	      "manifest": "MATH_FILE_MANIFEST.json",
+15	      "sha256_list": "MATH_SHA256SUMS.txt",
+16	      "status": "BLOCKED_NOT_A_STAKE_UPLOAD_PACKAGE"
+17	    },
+18	    {
+19	      "name": "front",
+20	      "folder": "front",
+21	      "file_count": 19,
+22	      "expanded_bytes": 348988,
+23	      "zip": "Ganesha-Front-R8-Engineering-Preview.zip",
+24	      "zip_bytes": 240956,
+25	      "zip_sha256": "bf2948430d8d2a0a356b24c375a5c810ca2f766841e8900191415a22bf893c45",
+26	      "manifest": "FRONT_FILE_MANIFEST.json",
+27	      "sha256_list": "FRONT_SHA256SUMS.txt",
+28	      "status": "ENGINEERING_PREVIEW_ONLY_NOT_STAKE_UPLOAD_READY"
+29	    }
+30	  ],
+31	  "publication_note": "The publication commit is separate from the source_head used to build the packages."
+32	}
