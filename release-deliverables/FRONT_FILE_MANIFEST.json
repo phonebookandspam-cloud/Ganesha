@@ -1,0 +1,102 @@
+{
+  "schema": "ganesha.deliverable-file-manifest.v1",
+  "folder": "front",
+  "file_count": 19,
+  "files": [
+    {
+      "path": "assets/a_icon_v15.svg",
+      "size_bytes": 752,
+      "sha256": "09e8f469deaf184d7a0abe1f054a30be62c4c817a6ff8b1cc17a7dfb620dcf9a"
+    },
+    {
+      "path": "assets/chakra_icon_v15.svg",
+      "size_bytes": 977,
+      "sha256": "52e3bc7e6f7da2adbd7db8915a4db96e2ef2ae56a1f2a45081c17eeb45b64a1e"
+    },
+    {
+      "path": "assets/elephant_icon_v15.svg",
+      "size_bytes": 1637,
+      "sha256": "123ed31e51337d0e689eae7324c9c6705ef1a592ad00c3d95607b1cf9a48e36a"
+    },
+    {
+      "path": "assets/free-spins.wav",
+      "size_bytes": 81188,
+      "sha256": "0ab8844a55378fe059c43fef6011ab0b2210b10a72eacd0f27a5c52430c08916"
+    },
+    {
+      "path": "assets/ganesha_temple_scene_v15.svg",
+      "size_bytes": 2996,
+      "sha256": "f5900d4a84eb074c9f24911b70f93d914752236000aba4390da2d49f0d50d8fb"
+    },
+    {
+      "path": "assets/ganesha_wild_v15.svg",
+      "size_bytes": 2705,
+      "sha256": "79645dacb64f1519aa82161219b660df0603989657446efd0a6d538c54de81ff"
+    },
+    {
+      "path": "assets/index-DNasfM1Z.js",
+      "size_bytes": 42600,
+      "sha256": "550a3e177438f36299cf51440ae22465083ba63b672ceffa09cc2f8ab315dfb8"
+    },
+    {
+      "path": "assets/index.css",
+      "size_bytes": 30069,
+      "sha256": "d285ed20662847e3c6dfe0fbea623c091d289042d965d622bb4de9be16136451"
+    },
+    {
+      "path": "assets/k_icon_v15.svg",
+      "size_bytes": 725,
+      "sha256": "14e6a347563d95f649248e853fcea7e5e27ddf25605317d20cde5974f9defbc9"
+    },
+    {
+      "path": "assets/lotus_scatter_v15.svg",
+      "size_bytes": 1915,
+      "sha256": "a3e88cdbeb47ff644c18d11f45317d6d8baf92abaca8869862a690ff56eda888"
+    },
+    {
+      "path": "assets/modak_icon_v15.svg",
+      "size_bytes": 1066,
+      "sha256": "085a5f50c03f4bef13c3baee0c41a7084435ef702f55d0b4dc1f4211c2b01c5f"
+    },
+    {
+      "path": "assets/mouse_icon_v15.svg",
+      "size_bytes": 1638,
+      "sha256": "a5752a928ffd3f9470f2f845bcc36802fadc6d5106f1565133d5ac0cf0e1a713"
+    },
+    {
+      "path": "assets/reel-stop.wav",
+      "size_bytes": 14156,
+      "sha256": "39903d82362db7de4c61d9126f7bdd9bf6d7a60344f52e11bf5f7476be6f0853"
+    },
+    {
+      "path": "assets/stake-rgs-adapter-CNj5fLs8.js",
+      "size_bytes": 16643,
+      "sha256": "28f3f8b35887a2cd7caa48a81efc12897a30360d24f11d24faf40748c07f69bb"
+    },
+    {
+      "path": "assets/wild-expansion.wav",
+      "size_bytes": 68840,
+      "sha256": "a0d99ed2b5106c63b17f5c0b9ec32116ee794b0a5e90848dbba17c7848c63148"
+    },
+    {
+      "path": "assets/win.wav",
+      "size_bytes": 63548,
+      "sha256": "0de547e043339a0463e7b0209e1e6cd71f9b75659a09f2873f6442e50ddf3c18"
+    },
+    {
+      "path": "config.js",
+      "size_bytes": 297,
+      "sha256": "f4324520d578fba8401481a82b72a54ab190aedde67eb2ec7d7c2aee5c827a8c"
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 15879,
+      "sha256": "ca5b4dd67d7db92b070bb2ea168dff7de7f7b582cc2ca0ae04f89df3511ffd67"
+    },
+    {
+      "path": "manifest.json",
+      "size_bytes": 1357,
+      "sha256": "c500d52477486f28db8eba45482d897fe857ecbbc9720f58e9180b233ba09bc7"
+    }
+  ]
+}

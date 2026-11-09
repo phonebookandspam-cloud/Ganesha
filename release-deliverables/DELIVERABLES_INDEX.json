@@ -1,0 +1,31 @@
+{
+  "schema": "ganesha.release-deliverables-index.v1",
+  "git_branch": "integration/ganesha-full-release-2026-11-09",
+  "source_head": "4e31a70cd57dfe8a41f2357114a6f11732827e23",
+  "deliverables": [
+    {
+      "name": "math",
+      "folder": "math",
+      "file_count": 4,
+      "expanded_bytes": 25137,
+      "zip": "Ganesha-Math-BLOCKED-Evidence.zip",
+      "zip_bytes": 9525,
+      "zip_sha256": "20368bd2ab387ddce775fa9d07a5f36b81e982223edbc632803a10280c5cb0a1",
+      "manifest": "MATH_FILE_MANIFEST.json",
+      "sha256_list": "MATH_SHA256SUMS.txt",
+      "status": "BLOCKED_NOT_A_STAKE_UPLOAD_PACKAGE"
+    },
+    {
+      "name": "front",
+      "folder": "front",
+      "file_count": 19,
+      "expanded_bytes": 348988,
+      "zip": "Ganesha-Front-R8-Engineering-Preview.zip",
+      "zip_bytes": 240956,
+      "zip_sha256": "bf2948430d8d2a0a356b24c375a5c810ca2f766841e8900191415a22bf893c45",
+      "manifest": "FRONT_FILE_MANIFEST.json",
+      "sha256_list": "FRONT_SHA256SUMS.txt",
+      "status": "ENGINEERING_PREVIEW_ONLY_NOT_STAKE_UPLOAD_READY"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "ganesha.front-deliverable-status.v1",
+  "status": "ENGINEERING_PREVIEW_ONLY_NOT_STAKE_UPLOAD_READY",
+  "source_build": "artifacts/FRONTEND_BUILD_OFFLINE_20261109_R8",
+  "source_git_head": "4e31a70cd57dfe8a41f2357114a6f11732827e23",
+  "source_git_tree": "f933bacf552c6bf8f63ab9cda04e8e9d09aedb01",
+  "source_worktree_dirty_at_build": true,
+  "source_worktree_status_sha256": "4288527a7ec2dbc3bdb155eea6f346af7f92703aa76478bb33acf7465e0b38bc",
+  "build_tree_sha256": "d4012cb7c0c8b4741af9239cee2b5e0f6b3e7cdb3e16d9d369fb3413dfb5ef64",
+  "file_count": 19,
+  "expanded_bytes": 348988,
+  "zip": "Ganesha-Front-R8-Engineering-Preview.zip",
+  "zip_bytes": 240956,
+  "zip_sha256": "bf2948430d8d2a0a356b24c375a5c810ca2f766841e8900191415a22bf893c45",
+  "provider_sdk": {
+    "package": "stake-engine",
+    "version": "0.1.32",
+    "status": "BETA_READ_ONLY_AUTHENTICATE_ONLY"
+  },
+  "capabilities": {
+    "authenticate": "READ_ONLY",
+    "play": false,
+    "event": false,
+    "end_round": false,
+    "wagering": false,
+    "bonus_buy": false
+  },
+  "artifacts_included": [
+    "8 SVG symbols",
+    "Ganesha temple scene SVG",
+    "4 WAV sound effects",
+    "compiled JS/CSS",
+    "index.html",
+    "config.js",
+    "engineering manifest"
+  ],
+  "not_proven": [
+    "production RGS/Wallet",
+    "canonical Math integration",
+    "real-money lifecycle",
+    "Provider approval",
+    "Stake Studio acceptance",
+    "mobile physical-device acceptance",
+    "asset redistribution rights"
+  ],
+  "test_baseline": {
+    "reported_result": "496/496 PASS",
+    "source": "docs/RELEASE_RECOVERY_AUDIT_20261109.md",
+    "reexecuted_for_packaging": false,
+    "reason": "No application source changed in this packaging task; the prior full-suite result is retained as existing evidence."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "ganesha.deliverable-file-manifest.v1",
+  "folder": "math",
+  "file_count": 4,
+  "files": [
+    {
+      "path": "CANONICAL_MATH_PREFLIGHT.json",
+      "size_bytes": 4927,
+      "sha256": "0b62498bd358f1b75443b135bb03af3408d5f2f760e76905608e90b19edf742f"
+    },
+    {
+      "path": "CANONICAL_MATH_RECOVERY_CHECKLIST.md",
+      "size_bytes": 10156,
+      "sha256": "020ebe02b2b01288cd3b516dc841bfe48c99f527f0354cc37235ca61b18e3d2c"
+    },
+    {
+      "path": "PACKAGE_STATUS.json",
+      "size_bytes": 4259,
+      "sha256": "0a4d25d0251226787b38afa977f14775fb03e2a19c09ec090303d459424c4b73"
+    },
+    {
+      "path": "PROVIDER_RELEASE_INPUT_REQUEST.md",
+      "size_bytes": 5843,
+      "sha256": "27aa6179bdb6b6cdac27ae6f574f51cae2a2c57034dd8585136590976dcb2ec0"
+    }
+  ]
+}
