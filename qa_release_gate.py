@@ -273,7 +273,8 @@ def validate_release_path_classification(root, source_completeness):
             return {"pass": False, "evidence": "historical QA evidence is not separately classified and checksum-verified"}
         return {"pass": True, "evidence": "all classified source/evidence paths exist and their SHA-256 values match",
                 "source_path_count": len(source_paths), "historical_evidence_count": len(evidence_paths),
-                "source_tracking_complete": False, "untracked_source_paths_remain_blocking": len(source_paths)}
+                "source_tracking_complete": not source_paths,
+                "untracked_source_paths_remain_blocking": len(source_paths)}
     except Exception as exc:
         return {"pass": False, "evidence": "unable to validate source path classification: %s" % type(exc).__name__}
 

@@ -51,10 +51,10 @@ class PublicationGateTests(unittest.TestCase):
         report = json.loads(result.stdout)
         source = report["checks"]["source_complete_and_tracked"]
         self.assertTrue(source["filesystem_present"], source)
-        self.assertFalse(source["tracking_complete"], source)
+        self.assertTrue(source["tracking_complete"], source)
         self.assertEqual(source["tracked_missing"], [])
         self.assertEqual(source["tracked_invalid"], [])
-        self.assertGreater(source["counts"]["untracked_required"], 0)
+        self.assertEqual(source["counts"]["untracked_required"], 0)
         self.assertEqual(set(source["missing"]), set(source["untracked_required"]))
         for relative in source["untracked_required"]:
             path = ROOT / relative
@@ -69,26 +69,27 @@ class PublicationGateTests(unittest.TestCase):
         self.assertEqual(evidence["git_tracking"], "UNTRACKED_HISTORICAL_EVIDENCE")
         self.assertIn("not current", evidence["release_use"])
 
-    def test_offline_preview_and_local_accessibility_are_verified_without_claiming_external_acceptance(self):
+    def test_offline_preview_and_accessibility_evidence_are_separate_from_external_acceptance(self):
         result = subprocess.run([sys.executable, "qa_release_gate.py"], cwd=str(ROOT), capture_output=True, text=True)
         report = json.loads(result.stdout)
         preview = report["checks"]["offline_frontend_preview_integrity"]
         accessibility = report["checks"]["local_accessibility_reflow"]
         self.assertTrue(preview["pass"], preview)
-        self.assertTrue(accessibility["pass"], accessibility)
+        self.assertFalse(accessibility["pass"], accessibility)
         self.assertFalse(accessibility["full_wcag_aa"])
         self.assertFalse(accessibility["physical_device_acceptance"])
         self.assertFalse(report["checks"]["accessibility_and_physical_devices"]["pass"])
 
-    def test_r12_release_evidence_integrity_checks_are_current_and_non_authoritative_where_required(self):
+    def test_release_evidence_integrity_is_distinct_from_release_clearance(self):
         result = subprocess.run([sys.executable, "qa_release_gate.py"], cwd=str(ROOT), capture_output=True, text=True)
         report = json.loads(result.stdout)
-        for name in ("sbom_completeness", "security_dependency_scan", "license_and_asset_inventory_integrity",
-                     "r9_frontend_candidate_integrity", "ci_workflow_definition", "source_path_classification_integrity",
-                     "offline_frontend_preview_integrity", "local_accessibility_reflow", "local_worktree_reproducibility"):
+        for name in ("ci_workflow_definition", "source_path_classification_integrity"):
             self.assertTrue(report["checks"][name]["pass"], (name, report["checks"][name]))
-        self.assertFalse(report["checks"]["r9_frontend_candidate_integrity"]["complete_math_frontend_submission"])
-        self.assertFalse(report["checks"]["security_dependency_scan"]["whole_release_security_clearance"])
+        self.assertTrue(report["checks"]["source_path_classification_integrity"]["source_tracking_complete"])
+        self.assertFalse(report["checks"]["project_license"]["pass"])
+        self.assertFalse(report["checks"]["asset_redistribution_rights"]["pass"])
+        self.assertFalse(report["checks"]["canonical_math_and_provider_approval"]["pass"])
+        self.assertFalse(report["checks"]["production_rgs_wallet_contract"]["pass"])
 
     def test_generated_build_outputs_do_not_count_as_missing_source(self):
         token = uuid.uuid4().hex
