@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-label="Ornate emerald temple chamber">
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#061b1b"/><stop offset=".52" stop-color="#103c36"/><stop offset="1" stop-color="#061b1b"/></linearGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#f8e3a2"/><stop offset=".48" stop-color="#b98239"/><stop offset="1" stop-color="#68411f"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#d9b66b" stop-opacity=".26"/><stop offset="1" stop-color="#d9b66b" stop-opacity="0"/></radialGradient>
+ <pattern id="lattice" width="72" height="72" patternUnits="userSpaceOnUse"><path d="M36 3L69 36 36 69 3 36Z M36 17L55 36 36 55 17 36Z" fill="none" stroke="#d8b66f" stroke-opacity=".12" stroke-width="2"/><circle cx="36" cy="36" r="4" fill="#e9cc87" fill-opacity=".16"/></pattern>
+ <pattern id="floor" width="120" height="60" patternUnits="userSpaceOnUse"><path d="M0 0H120M0 30H120M60 0V30M0 30V60M120 30V60" stroke="#d4ae65" stroke-opacity=".12" fill="none"/></pattern>
+</defs>
+<rect width="1920" height="1080" fill="url(#bg)"/><rect width="1920" height="1080" fill="url(#lattice)"/>
+<ellipse cx="960" cy="430" rx="710" ry="520" fill="url(#glow)"/>
+<path d="M0 0H1920V1080H0Z" fill="none" stroke="url(#gold)" stroke-width="18" opacity=".5"/>
+<path d="M80 1080V260Q80 92 250 92H1670Q1840 92 1840 260V1080" fill="none" stroke="url(#gold)" stroke-width="18" opacity=".62"/>
+<path d="M180 1080V310Q180 170 320 170H1600Q1740 170 1740 310V1080" fill="none" stroke="#e0bf78" stroke-width="5" opacity=".38"/>
+<g fill="#b57d3a" fill-opacity=".18" stroke="url(#gold)" stroke-width="9" opacity=".82">
+ <path d="M0 1080V520Q0 440 85 440Q170 440 170 520V1080Z"/><path d="M1750 1080V520Q1750 440 1835 440Q1920 440 1920 520V1080Z"/>
+ <path d="M120 1080V390Q120 300 220 300Q320 300 320 390V1080Z"/><path d="M1600 1080V390Q1600 300 1700 300Q1800 300 1800 390V1080Z"/>
+</g>
+<g fill="none" stroke="url(#gold)" stroke-width="5" opacity=".5"><path d="M55 520Q85 455 115 520M1805 520Q1835 455 1865 520M155 390Q220 280 285 390M1635 390Q1700 280 1765 390"/><path d="M90 1080V560M1830 1080V560M270 1080V420M1650 1080V420"/></g>
+<g transform="translate(960 270)" fill="none" stroke="url(#gold)" stroke-width="8" opacity=".42"><path d="M-360 0Q-360 -220 0 -270Q360 -220 360 0Q360 230 0 270Q-360 230 -360 0Z"/><path d="M-300 0Q-300 -180 0 -220Q300 -180 300 0Q300 180 0 220Q-300 180 -300 0Z"/><path d="M0 -250V250M-350 0H350M-248 -176L248 176M248 -176L-248 176"/></g>
+<g fill="#e6c57c" opacity=".45"><circle cx="960" cy="92" r="8"/><circle cx="250" cy="220" r="7"/><circle cx="1670" cy="220" r="7"/><circle cx="420" cy="135" r="4"/><circle cx="1500" cy="135" r="4"/></g>
+<path d="M0 930Q480 850 960 930T1920 930V1080H0Z" fill="#041616" opacity=".78"/><path d="M0 980Q480 900 960 980T1920 980V1080H0Z" fill="url(#floor)" opacity=".8"/>
+<path d="M0 1020H1920" stroke="url(#gold)" stroke-width="5" opacity=".45"/>
+</svg>

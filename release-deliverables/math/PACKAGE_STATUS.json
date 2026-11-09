@@ -1,0 +1,112 @@
+{
+  "schema": "ganesha.math-deliverable-status.v1",
+  "status": "BLOCKED_NOT_A_STAKE_UPLOAD_PACKAGE",
+  "purpose": "Evidence package documenting why canonical Math cannot currently be emitted without inventing or reusing unapproved source distributions.",
+  "stake_upload_ready": false,
+  "canonical_manifest": "math/generator_input_manifest.json",
+  "required_canonical_fields": 58,
+  "missing_canonical_fields": 58,
+  "modes": {
+    "BASE": {
+      "status": "BLOCKED",
+      "reason": "Canonical reel strip/probability model/Provider approval missing; BASE LUT precision failures remain unresolved; embedded 5-Scatter EPIC payload missing."
+    },
+    "MAGICBUY_V36": {
+      "status": "BLOCKED",
+      "reason": "Canonical source manifest and Provider approval missing; historical Books/LUT are not approved canonical outputs."
+    },
+    "EPICBUY_V37": {
+      "status": "BLOCKED",
+      "reason": "Canonical source manifest and Provider approval missing; historical Books/LUT are not approved canonical outputs."
+    }
+  },
+  "required_targets": {
+    "rtp": 0.965,
+    "max_win_multiplier": 50000,
+    "volatility": "EXTREME_HIGH",
+    "purchase_multipliers": {
+      "BASE": 1,
+      "MAGICBUY_V36": 100,
+      "EPICBUY_V37": 500
+    }
+  },
+  "scatter_policy": {
+    "3": "10 Free Spins",
+    "4": "12 Free Spins",
+    "5": "Provider-authoritative embedded EPICBUY_V37 inside existing BASE round; no additional debit or second Play; BASE settlement",
+    "6+": "fail-closed",
+    "free_spins_retrigger": "fail-closed"
+  },
+  "prohibited_substitutions": [
+    "draft distribution",
+    "historical unapproved Books/LUT",
+    "guessed reel strips",
+    "fabricated Provider approval",
+    "synthetic index.json modes"
+  ],
+  "missing_fields": [
+    "generator.name",
+    "generator.version",
+    "generator.source_entrypoint",
+    "generator.source_sha256",
+    "sdk.repository",
+    "sdk.commit",
+    "sdk.dependency_lock_path",
+    "sdk.dependency_lock_sha256",
+    "game_config.path",
+    "game_config.sha256",
+    "game_config.approval_reference",
+    "modes.BASE.reel_strips.path",
+    "modes.BASE.reel_strips.sha256",
+    "modes.BASE.reel_strips.approval_reference",
+    "modes.MAGICBUY_V36.reel_strips.path",
+    "modes.MAGICBUY_V36.reel_strips.sha256",
+    "modes.MAGICBUY_V36.reel_strips.approval_reference",
+    "modes.EPICBUY_V37.reel_strips.path",
+    "modes.EPICBUY_V37.reel_strips.sha256",
+    "modes.EPICBUY_V37.reel_strips.approval_reference",
+    "paytable.path",
+    "paytable.sha256",
+    "paytable.approval_reference",
+    "paylines.path",
+    "paylines.sha256",
+    "paylines.approval_reference",
+    "symbols.path",
+    "symbols.sha256",
+    "symbols.approval_reference",
+    "feature_rules.path",
+    "feature_rules.sha256",
+    "feature_rules.approval_reference",
+    "feature_rules.scatter_policy",
+    "feature_rules.six_plus_scatter_policy",
+    "feature_rules.retrigger_policy",
+    "modes.BASE.probability_model.path",
+    "modes.BASE.probability_model.sha256",
+    "modes.BASE.probability_model.approval_reference",
+    "modes.MAGICBUY_V36.probability_model.path",
+    "modes.MAGICBUY_V36.probability_model.sha256",
+    "modes.MAGICBUY_V36.probability_model.approval_reference",
+    "modes.EPICBUY_V37.probability_model.path",
+    "modes.EPICBUY_V37.probability_model.sha256",
+    "modes.EPICBUY_V37.probability_model.approval_reference",
+    "rng.algorithm",
+    "rng.version",
+    "rng.seed_derivation",
+    "purchase_costs.BASE.multiplier",
+    "purchase_costs.BASE.approval_reference",
+    "purchase_costs.MAGICBUY_V36.multiplier",
+    "purchase_costs.MAGICBUY_V36.approval_reference",
+    "purchase_costs.EPICBUY_V37.multiplier",
+    "purchase_costs.EPICBUY_V37.approval_reference",
+    "golden_vectors.path",
+    "golden_vectors.sha256",
+    "golden_vectors.approval_reference",
+    "front_contract.path",
+    "front_contract.sha256"
+  ],
+  "preflight_exit_code": 2,
+  "verification_note": "This folder intentionally omits index.json, Books and LUT. It is not accepted by Stake Math package verification and must not be uploaded. The companion evidence ZIP is integrity-listed in release-deliverables/MATH_SHA256SUMS.txt.",
+  "file_count": 4,
+  "expanded_bytes": 25185,
+  "zip": "Ganesha-Math-BLOCKED-Evidence.zip"
+}
