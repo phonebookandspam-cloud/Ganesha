@@ -1,8 +1,8 @@
-# BASE Scatter Feature Contract — 2026-11-07
+# BASE Scatter Feature Contract — current user authority as of 2026-11-09
 
 ## Authority
 
-This addendum records the latest explicit user instruction and supersedes the earlier draft rule that treated every BASE Scatter count above three as unspecified.
+This addendum records the current explicit user instruction and supersedes the earlier draft rule that treated every BASE Scatter count above three as unspecified.
 
 | BASE reveal Scatter count | Required behavior | Financial mode |
 |---:|---|---|

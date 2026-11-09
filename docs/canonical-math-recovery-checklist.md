@@ -2,7 +2,7 @@
 
 **Status:** BLOCKED — original 2026-09-27 Math JSON / official Stake Studio export not recovered.
 
-The recovery evidence is recorded in `artifacts/RC10_SOURCE_RECOVERY_EVIDENCE.json`. The source archive contains a partial `generator_input_manifest.json` with 58 required canonical fields; all 58 are missing. The previous search covered 410 ZIP archives and 65,321 text/JSON/Markdown entries without recovering the raw canonical Math JSON.
+The recovery evidence is recorded in `artifacts/RC10_SOURCE_RECOVERY_EVIDENCE.json`. The expected canonical `generator_input_manifest.json` is absent (58/58 required fields unavailable). The separately recovered R8 partial manifest has 44/58 fields missing and is not canonical. The previous search covered 410 ZIP archives and 65,321 text/JSON/Markdown entries without recovering the raw canonical Math JSON.
 
 ## Missing authority groups
 
@@ -15,7 +15,7 @@ The canonical manifest reports **58 required fields, 58 missing**. The partial s
 | Game configuration | Empty object | Complete canonical dimensions, paylines count, target RTP, volatility, wager and payout configuration |
 | Modes | BASE, MAGICBUY_V36 and EPICBUY_V37 names recovered | All three mode-specific reel strips and probability models |
 | Paytable / paylines / symbols | Empty objects | Complete symbol definitions, integer payouts, paylines and symbol mapping |
-| Feature rules | Partial user-authority reconciliation | Wild semantics, 4+ Scatter, 6+ Scatter, Free Spins retrigger, termination and all Buy-mode feature rules |
+| Feature rules | Current user authority defines 3=10 Free Spins, 4=12 Free Spins, 5=embedded EPICBUY_V37 in the already-paid BASE round, and 6+ fail closed | Provider payload and BASE-unit conversion for 5 Scatter; approved Wild semantics/multiplier order; Free Spins retrigger/termination; mode-specific Buy feature payloads |
 | RNG | Empty object | RNG algorithm, seed derivation, stop weighting and reproducibility contract |
 | Purchase costs | Historical `1.0× / 100× / 100×` values observed in an old index | User-defined target is BASE ×1 / MAGIC ×100 / EPIC ×500; canonical Math, mode distributions, eligibility and Provider authorization remain unavailable |
 | Golden vectors | Empty object | BASE, Free Spins, Buy-mode and maximum-payout input/output vectors |
@@ -26,7 +26,6 @@ The recovered generic SDK metadata and historical Front hash are provenance clue
 
 ## Known rules versus unresolved rules
 
-- User-authoritative: exactly 3 Scatter in BASE awards exactly 10 Free Spins.
 - Current user-authoritative: 3 Scatter = 10 Free Spins; 4 Scatter = 12 Free Spins; 5 Scatter invokes the existing `EPICBUY_V37` feature embedded inside the already-paid BASE round, without another debit or Play, and remains BASE settlement; 6+ Scatter fails closed.
 - Current user-defined independent purchase multipliers: MAGIC BUY = ×100 and EPIC BUY = ×500. Both remain disabled pending canonical Math and Provider approval.
 - The partial manifest's 100× / 100× observations are historical and conflict with the current EPIC ×500 requirement. They are not approved current prices and do not authorize changing Books/LUT or implementing either Buy mode.
@@ -38,7 +37,7 @@ The recovered generic SDK metadata and historical Front hash are provenance clue
 1. The original raw Math JSON dated 2026-09-27, ideally the exact file as exported; do not re-save or normalize it before preserving the original bytes and SHA-256.
 2. If that file is unavailable, the official Stake Studio Math export plus its complete generator/source archive and SDK/tool versions.
 3. The exact mode-specific reel strips, stop weights, symbol mapping, paylines and paytable, including the original units and integer scaling.
-4. The complete approved feature rules: Wild expansion, Scatter thresholds, Free Spins awards/retrigger/termination, each Buy mode price and feature outcomes, multiplier order, round/payout cap.
+4. The complete approved feature rules: Wild expansion and multiplier order, Provider-authoritative 5-Scatter embedded EPIC payload and BASE-unit conversion, Free Spins retrigger/termination, each independent Buy mode's feature outcomes, and round/payout cap. The current user-defined initial BASE Scatter thresholds (3=10, 4=12, 5=embedded EPIC, 6+=fail closed) are already specified and must not be replaced by historical Exact-3-only rules.
 5. The RNG/seed derivation contract and Provider Golden Vectors for BASE, Free Spins, all Buy modes and maximum payout cases.
 6. Canonical Books/LUT generation inputs, canonical `index.json` or source manifest, and any prior Math upload receipt / Provider approval identifier.
 
@@ -121,6 +120,6 @@ The expected canonical manifest (`math/generator_input_manifest.json`) is absent
 
 ## Fail-closed index build pipeline
 
-Run `PYTHONPATH=src python3 tools/build_stake_math_package.py preflight <canonical-manifest.json>` before any build. A build requires all 58 fields, matching hashes for source inputs and Books/LUT outputs, explicit approval references, and `status=CANONICAL_SOURCE_VERIFIED`. Then `build <manifest> <new-MATH-dir> <new-MATH.zip>` creates only a previously absent output pair and re-runs directory and extracted-ZIP contract checks. Existing candidate outputs are never overwritten. This pipeline is implemented and covered by temporary-directory tests; it does not bypass missing source authority.
+Run `PYTHONPATH=src python3 tools/build_stake_math_package.py preflight <canonical-manifest.json>` before any build. A build requires all 58 fields, matching hashes for source inputs and Books/LUT outputs, `status=CANONICAL_SOURCE_VERIFIED`, and a top-level `provider_approval` bundle with an Ed25519 signature. The signed `ganesha-provider-math-approval.v1` record must bind the exact canonical manifest core, all per-field approval references, the current ×1/×100/×500 prices, 96.50% RTP target, 50,000× max-win target, EXTREME_HIGH volatility and 3/4/5/6+ Scatter policy. Its public-key fingerprint must match the independently supplied `GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256` environment variable; a non-empty approval string alone is not approval evidence. `build <manifest> <new-MATH-dir> <new-MATH.zip>` creates only a previously absent output pair and re-runs directory and extracted-ZIP contract checks. Existing candidate outputs are never overwritten. This pipeline is implemented and covered by temporary-directory tests; it does not bypass missing source authority or supply a Provider trust key.
 
 The exact RC10 R8 semantic audit is recorded in `artifacts/RC10_R8_HISTORICAL_MATH_AUDIT_20261104.json`. It confirms full Books/LUT row parity but identifies SDK payout increment violations, mixed BASE `finalWin` amount units, and historical retrigger events.

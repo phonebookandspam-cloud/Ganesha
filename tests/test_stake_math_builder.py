@@ -1,8 +1,11 @@
 import hashlib
 import json
+import os
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import zstandard
 
@@ -46,9 +49,9 @@ class StakeMathBuilderTests(unittest.TestCase):
                 _set_path(manifest, field, "test-fixture-approval-reference")
             elif field.endswith(".multiplier"):
                 expected = {
-                    "purchase_costs.BASE.multiplier": 1.0,
-                    "purchase_costs.MAGICBUY_V36.multiplier": 100.0,
-                    "purchase_costs.EPICBUY_V37.multiplier": 500.0,
+                    "purchase_costs.BASE.multiplier": 1,
+                    "purchase_costs.MAGICBUY_V36.multiplier": 100,
+                    "purchase_costs.EPICBUY_V37.multiplier": 500,
                 }[field]
                 _set_path(manifest, field, expected)
             elif field.endswith(".sha256") and _get(manifest, field) is None:
@@ -65,8 +68,60 @@ class StakeMathBuilderTests(unittest.TestCase):
             artifacts[mode] = {"events_path": book.name, "events_sha256": _hash(book),
                                "weights_path": lut.name, "weights_sha256": _hash(lut)}
         manifest["publish_artifacts"] = artifacts
+        approval_references = {field: _get(manifest, field) for field in REQUIRED_FIELDS
+                               if field.endswith(".approval_reference")}
+        core_bytes = json.dumps(manifest, ensure_ascii=False, sort_keys=True,
+                                separators=(",", ":")).encode()
+        record = {
+            "schema": "ganesha-provider-math-approval.v1",
+            "provider": "Stake Engine",
+            "game_title": "Ganesha and The Magic",
+            "approval_id": "test-fixture-approval-reference",
+            "status": "APPROVED",
+            "issued_at": "2026-11-09T00:00:00Z",
+            "approved_manifest_core_sha256": hashlib.sha256(core_bytes).hexdigest(),
+            "approval_references": approval_references,
+            "approved_contract": {
+                "rtp_percent": 96.5,
+                "max_win_x": 50000,
+                "volatility": "EXTREME_HIGH",
+                "scatter_policy": "BASE:3=10FS;4=12FS;5=EMBEDDED_EPICBUY_V37;6+=FAIL_CLOSED",
+                "purchase_costs": {"BASE": 1, "MAGICBUY_V36": 100, "EPICBUY_V37": 500},
+            },
+        }
+        record_path = self.root / "provider-approval.json"
+        signature_path = self.root / "provider-approval.sig"
+        public_key_path = self.root / "provider-approval-public.pem"
+        record_bytes = json.dumps(record, ensure_ascii=False, sort_keys=True,
+                                  separators=(",", ":")).encode()
+        record_path.write_bytes(record_bytes)
+        script = r"""
+const crypto = require('node:crypto');
+const fs = require('node:fs');
+const [recordPath, publicPath, signaturePath] = process.argv.slice(1);
+const { publicKey, privateKey } = crypto.generateKeyPairSync('ed25519');
+const pem = publicKey.export({ type: 'spki', format: 'pem' });
+fs.writeFileSync(publicPath, pem);
+fs.writeFileSync(signaturePath, crypto.sign(null, fs.readFileSync(recordPath), privateKey));
+const der = publicKey.export({ type: 'spki', format: 'der' });
+process.stdout.write(crypto.createHash('sha256').update(der).digest('hex'));
+"""
+        fingerprint = subprocess.check_output(
+            ["node", "-e", script, str(record_path), str(public_key_path), str(signature_path)],
+            text=True,
+        ).strip()
+        self.env_patch = patch.dict(os.environ, {"GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256": fingerprint})
+        self.env_patch.start()
+        self.addCleanup(self.env_patch.stop)
+        manifest["provider_approval"] = {
+            "record_path": record_path.name,
+            "record_sha256": _hash(record_path),
+            "signature_path": signature_path.name,
+            "public_key_path": public_key_path.name,
+            "public_key_sha256": _hash(public_key_path),
+        }
         path = self.root / "generator_input_manifest.json"
-        path.write_text(json.dumps(manifest), encoding="utf-8")
+        path.write_text(json.dumps(manifest, ensure_ascii=False, sort_keys=True), encoding="utf-8")
         return path
 
     def test_contract_has_exactly_58_unique_fields(self):
@@ -88,6 +143,29 @@ class StakeMathBuilderTests(unittest.TestCase):
         codes = {item["code"] for item in report["issues"]}
         self.assertIn("CANONICAL_SOURCE_STATUS_NOT_VERIFIED", codes)
         self.assertIn("CANONICAL_FIELDS_MISSING", codes)
+
+    def test_provider_approval_requires_an_independent_trusted_key_pin(self):
+        manifest = self._complete_manifest()
+        with patch.dict(os.environ, {"GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256": ""}):
+            report = inspect_manifest(manifest)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("PROVIDER_APPROVAL_TRUST_ANCHOR_MISSING", {x["code"] for x in report["issues"]})
+
+    def test_provider_approval_signature_rejects_changed_approval_reference(self):
+        manifest = self._complete_manifest()
+        data = json.loads(manifest.read_text())
+        data["game_config"]["approval_reference"] = "invented-approval-id"
+        manifest.write_text(json.dumps(data, ensure_ascii=False, sort_keys=True))
+        report = inspect_manifest(manifest)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("PROVIDER_APPROVAL_EVIDENCE_INVALID", {x["code"] for x in report["issues"]})
+
+    def test_provider_approval_signature_rejects_wrong_trust_anchor(self):
+        manifest = self._complete_manifest()
+        with patch.dict(os.environ, {"GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256": "0" * 64}):
+            report = inspect_manifest(manifest)
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertIn("PROVIDER_APPROVAL_EVIDENCE_INVALID", {x["code"] for x in report["issues"]})
 
     def test_valid_manifest_builds_separate_source_and_zip_with_final_recheck(self):
         manifest = self._complete_manifest()

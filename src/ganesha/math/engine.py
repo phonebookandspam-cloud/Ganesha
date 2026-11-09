@@ -73,7 +73,7 @@ def free_spins_awarded(count: int, retrigger: bool = False) -> int:
             "5 Scatter selects the embedded EPICBUY_V37 feature; a provider-authoritative "
             "10-spin payload and BASE-bet payout-unit mapping are required"
         )
-    raise UnspecifiedMathRule("Scatter 6+ behavior is unspecified")
+    raise UnspecifiedMathRule("6+ Scatter is rejected by the current BASE contract (fail closed)")
 
 
 def evaluate_board(board: Board, mode: str = "BASE") -> Dict[str, object]:

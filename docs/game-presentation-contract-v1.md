@@ -25,7 +25,7 @@ CREATED
 ```
 
 - Reel stop events are strictly ordered by reel index and must reproduce the exact board in the corresponding outcome event.
-- Feature spin numbers are contiguous. Each resolved spin consumes exactly one remaining spin. Free Spins with 0–2 Scatter do not trigger another award under the exact-3 threshold; 3+ Scatter/retrigger outcomes remain rejected because their behavior is not authorized.
+- Feature spin numbers are contiguous. Each resolved spin consumes exactly one remaining spin. Free Spins retrigger remains fail closed; the initial BASE awards are 3 Scatter = 10 Free Spins and 4 Scatter = 12 Free Spins. Five Scatter selects the embedded EPICBUY_V37 feature, but this local non-financial presentation contract rejects it until the Provider payload and BASE-unit conversion are available.
 - A Wild expansion event identifies unique reel indices and the display board. Every expanded reel must contain the configured `WILD_GANESHA` symbol; the resolved event must carry the same expanded reel set and display board, with three `WILD_GANESHA` symbols on every expanded reel.
 - A multiplier event is required when the resolved multiplier exceeds 1; the resolved event must match it.
 - Hash chaining and deterministic event IDs permit tamper detection and deterministic replay. They are not digital signatures, trusted timestamps, WORM retention or protection against a party able to rewrite the full stream and recompute its hashes.
@@ -33,13 +33,13 @@ CREATED
 - The local server exposes `POST /api/demo/game-sessions`, `POST /api/demo/game-sessions/{id}/rounds`, and `GET /api/demo/game-sessions/{id}` only when explicitly enabled on a loopback bind. Sessions are in-memory, request-idempotent and non-financial.
 - The Frontend verifies the response contract, sequence, deterministic event IDs and SHA-256 event chain before rendering BASE stops, Free Spins, Wild Expansion, multiplier and completion events. The UI labels every result as non-financial and does not show money or payout. Current desktop/mobile/landscape Chrome smoke evidence is in `artifacts/BROWSER_SMOKE_20261104_ENGINE_FIXTURE.json` and its PNG.
 
-## Exact-3 Scatter boundary
+## Current BASE Scatter boundary — 2026-11-09
 
-The contract independently checks the user-authorized BASE boundary against the projected board: exactly 3 `SCATTER_LOTUS` requires 10 Free Spins; 0–2 requires no exact-3 award; 4+ is rejected as unspecified. During Free Spins, 0–2 Scatter are non-triggering under the same exact-3 threshold; 3+ is rejected before resolution because retrigger behavior is not authorized. The reducer derives Scatter count from the raw stopped board and does not trust a caller-supplied count. Jackpot presentation is also disabled. No 4/5 reward, 6+ behavior, retrigger award, Buy price or Buy spin count is inferred.
+The contract derives Scatter count from the raw stopped board and does not trust a caller-supplied count. In BASE, 0–2 awards no Free Spins, exactly 3 awards 10, exactly 4 awards 12, exactly 5 selects the existing embedded EPICBUY_V37 feature within the already-paid BASE round (no second debit or Play; BASE settlement), and 6+ is rejected fail closed. The 5-Scatter path remains rejected by this local presentation implementation until the Provider-authoritative embedded payload and BASE payout-unit conversion are supplied. Free Spins retrigger remains fail closed. Independent purchase prices are MAGIC BUY ×100 and EPIC BUY ×500, but both purchases remain disabled pending canonical Math and Provider approval. Jackpot presentation is disabled.
 
 ## Validation
 
-`tests/test_game_presentation.py` uses explicit fixture/development MathPorts and validates the GameEngine → presentation projection → replay path, ten Free Spins, 5×3 board agreement, Wild expansion, multiplier, payout-cap arithmetic, event ordering, deterministic IDs, hash tampering, duplicates and unspecified 4/5 Scatter rejection. `tests/test_game_simulation_events.py` separately validates the lifecycle summary, including exact feature exhaustion or payout-proven cap termination. These tests do not validate canonical Math, RNG, RTP, max payout, Wallet, RGS production behavior or Provider behavior. Browser playback validates only local non-financial outcomes.
+`tests/test_game_presentation.py` uses explicit fixture/development MathPorts and validates the GameEngine → presentation projection → replay path, 3/4 Scatter award arithmetic, 5/6+ fail-closed boundaries, 5×3 board agreement, Wild expansion, multiplier, payout-cap arithmetic, event ordering, deterministic IDs, hash tampering and duplicates. These tests do not validate canonical Math, RNG, RTP, max payout, Wallet, RGS production behavior or Provider behavior. Browser playback validates only local non-financial outcomes.
 
 
 ## Integrity hardening (2026-11-04)
@@ -47,4 +47,4 @@ The contract independently checks the user-authorized BASE boundary against the 
 - BASE display cells must exactly equal the raw stopped board. Feature display cells must equal the raw board except that each explicitly expanded Wild reel (which must contain an original WILD) is rendered as three WILD cells; no other display mutation is accepted.
 - Every feature round-payout projection must equal min(previous_round_total + this_spin_payout, configured_round_cap). The reducer updates cap state from that arithmetic, rejects further feature reels after the cap, and verifies the final cap flag against the final total.
 
-- A Wild expansion event must follow all five feature reel stops and precede its multiplier event; the reducer accepts only the exact multiplier derived from the expanded Wild reel count. A multiplier cannot appear without a preceding Wild expansion.
+- A Wild expansion event mus

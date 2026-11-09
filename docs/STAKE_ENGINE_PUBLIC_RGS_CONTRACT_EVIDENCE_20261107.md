@@ -35,6 +35,25 @@
 - Provider-approved Golden Vectors for normal wins/losses, 3/4/5/6+ Scatter, Free Spins, Wild movement/expansion, cap boundary, max payout, zero payout and response-loss recovery.
 - Provider confirmation of duplicate Play/EndRound semantics and authoritative round history/reconciliation after transport loss.
 
+## Current release integration status — 2026-11-09
+
+- The current Front R7 bundle pins `stake-engine@0.1.32` and is classified `BETA_READ_ONLY_AUTHENTICATE_ONLY`. It performs Authenticate only; Play, Event, EndRound, wagering and Bonus Buy remain disabled. The local SDK adapter has guarded method wrappers, but the app does not provide the four trusted verifiers required to enable them.
+- The SDK exposes Authenticate, Play, Event and EndRound requests. It does not expose a separate Wagering or BonusBuy method. `Play` accepts a `mode` string, but this alone does not prove which mode names, multipliers or purchase modes the Provider has enabled for this game.
+- The SDK's normalized Authenticate configuration does not expose the documented `gameModes` / per-mode `costMultiplier` data. Therefore the client cannot establish the Provider's MAGIC ×100 / EPIC ×500 configuration or validate mode-specific max bet from its normalized session object.
+- The SDK request surface does not provide an operation-level idempotency key for Play or EndRound. `Event` accepts an opaque string; the SDK type does not define its game-specific event schema or prove server acknowledgement semantics. Ambiguous outcomes remain blocked pending Provider-backed ownership, event acknowledgement and round-history reconciliation.
+- Current BASE authority is 3 Scatter = 10 Free Spins, 4 = 12, 5 = embedded EPICBUY_V37 in the already-paid BASE round with no second debit/Play and BASE settlement, and 6+ fail closed. The 5-Scatter Provider payload and BASE-unit conversion remain unavailable. Independent purchase prices are MAGIC ×100 and EPIC ×500; the historical ×100/×100 Books are rejected.
+- Local SDK tests use mocked fetch. No production Provider RGS request, production Wallet settlement, signed Provider Golden Vector, or Stake Studio upload was performed.
+
+## Exact Provider materials required to proceed
+
+1. Versioned, game-specific RGS/Wallet contract and sandbox endpoint, session-launch requirements, authentication scheme and test credentials supplied through a secure secret channel (not committed or pasted into source).
+2. Request/response schemas and authoritative semantics for Play, Event, EndRound, zero-payout completion, active-round restore, currency exponent, amount units, debit/credit rounding and payout ceilings.
+3. Server-side idempotency/ownership guarantees for duplicate or timed-out Play and EndRound, a unique operation/round correlation field, and an authoritative round-history or settlement-reconciliation endpoint.
+4. Provider Event marker schema, persistence acknowledgement semantics, event ordering and replay contract.
+5. Provider-supported game mode identifiers and mode-specific costMultiplier/maxBet configuration, explicitly confirming BASE ×1, MAGICBUY_V36 ×100 and independent EPICBUY_V37 ×500.
+6. Provider-authoritative embedded 5-Scatter EPICBUY_V37 payload, complete 10-spin sequence, event IDs/ordering, payout-unit conversion into BASE wager units, and settlement treatment.
+7. Provider Golden Vectors and written Math approval for BASE, both independent Buy modes, 3/4/5/6+ Scatter, Free Spins, Wild expansion/multipliers, payout cap, max-win and transport-loss recovery.
+
 ## Release conclusion
 
 The public frontend API mapping is implemented and local SDK-wire fixture tested. Production Provider/Operator Wallet semantics, canonical Math, embedded EPIC payload, live RGS settlement, and Stake Studio review remain unverified. This document is evidence of the public contract mapping only; it is not a Provider approval certificate.

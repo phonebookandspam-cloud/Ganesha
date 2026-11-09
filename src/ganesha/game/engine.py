@@ -125,7 +125,7 @@ class GameEngine:
                     "5 Scatter selects embedded EPICBUY_V37; the provider feature payload is unavailable"
                 )
             if result["scatter_count"] >= 6:
-                raise UnspecifiedMathRule("6+ Scatter behavior is not user-authorized")
+                raise UnspecifiedMathRule("6+ Scatter is rejected by the current BASE contract (fail closed)")
             expected_award = 10 if result["scatter_count"] == 3 else 12 if result["scatter_count"] == 4 else 0
             if award != expected_award:
                 raise InvalidMathOutcome("BASE Free Spins award must be 10 for 3 Scatter, 12 for 4 Scatter, otherwise 0")

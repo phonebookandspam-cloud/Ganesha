@@ -1,6 +1,8 @@
 {
   "all_classified_paths_present_as_regular_files": true,
-  "category_counts": {"historical_qa_evidence": 2},
+  "category_counts": {
+    "historical_qa_evidence": 2
+  },
   "classified_total": 2,
   "files": [
     {
@@ -29,7 +31,7 @@
     }
   ],
   "gate_required_untracked_source_count": 0,
-  "git_head": "73cfb2d306de40fc6711c8a7c3004d7168b8aa4f",
+  "git_head": "aaf59f967b45effb96fb6ead20093794b7e722e5",
   "historical_qa_authority": "SUPERSEDED_HISTORICAL_QA_EVIDENCE; its Scatter interpretation predates the current user-authorized contract",
   "historical_qa_checksum_valid": true,
   "historical_qa_evidence_count": 2,

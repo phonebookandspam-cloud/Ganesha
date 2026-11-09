@@ -62,4 +62,4 @@ class LocalRuntimeMathPort:
             raise EmbeddedEpicFeatureUnavailable(
                 "5 Scatter requires the Provider-authoritative embedded EPIC payload and BASE-unit conversion"
             )
-        raise UnspecifiedMathRule("6+ Scatter behavior is unspecified")
+        raise UnspecifiedMathRule("6+ Scatter is rejected by the current BASE contract (fail closed)")

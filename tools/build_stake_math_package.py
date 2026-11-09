@@ -2,8 +2,10 @@
 """Fail-closed builder for an authority-bound Stake Math package.
 
 The builder never infers source Math from Books/LUT/index. It requires the
-58-field RC10 canonical-input manifest, hash-linked source files, explicit
-approval references, and generator-produced publish artifact declarations.
+58-field RC10 canonical-input manifest, hash-linked source files, a Provider-
+signed approval record bound to the exact manifest core and all approval
+references, an out-of-band Ed25519 trust-key fingerprint, and generator-
+produced publish artifact declarations.
 It writes nothing unless every precondition and the final SDK package verifier
 passes. Output paths must not already exist.
 """
@@ -16,6 +18,7 @@ import math
 import os
 import shutil
 import sys
+import subprocess
 import tempfile
 import zipfile
 from pathlib import Path, PurePosixPath
@@ -95,6 +98,48 @@ def _confined_file(root: Path, raw: object, label: str, issues: list) -> Path | 
     return resolved
 
 
+def _verify_provider_approval(manifest_path: Path, issues: list) -> dict | None:
+    """Verify a Provider-signed approval bundle against an out-of-band key pin.
+
+    A non-empty approval_reference is only a label. It is not evidence of
+    Provider approval. The signed record must bind the exact manifest core and
+    every approval reference, and its Ed25519 key fingerprint must be pinned
+    independently in GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256.
+    """
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest.get("provider_approval"), dict):
+        issues.append({"code": "PROVIDER_APPROVAL_EVIDENCE_MISSING"})
+        return None
+    fingerprint = os.environ.get("GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256", "").lower()
+    if len(fingerprint) != 64 or any(c not in "0123456789abcdef" for c in fingerprint):
+        issues.append({"code": "PROVIDER_APPROVAL_TRUST_ANCHOR_MISSING",
+                       "detail": "Set GANESHA_PROVIDER_MATH_TRUSTED_KEY_SHA256 from an independently verified Stake/Provider public key fingerprint"})
+        return None
+    verifier = Path(__file__).resolve().with_name("verify_provider_math_approval.mjs")
+    if not verifier.is_file():
+        issues.append({"code": "PROVIDER_APPROVAL_VERIFIER_MISSING"})
+        return None
+    try:
+        result = subprocess.run(
+            ["node", str(verifier), str(manifest_path), fingerprint],
+            check=False, capture_output=True, text=True, timeout=15,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        issues.append({"code": "PROVIDER_APPROVAL_VERIFIER_UNAVAILABLE", "detail": type(exc).__name__})
+        return None
+    try:
+        evidence = json.loads(result.stdout.strip().splitlines()[-1])
+    except Exception:
+        issues.append({"code": "PROVIDER_APPROVAL_VERIFIER_INVALID_OUTPUT",
+                       "detail": result.stderr[-1000:]})
+        return None
+    if result.returncode != 0 or evidence.get("status") != "PASS":
+        issues.append({"code": evidence.get("code", "PROVIDER_APPROVAL_SIGNATURE_INVALID"),
+                       "detail": evidence.get("detail", result.stderr[-1000:])})
+        return None
+    return evidence
+
+
 def inspect_manifest(manifest_path: str | Path) -> dict:
     path = Path(manifest_path).resolve()
     report = {"schema": "ganesha-stake-math-source-preflight.v1", "status": "BLOCKED",
@@ -141,7 +186,8 @@ def inspect_manifest(manifest_path: str | Path) -> dict:
             if not isinstance(value, str) or not value.strip():
                 report["issues"].append({"code": "APPROVAL_REFERENCE_MISSING", "field": field})
         elif field.endswith(".multiplier"):
-            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+            if (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not math.isfinite(value) or value <= 0 or not float(value).is_integer()):
                 report["issues"].append({"code": "PURCHASE_COST_INVALID", "field": field, "value": value})
         elif not isinstance(value, str) or not value.strip():
             report["issues"].append({"code": "REQUIRED_VALUE_INVALID", "field": field})
@@ -183,6 +229,7 @@ def inspect_manifest(manifest_path: str | Path) -> dict:
     if manifest.get("status") != "CANONICAL_SOURCE_VERIFIED":
         report["issues"].append({"code": "CANONICAL_SOURCE_STATUS_NOT_VERIFIED",
                                  "observed": manifest.get("status")})
+    report["provider_approval"] = _verify_provider_approval(path, report["issues"])
     if missing:
         report["issues"].append({"code": "CANONICAL_FIELDS_MISSING", "count": len(missing), "fields": missing})
     report["manifest_sha256"] = _sha(path)
@@ -289,11 +336,4 @@ def main():
     build.add_argument("output_dir")
     build.add_argument("output_zip")
     args = parser.parse_args()
-    result = inspect_manifest(args.manifest) if args.command == "preflight" else build_package(
-        args.manifest, args.output_dir, args.output_zip)
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    raise SystemExit(0 if result["status"] == "PASS" else 2)
-
-
-if __name__ == "__main__":
-    main()
+    result = inspect_manifest(args.manifest) if args.command == 

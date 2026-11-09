@@ -391,7 +391,7 @@ import './config.js';
     const scatterCount = baseOutcome.payload.board.flat()
       .filter((symbol) => symbol === 'SCATTER_LOTUS' || symbol === 'SCATTER').length;
     if (scatterCount === 5) throw new Error('5 Scatter requires the unavailable provider-authoritative embedded EPICBUY_V37 payload');
-    if (scatterCount >= 6) throw new Error('6+ Scatter behavior is not user-authorized');
+    if (scatterCount >= 6) throw new Error('6+ Scatter is rejected by the current BASE contract (fail closed)');
     const expectedFreeSpins = scatterCount === 3 ? 10 : scatterCount === 4 ? 12 : 0;
     let projectedTotal = baseOutcome.payload.payout_milli;
     let featurePayoutTotal = 0;

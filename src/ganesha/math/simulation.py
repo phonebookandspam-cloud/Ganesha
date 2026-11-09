@@ -103,10 +103,10 @@ def run_monte_carlo():
         "public_claims_permitted": False,
         "sample_run_performed": False,
         "modes": {
-            "BASE": "BLOCKED_4PLUS_SCATTER_AND_CANONICAL_INPUTS",
+            "BASE": "BLOCKED_CANONICAL_INPUTS_AND_5_SCATTER_EMBEDDED_EPIC_PAYLOAD",
             "FREE_SPINS": "BLOCKED_RETRIGGER_AND_TERMINATION_RULES",
-            "MAGIC_BUY": "BLOCKED_NO_APPROVED_PRICE_OR_PROBABILITY_MODEL",
-            "EPIC_BUY": "BLOCKED_NO_APPROVED_PRICE_OR_PROBABILITY_MODEL",
+            "MAGIC_BUY": "BLOCKED_NO_CANONICAL_PROBABILITY_MODEL_OR_PROVIDER_APPROVAL; USER_PRICE_X100",
+            "EPIC_BUY": "BLOCKED_NO_CANONICAL_PROBABILITY_MODEL_OR_PROVIDER_APPROVAL; USER_PRICE_X500",
         },
         "metrics": {"rtp": "NOT_COMPUTED", "hit_frequency": "NOT_COMPUTED",
                     "variance": "NOT_COMPUTED", "volatility": "NOT_COMPUTED",
@@ -114,7 +114,8 @@ def run_monte_carlo():
                     "max_payout_frequency": "NOT_COMPUTED"},
         "blockers": [
             "A Monte Carlo run cannot resolve missing game rules or canonical source authority.",
-            "No 4/5/6+ Scatter or Free Spins retrigger rule may be inferred.",
+            "Current BASE awards are 3 Scatter = 10 Free Spins and 4 Scatter = 12 Free Spins; 5 Scatter selects the embedded EPICBUY_V37 feature but remains blocked without its Provider payload and BASE-unit conversion; 6+ fails closed.",
+            "Free Spins retrigger remains fail closed until its canonical rule is approved.",
             "No Buy price, spin count or probability model may be inferred.",
             "The 96.50% RTP and 50,000x maximum payout remain design targets only.",
         ],
