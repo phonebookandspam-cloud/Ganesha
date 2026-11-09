@@ -115,4 +115,10 @@ try {
   process.stdout.write(JSON.stringify({
     status: 'PASS', schema: record.schema, approval_id: record.approval_id,
     provider: record.provider, game_title: record.game_title,
-    trusted_pu
+    trusted_public_key_sha256: fingerprint,
+    approved_manifest_core_sha256: coreHash,
+    approval_reference_count: Object.keys(requiredReferences).length,
+  }) + '\n');
+} catch (error) {
+  fail('PROVIDER_APPROVAL_EVIDENCE_INVALID', String(error?.message || error));
+}

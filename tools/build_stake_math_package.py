@@ -336,4 +336,11 @@ def main():
     build.add_argument("output_dir")
     build.add_argument("output_zip")
     args = parser.parse_args()
-    result = inspect_manifest(args.manifest) if args.command == 
+    result = inspect_manifest(args.manifest) if args.command == "preflight" else build_package(
+        args.manifest, args.output_dir, args.output_zip)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    raise SystemExit(0 if result["status"] == "PASS" else 2)
+
+
+if __name__ == "__main__":
+    main()
