@@ -9,8 +9,8 @@
       "file_count": 4,
       "expanded_bytes": 25137,
       "zip": "Ganesha-Math-BLOCKED-Evidence.zip",
-      "zip_bytes": 9525,
-      "zip_sha256": "20368bd2ab387ddce775fa9d07a5f36b81e982223edbc632803a10280c5cb0a1",
+      "zip_bytes": 9628,
+      "zip_sha256": "a52878d4a083304a1b88436d6f2379442398884bfb469b9202e4fd3b24999bbf",
       "manifest": "MATH_FILE_MANIFEST.json",
       "sha256_list": "MATH_SHA256SUMS.txt",
       "status": "BLOCKED_NOT_A_STAKE_UPLOAD_PACKAGE"
@@ -27,5 +27,6 @@
       "sha256_list": "FRONT_SHA256SUMS.txt",
       "status": "ENGINEERING_PREVIEW_ONLY_NOT_STAKE_UPLOAD_READY"
     }
-  ]
+  ],
+  "publication_note": "The publication commit is separate from the source_head used to build the packages."
 }
