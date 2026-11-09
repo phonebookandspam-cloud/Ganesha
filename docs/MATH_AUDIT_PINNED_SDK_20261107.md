@@ -6,6 +6,8 @@ The exact pinned official Math SDK commit is `141b4e89065ac4400769709a919259a923
 
 The validator was fetched from `https://github.com/engineio/math-sdk` into an isolated `/tmp` checkout and executed against the existing R98 Math package. No Books or LUT files were modified.
 
+The same pinned SDK's `RISK_CHECKS` implementation also evaluates top win (100,000x), cost multiplier (5,000x), standard deviation (60x), worst-0.1%-round CVaR (700x relative and 50,000x absolute), and tail-liability ratios (40x, 10,000x and combined). These are the SDK's published code constants, not a substitute for a written game-specific Provider decision.
+
 ## Results
 
 | Mode | LUT rows | Payout quantum failures | Pinned validator | Books/LUT payout array |
@@ -60,6 +62,8 @@ The historical R98 `math/index.json` and Frontend `MODE` both set `MAGICBUY_V36`
 
 - MAGICBUY_V36: variance 62,509.400826 x²; standard deviation 250.018800945x; CVaR99.9% 2,586.466156x; max 50,000x base / 500x purchase cost; max-win frequency 1/10,000,000.
 - EPICBUY_V37: variance 80,635.819229 x²; standard deviation 283.964468252x; CVaR99.9% 2,601.726947x; max 50,000x base / 500x purchase cost; max-win frequency 1/10,000,000.
+
+Under those historical 100/100 costs, both Buy modes exceed the SDK's standard-deviation and relative-CVaR thresholds; BASE exceeds the relative-CVaR threshold. These risk figures are historical and cannot be carried forward to the new MAGIC ×100 / EPIC ×500 contract. Tail-liability metrics and the complete SDK risk-check suite must be recomputed from the correct canonical distributions before release.
 
 Machine-readable addendum: `artifacts/MATH_BUY_MODE_AUDIT_ADDENDUM_20261107.json`.
 

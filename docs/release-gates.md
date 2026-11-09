@@ -1,6 +1,6 @@
 # Release Gates
 
-## Current authoritative status — R12, 2026-11-07
+## Current authoritative status — Full Scratch V1, 2026-11-09
 
 <badge>BLOCKED_NOT_UPLOAD_READY</badge>
 
@@ -16,8 +16,10 @@ The detailed tables and dated engineering notes below are historical evidence fr
 - Provider atomicity, idempotency, ledger, refund, settlement and recovery remain unverified against an actual Provider contract/sandbox. Public RGS documentation is not proof of provider ledger behavior.
 - R9 Frontend ZIP remains a 195-file Frontend-only engineering candidate, SHA-256 `2ff26b987b7d9b5eb12fe4f0952c8756be29e7b4c623447af0daf9b1815b868c`. It is not a complete Stake submission and its 177 media assets have zero cleared redistribution rights in the R12 audit.
 - R12C Full Scratch offline preview has 19 files and passes local integrity checks. A local Chrome 156 run at 320 CSS px reports no horizontal overflow, unnamed controls, undersized targets, broken images, console errors, failed requests or JavaScript exceptions; financial and Bonus Buy controls remain disabled, and the skip link receives a visible focus outline. This is not full WCAG 2.2 AA or physical-device acceptance.
+- Current safe-branch Front offline build: `artifacts/FRONTEND_BUILD_OFFLINE_20261109_R2`, 19 files, 2 JS bundles, 8 symbols, 4 audio assets, tree SHA-256 `0b521f9d6bc8866d55f0bc961083e680bd972e40e0202784abbd85aafd263adf`. Local integrity is PASS; Stake package verification is BLOCKED because Play/Event/EndRound/wagering/Buy are explicitly disabled and the manifest is `NON_FINANCIAL_ENGINEERING_PREVIEW`.
+- Current Math preflight is BLOCKED: `math/generator_input_manifest.json` is absent and all 58 canonical fields are missing. No `math/` upload folder was generated. The existing R12 sample ZIP's `math/` entries are byte-identical to the historical V1.0 Math candidate and remain nonconforming.
 - Python 3.13.17 / pip 26.3 / setuptools 84.1.0 resolve the six R11 build-tool advisories in the scanned environment. npm audit and pip-audit report zero known vulnerabilities in their respective scanned dependency sets. This does not clear project/asset licensing, SDK fork acceptance, signing, CI, hosted operations, accessibility or legal gates.
-- Current local regression results: Python 456/456 PASS; Node 33/33 PASS; R98 Replay 24/24 PASS; R98 Wild/Scatter 59/59 PASS; SDK wire fixture 4/4 PASS. These do not imply Provider or Stake Studio acceptance.
+- Previous R12 baseline regression results: Python 456/456 PASS; Node 33/33 PASS; R98 Replay 24/24 PASS; R98 Wild/Scatter 59/59 PASS; SDK wire fixture 4/4 PASS. These are historical counts and do not imply Provider or Stake Studio acceptance; the 2026-11-09 revalidation is recorded separately below.
 
 ### Current R12 release evidence
 
@@ -47,7 +49,7 @@ The 50,000× design target must be assessed as three independent claims—mathem
 
 | Gate | Required evidence | Current |
 |---|---|---|
-| P1 Source completeness | Current repository source is tracked; clean clone contains source/tests/assets/build scripts; reproducible package evidence for the same source snapshot | BLOCKED — current source/test/evidence paths are tracked, but current changes are not committed and no exact-current-source clean-clone build evidence exists. Earlier clean-clone evidence applies to a prior snapshot only |
+| P1 Source completeness | Current repository source is tracked; clean clone contains source/tests/assets/build scripts; reproducible package evidence for the same source snapshot | BLOCKED — source implementation is committed on `integration/ganesha-full-release-2026-11-09` at `05ede8478f96dfe806a133ea88e0d9ca25a106cb`; a clean-clone exact-HEAD build and signed/hosted CI attestation remain outstanding. The generated Front preview is not a Stake release package. |
 | P2 License | User-selected project license and third-party dependency notices | BLOCKED — no LICENSE/NOTICE |
 | P3 Asset rights | Creator/ownership and redistribution rights for every image/audio/font | BLOCKED — provenance not established |
 | P4 Privacy | Accurate data inventory, retention, deletion and deployment statement | BLOCKED — local prototype only |
