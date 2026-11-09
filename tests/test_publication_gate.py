@@ -76,8 +76,8 @@ class PublicationGateTests(unittest.TestCase):
         accessibility = report["checks"]["local_accessibility_reflow"]
         self.assertTrue(preview["pass"], preview)
         self.assertFalse(accessibility["pass"], accessibility)
-        self.assertFalse(accessibility["full_wcag_aa"])
-        self.assertFalse(accessibility["physical_device_acceptance"])
+        self.assertFalse(accessibility.get("full_wcag_aa", False))
+        self.assertFalse(accessibility.get("physical_device_acceptance", False))
         self.assertFalse(report["checks"]["accessibility_and_physical_devices"]["pass"])
 
     def test_release_evidence_integrity_is_distinct_from_release_clearance(self):

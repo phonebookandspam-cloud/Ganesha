@@ -4,6 +4,8 @@ Status is deliberately conservative. Local tests and mathematical design do not 
 
 **Current user-authoritative game rules (2026-11-09):** BASE 3 Scatter = 10 Free Spins; 4 = 12; 5 selects the existing embedded `EPICBUY_V37` feature within BASE with no second debit/Play and BASE settlement, but remains fail-closed pending Provider payload and BASE-unit conversion; 6+ and Free Spins retriggers fail closed. Independent MAGIC BUY = ×100 and EPIC BUY = ×500; both controls remain disabled pending canonical Math and Provider approval. Older dated notes below describing Exact-3-only or 4+ as unspecified are historical snapshots, not current requirements.
 
+The local HMAC stop generator hashes the raw `rng.py` and `config.py` bytes into its implementation version; even comment-only changes alter stop vectors. See [`RNG_VERSIONING_CONTRACT_20261109.md`](RNG_VERSIONING_CONTRACT_20261109.md). No RNG algorithm, stop weights or Math probabilities were changed in this integration.
+
 | Area | Current implementation | Gate status |
 |---|---|---|
 | Math Engine | draft weighted 13-stop strips, 20 draft paylines, 8 proposed symbols; strict integer/boolean config validation; deterministic HMAC stop generator; separate reference evaluator; exhaustive comparison of 371,293 stop vectors per mode with zero evaluator mismatches on resolved domains; conditional Draft distribution remains incomplete and noncanonical | BLOCKED; local rules enforce 3=10 / 4=12; 5 embedded EPIC payload and BASE-unit conversion unavailable; 6+ and retriggers fail closed. No original Math JSON, complete 58-field canonical manifest, approved generator inputs, Provider Golden Vectors or Provider Math approval |

@@ -57,9 +57,7 @@ PAYTABLE_MILLI: Dict[str, Dict[int, int]] = {
 @dataclass(frozen=True)
 class FeatureRules:
     # Defensive implementation ceilings only; these are not feature award rules.
-    # User-authoritative BASE awards: 3 Scatter => 10 spins; 4 Scatter => 12 spins.
-    # Five Scatter selects a separate embedded EPIC feature whose Provider payload
-    # is missing; 6+ Scatter and Free Spins retriggers fail closed.
+    # The only user-authoritative BASE award is exactly 3 Scatter => exactly 10 spins.
     max_total_free_spins: int = 50
     max_base_free_spins: int = 49
     # Draft-only Wild Expansion assumptions; not canonical or Provider-approved.
