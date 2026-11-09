@@ -1,0 +1,12 @@
+{
+  "kind": "ganesha-stake-math-directory",
+  "path": "/Users/Shared/Ganesha_and_The_Magic_V49_USER_MUSIC/Ganesha_Release_Integration_20261109/release-deliverables/math",
+  "status": "BLOCKED",
+  "modes": [],
+  "issues": [
+    {
+      "code": "ERR_MISSING_FILE",
+      "detail": "Stake Math upload requires index.json at the package root"
+    }
+  ]
+}

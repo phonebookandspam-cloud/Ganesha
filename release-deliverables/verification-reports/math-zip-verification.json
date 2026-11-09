@@ -1,0 +1,23 @@
+{
+  "kind": "ganesha-stake-math-zip",
+  "path": "/Users/Shared/Ganesha_and_The_Magic_V49_USER_MUSIC/Ganesha_Release_Integration_20261109/release-deliverables/Ganesha-Math-BLOCKED-Evidence.zip",
+  "status": "BLOCKED",
+  "issues": [
+    {
+      "code": "ERR_MISSING_FILE",
+      "detail": "Stake Math upload requires index.json at the package root"
+    }
+  ],
+  "inner": {
+    "kind": "ganesha-stake-math-directory",
+    "path": "/private/var/folders/1g/58lpn_c51l7c0417b1qlz17r0000gn/T/stake-package-check-_ic6yvkw",
+    "status": "BLOCKED",
+    "modes": [],
+    "issues": [
+      {
+        "code": "ERR_MISSING_FILE",
+        "detail": "Stake Math upload requires index.json at the package root"
+      }
+    ]
+  }
+}

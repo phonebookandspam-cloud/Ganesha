@@ -1,0 +1,57 @@
+{
+  "kind": "stake-frontend-directory",
+  "path": "/Users/Shared/Ganesha_and_The_Magic_V49_USER_MUSIC/Ganesha_Release_Integration_20261109/release-deliverables/front",
+  "status": "BLOCKED",
+  "files": 19,
+  "sdk_path_literals_found": [
+    "/wallet/authenticate",
+    "/wallet/play",
+    "/wallet/end-round",
+    "/bet/event"
+  ],
+  "launch_params_found": [
+    "sessionID",
+    "rgs_url",
+    "lang",
+    "device"
+  ],
+  "declared_capabilities": {
+    "provider_authenticate": "READ_ONLY",
+    "play": false,
+    "end_round": false,
+    "event": false,
+    "wagering": false,
+    "bonus_buy": false,
+    "outcome_mutation_by_frontend": false
+  },
+  "issues": [
+    {
+      "code": "RGS_CAPABILITY_NOT_IMPLEMENTED",
+      "detail": "Engineering manifest explicitly declares play unavailable"
+    },
+    {
+      "code": "RGS_CAPABILITY_NOT_IMPLEMENTED",
+      "detail": "Engineering manifest explicitly declares end_round unavailable"
+    },
+    {
+      "code": "RGS_CAPABILITY_NOT_IMPLEMENTED",
+      "detail": "Engineering manifest explicitly declares event unavailable"
+    },
+    {
+      "code": "RGS_CAPABILITY_NOT_IMPLEMENTED",
+      "detail": "Engineering manifest explicitly declares wagering unavailable"
+    },
+    {
+      "code": "RGS_CAPABILITY_NOT_IMPLEMENTED",
+      "detail": "Engineering manifest explicitly declares bonus_buy unavailable"
+    },
+    {
+      "code": "RGS_ADAPTER_NOT_PRODUCTION_READY",
+      "detail": "Provider adapter is not declared as a full authenticated Play/Event/EndRound lifecycle"
+    },
+    {
+      "code": "NON_RELEASE_FRONTEND_PACKAGE",
+      "detail": "Engineering manifest identifies this as a non-release package"
+    }
+  ]
+}
