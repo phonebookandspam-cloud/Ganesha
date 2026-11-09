@@ -56,6 +56,7 @@ The third-party approval checklist contains generic examples such as retrigger a
 - Added this provenance and adoption record.
 - Added `docs/skill-adoption/README.md` as the skills index.
 - Corrected the repository README and authority-boundary document to point to the later 2026-11-07 Scatter addendum, rather than leaving the earlier Exact-3-only interpretation presented as current.
+- Explicitly constrained the Stake upload boundary to the two deliverable roots `MATH/` and `Front/`. Math and Front End remain separate Studio imports/approval tracks; all SKILLs, source, tests, QA, SBOM, provenance, audit evidence and engineering tools stay in the repository and are not upload contents.
 - No production source, Math inputs, Books, LUTs, wallet behavior, RGS adapter behavior, npm dependencies, or SDK versions were changed in this adoption commit.
 
 ## Validation status

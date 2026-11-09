@@ -26,6 +26,15 @@ A lower-ranked source never overrides a higher-ranked contract. Record unresolve
 7. Run focused tests, then the complete relevant suite and release gate. Report exact commands, exit codes, counts, and unrun checks.
 8. Update evidence/manifests only after the underlying source and tests are final. Never claim Provider approval or upload readiness from local mocks.
 
+## Stake Engine upload boundary
+
+- The only Stake Engine upload payload roots are the two deliverable folders: `MATH/` and `Front/` (the Math and Front End packages). Treat their contents as two separately versioned/imported deliverables, even if an owner creates a convenience archive containing both top-level folders.
+- `MATH/` contains only the Stake publication files: root `index.json`, every referenced compressed `.jsonl.zst` Books file, and every referenced lookup `.csv` file. No Python generator/source, audit output, tests, docs, SKILLs, local databases, or development tooling belongs inside this upload folder.
+- `Front/` contains only the assembled static Front End build: root `index.html` and all referenced runtime JS/CSS/assets/fonts/media/manifest files. No source-only tests, Python services, local API, SQLite wallet, docs, SKILLs, or development tooling belongs inside this upload folder.
+- Agent skills, source code, QA, SBOM, provenance, audit evidence, release manifests, and CI files remain in the engineering repository and are used to build/verify the two deliverables; they are not uploaded to Stake Engine.
+- Before any upload, independently verify the exact `MATH/` directory/ZIP and `Front/` directory/ZIP, their root layout, all transitive asset references, hashes, and the release gates. A combined convenience ZIP does not replace the two separate Studio imports or approvals.
+- Never add a third upload folder or place project-root engineering files beside the two deliverable roots in an upload archive. Do not upload while `BLOCKED_NOT_UPLOAD_READY` remains.
+
 ## Immutable Ganesha game constraints
 
 - MAGIC BUY cost multiplier is 100x; standalone EPIC BUY cost multiplier is 500x.
