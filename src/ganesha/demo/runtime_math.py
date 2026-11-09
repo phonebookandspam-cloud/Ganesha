@@ -5,7 +5,7 @@ and must never be wired to a financial RoundService.
 """
 import copy
 
-from ganesha.math.engine import UnspecifiedMathRule
+from ganesha.math.engine import EmbeddedEpicFeatureUnavailable, UnspecifiedMathRule
 from ganesha.math.config import WILD
 
 
@@ -44,10 +44,22 @@ class LocalRuntimeMathPort:
         raise ValueError("unsupported simulation mode")
 
     def award_free_spins(self, scatter_count, retrigger=False):
+        if type(scatter_count) is not int or not 0 <= scatter_count <= 15:
+            raise ValueError("scatter_count must be an integer in [0, 15]")
+        if type(retrigger) is not bool:
+            raise ValueError("retrigger must be a boolean")
         if retrigger:
+            if scatter_count < 3:
+                return 0
+            raise UnspecifiedMathRule("Free Spins retrigger rules are not user-authorized")
+        if scatter_count < 3:
             return 0
         if scatter_count == 3:
             return 10
-        if scatter_count < 3:
-            return 0
-        raise UnspecifiedMathRule("4+ Scatter award is unspecified without canonical Math")
+        if scatter_count == 4:
+            return 12
+        if scatter_count == 5:
+            raise EmbeddedEpicFeatureUnavailable(
+                "5 Scatter requires the Provider-authoritative embedded EPIC payload and BASE-unit conversion"
+            )
+        raise UnspecifiedMathRule("6+ Scatter behavior is unspecified")

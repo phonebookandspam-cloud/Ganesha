@@ -57,7 +57,7 @@ def evaluate_line(symbols, paytable_milli, wild_symbol, scale_numerator=1,
     return {"payout_milli": amount, "symbol": target, "count": count}
 
 
-def exact_three_award(scatter_count, mode):
+def base_scatter_award(scatter_count, mode):
     if type(scatter_count) is not int or not 0 <= scatter_count <= 15:
         raise ReferenceMathError("Scatter count must be an integer in [0, 15]")
     if mode == "BASE":
@@ -125,7 +125,7 @@ def evaluate_board(board, *, paylines, paytable_milli, wild_symbol,
     multiplied = raw_payout * wild_multiplier
     payout = multiplied if payout_cap_milli is None else min(multiplied, payout_cap_milli)
     scatters = sum(symbol == scatter_symbol for reel in raw for symbol in reel)
-    award = exact_three_award(scatters, mode)
+    award = base_scatter_award(scatters, mode)
     return {
         "mode": mode,
         "board": raw,

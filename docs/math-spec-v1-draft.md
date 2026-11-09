@@ -6,7 +6,7 @@ Status: `SUPERSEDED_NOT_RELEASE_EVIDENCE`. This document records a hypothetical 
 
 ## Why this draft is superseded
 
-The draft conflicts with later user-authority reconciliation for BASE Scatter: it proposes 3/4/5+ = 10/12/15 Free Spins, while the authoritative boundary is exactly 3 = 10 Free Spins and 4/5 must not award that exact-3 feature. The draft also assumes retrigger behavior, Wild multipliers, new weighted strips, an 8-symbol inventory, Buy prices and a Divine Jackpot without canonical approval. See [`authority-boundary.md`](authority-boundary.md).
+The draft's progressive 3/4/5+ awards conflict with the current user-authoritative contract: 3 = 10 Free Spins; 4 = 12 Free Spins; 5 invokes the existing embedded EPIC feature in BASE (blocked pending canonical Provider payload and BASE-unit conversion); 6+ and retriggers fail closed. Independent MAGIC BUY ×100 and EPIC BUY ×500 are also user-defined, but both remain disabled pending canonical Math and Provider approval. The draft's probability weights, Wild multipliers, symbol inventory and Divine Jackpot remain noncanonical. See [`authority-boundary.md`](authority-boundary.md), [`SCATTER_FEATURE_CONTRACT_20261107.md`](SCATTER_FEATURE_CONTRACT_20261107.md), and [`BUY_MODE_USER_CONTRACT_20261109.md`](BUY_MODE_USER_CONTRACT_20261109.md).
 
 The exact RTP, variance and jackpot probabilities in `artifacts/math_audit_v1.json` were computed under those draft assumptions. They are not valid release evidence. The Monte Carlo and crosscheck share the same payout evaluator, omit observed jackpot mass and cannot independently validate rare-tail RTP/CVaR.
 
@@ -19,7 +19,7 @@ The exact RTP, variance and jackpot probabilities in `artifacts/math_audit_v1.js
 - Draft Buy costs 57.766× and 112.420× (not approved; not the original 100× Buy contract).
 - Draft Wild expansion and Divine Jackpot behavior (not approved).
 
-The active engine now has a fail-closed authority guard: BASE exactly 3 Scatter returns 10 Free Spins; 4/5 and 6+ raise an unspecified-rule error, and retrigger Scatter raises an unspecified-rule error. The 10/12/15 and +5/+7/+10 values remain only as quarantined historical config data and are not consumed by this guard. This does not certify the remaining draft reels, weights, paylines, paytable, Wild behavior, Buy modes or RTP.
+The active local engine enforces the current rules: BASE 3 Scatter returns 10 Free Spins; 4 returns 12; 5 raises `EmbeddedEpicFeatureUnavailable` until the canonical embedded payload and BASE-unit conversion exist; 6+ and unauthorized Free Spins retriggers fail closed. This local implementation does not certify the draft reels, weights, paylines, paytable, Wild behavior, Buy modes or RTP.
 
 ## Arithmetic notes for historical reproducibility only
 

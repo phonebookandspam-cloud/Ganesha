@@ -21,10 +21,10 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 try:
-    from tools.verify_stake_package import verify_math_directory, verify_math_zip
+    from tools.verify_stake_package import verify_ganesha_math_directory, verify_ganesha_math_zip
 except ModuleNotFoundError:  # direct script execution from tools/
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from tools.verify_stake_package import verify_math_directory, verify_math_zip
+    from tools.verify_stake_package import verify_ganesha_math_directory, verify_ganesha_math_zip
 
 REQUIRED_FIELDS = (
     "generator.name", "generator.version", "generator.source_entrypoint",
@@ -50,6 +50,11 @@ REQUIRED_FIELDS = (
     "front_contract.path", "front_contract.sha256",
 )
 REQUIRED_MODES = ("BASE", "MAGICBUY_V36", "EPICBUY_V37")
+REQUIRED_PURCHASE_MULTIPLIERS = {
+    "BASE": 1.0,
+    "MAGICBUY_V36": 100.0,
+    "EPICBUY_V37": 500.0,
+}
 
 
 def _get(obj, dotted):
@@ -141,6 +146,16 @@ def inspect_manifest(manifest_path: str | Path) -> dict:
         elif not isinstance(value, str) or not value.strip():
             report["issues"].append({"code": "REQUIRED_VALUE_INVALID", "field": field})
 
+    # These are immutable user-authorized Ganesha price multipliers. Historical
+    # index observations or a valid-looking Provider approval string cannot
+    # silently substitute MAGIC x100 / EPIC x500.
+    for mode, expected in REQUIRED_PURCHASE_MULTIPLIERS.items():
+        field = f"purchase_costs.{mode}.multiplier"
+        actual = _get(manifest, field)
+        if actual is not None and (isinstance(actual, bool) or actual != expected):
+            report["issues"].append({"code": "PURCHASE_COST_CONTRACT_MISMATCH",
+                                     "field": field, "expected": expected, "actual": actual})
+
     # A canonical package requires explicit generated output files, not inferred names.
     artifacts = manifest.get("publish_artifacts")
     if not isinstance(artifacts, dict) or set(artifacts) != set(REQUIRED_MODES):
@@ -218,7 +233,7 @@ def build_package(manifest_path: str | Path, output_dir: str | Path, output_zip:
                                 "events": events_name, "weights": weights_name})
         (stage / "index.json").write_text(json.dumps({"modes": index_modes}, ensure_ascii=False,
                                                        indent=2) + "\n", encoding="utf-8")
-        math_report = verify_math_directory(stage)
+        math_report = verify_ganesha_math_directory(stage)
         report["source_math_verification"] = math_report
         if math_report["status"] != "PASS":
             report["issues"].append({"code": "STAKE_MATH_DIRECTORY_VERIFICATION_BLOCKED"})
@@ -231,7 +246,7 @@ def build_package(manifest_path: str | Path, output_dir: str | Path, output_zip:
                 info.compress_type = zipfile.ZIP_DEFLATED
                 info.external_attr = 0o100644 << 16
                 archive.writestr(info, item.read_bytes())
-        zip_report = verify_math_zip(temp_zip)
+        zip_report = verify_ganesha_math_zip(temp_zip)
         report["zip_verification"] = zip_report
         if zip_report["status"] != "PASS":
             report["issues"].append({"code": "STAKE_MATH_ZIP_VERIFICATION_BLOCKED"})
@@ -251,8 +266,8 @@ def build_package(manifest_path: str | Path, output_dir: str | Path, output_zip:
             report["issues"].append({"code": "OUTPUT_WRITE_INCOMPLETE_REQUIRES_MANUAL_REVIEW"})
             return report
     # Recheck the actual published destination, not only the staging directory.
-    report["final_directory_verification"] = verify_math_directory(out_dir)
-    report["final_zip_verification"] = verify_math_zip(out_zip)
+    report["final_directory_verification"] = verify_ganesha_math_directory(out_dir)
+    report["final_zip_verification"] = verify_ganesha_math_zip(out_zip)
     if (report["final_directory_verification"]["status"] != "PASS"
             or report["final_zip_verification"]["status"] != "PASS"):
         report["issues"].append({"code": "FINAL_DESTINATION_RECHECK_FAILED"})

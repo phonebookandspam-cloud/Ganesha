@@ -10,7 +10,7 @@ The browser page includes a **scripted visual demo**: DEMO SPIN calls a loopback
 
 ## Authority boundary
 
-The current V1 math and feature configuration is a hypothetical draft, not a transcription of the original user-supplied Math. The 2026-11-07 user instruction supersedes the earlier RC10 Exact-3-only Scatter interpretation: 3 Scatter awards 10 Free Spins; 4 Scatter awards 12 Free Spins; 5 Scatter selects the existing `EPICBUY_V37` sequence embedded in the already-paid BASE round (no second debit or Play); 6+ Scatter and retriggers fail closed. Five-Scatter financial execution remains disabled until the Provider-authoritative embedded payload and BASE-unit conversion are recovered and verified. See [`docs/SCATTER_FEATURE_CONTRACT_20261107.md`](docs/SCATTER_FEATURE_CONTRACT_20261107.md) for the current rule and [`docs/authority-boundary.md`](docs/authority-boundary.md) for historical source reconciliation and remaining blockers.
+The current V1 math and feature configuration is a hypothetical draft, not a transcription of the original user-supplied Math. Current user-authoritative BASE rules are: 3 Lotus Scatter = 10 Free Spins; 4 = 12 Free Spins; 5 = the existing embedded `EPICBUY_V37` feature inside the already-paid BASE round (no second debit or Play; BASE settlement), currently blocked pending the Provider-authoritative payload and BASE-unit conversion; 6+ and Free Spins retriggers fail closed. Independent purchase prices are MAGIC BUY ×100 and EPIC BUY ×500; both remain locked pending canonical Math and Provider approval. Historical ×100/×100 Math indexes and old Exact-3-only notes are superseded. See [`docs/authority-boundary.md`](docs/authority-boundary.md), [`docs/SCATTER_FEATURE_CONTRACT_20261107.md`](docs/SCATTER_FEATURE_CONTRACT_20261107.md), and [`docs/BUY_MODE_USER_CONTRACT_20261109.md`](docs/BUY_MODE_USER_CONTRACT_20261109.md).
 
 The original 2026-09-27 user Math JSON raw bytes are not currently available in this workspace. Its exact reel strips, paylines and paytable must not be reconstructed from generated Books, LUTs, artwork or this draft.
 
@@ -34,7 +34,7 @@ The 8-symbol art inventory in this preview is a proposed visual set. The origina
 - `provider`: integration boundary documentation only; no production adapter or credentials
 - `tests`: local unit/integration tests for this prototype
 - `docs`: architecture, authority boundary, draft Math and release gates
-- `.agents/skills`: project-specific Stake Engine, Math audit and RGS integration instructions for coding agents; see [`docs/skill-adoption/README.md`](docs/skill-adoption/README.md)
+- `.agents/skills`: original Ganesha-specific Stake Engine, Math audit and RGS engineering workflows; internal engineering assets, not Stake upload contents
 
 ## Publication status
 

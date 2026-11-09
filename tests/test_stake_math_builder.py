@@ -45,7 +45,12 @@ class StakeMathBuilderTests(unittest.TestCase):
             if field.endswith(".approval_reference"):
                 _set_path(manifest, field, "test-fixture-approval-reference")
             elif field.endswith(".multiplier"):
-                _set_path(manifest, field, 1.0 if field == "purchase_costs.BASE.multiplier" else 100.0)
+                expected = {
+                    "purchase_costs.BASE.multiplier": 1.0,
+                    "purchase_costs.MAGICBUY_V36.multiplier": 100.0,
+                    "purchase_costs.EPICBUY_V37.multiplier": 500.0,
+                }[field]
+                _set_path(manifest, field, expected)
             elif field.endswith(".sha256") and _get(manifest, field) is None:
                 _set_path(manifest, field, "a" * 64)
             elif _get(manifest, field) is None:
@@ -98,7 +103,7 @@ class StakeMathBuilderTests(unittest.TestCase):
         self.assertEqual(json.loads((out_dir / "index.json").read_text())["modes"], [
             {"name": "BASE", "cost": 1.0, "events": "books_BASE.jsonl.zst", "weights": "weights_BASE.csv"},
             {"name": "MAGICBUY_V36", "cost": 100.0, "events": "books_MAGICBUY_V36.jsonl.zst", "weights": "weights_MAGICBUY_V36.csv"},
-            {"name": "EPICBUY_V37", "cost": 100.0, "events": "books_EPICBUY_V37.jsonl.zst", "weights": "weights_EPICBUY_V37.csv"},
+            {"name": "EPICBUY_V37", "cost": 500.0, "events": "books_EPICBUY_V37.jsonl.zst", "weights": "weights_EPICBUY_V37.csv"},
         ])
         no_overwrite = build_package(manifest, out_dir, self.root / "second.zip")
         self.assertEqual(no_overwrite["status"], "BLOCKED")
@@ -118,6 +123,17 @@ class StakeMathBuilderTests(unittest.TestCase):
         self.assertFalse(out_dir.exists())
         self.assertFalse(out_zip.exists())
         self.assertIn("SOURCE_HASH_MISMATCH", {x["code"] for x in report["preflight"]["issues"]})
+
+    def test_wrong_epic_multiplier_is_rejected_before_any_output(self):
+        manifest = self._complete_manifest()
+        data = json.loads(manifest.read_text())
+        data["purchase_costs"]["EPICBUY_V37"]["multiplier"] = 100.0
+        manifest.write_text(json.dumps(data))
+        report = inspect_manifest(manifest)
+        self.assertEqual(report["status"], "BLOCKED")
+        mismatch = next(x for x in report["issues"] if x["code"] == "PURCHASE_COST_CONTRACT_MISMATCH")
+        self.assertEqual(mismatch["expected"], 500.0)
+        self.assertEqual(mismatch["actual"], 100.0)
 
     def test_unsafe_publish_artifact_path_is_rejected(self):
         manifest = self._complete_manifest()

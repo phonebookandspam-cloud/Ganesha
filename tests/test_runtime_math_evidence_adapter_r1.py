@@ -2,10 +2,25 @@ import unittest
 
 from ganesha.demo.runtime_math import LocalRuntimeMathPort
 from ganesha.game.engine import GameEngine
+from ganesha.math.engine import EmbeddedEpicFeatureUnavailable, UnspecifiedMathRule
 from ganesha.game.presentation import build_presentation_events
 
 
 class RuntimeMathEvidenceAdapterR1Tests(unittest.TestCase):
+    def test_runtime_math_port_obeys_current_base_scatter_contract_and_fails_closed(self):
+        port = LocalRuntimeMathPort()
+        self.assertEqual(port.award_free_spins(3), 10)
+        self.assertEqual(port.award_free_spins(4), 12)
+        self.assertEqual(port.award_free_spins(2), 0)
+        with self.assertRaises(EmbeddedEpicFeatureUnavailable):
+            port.award_free_spins(5)
+        with self.assertRaises(UnspecifiedMathRule):
+            port.award_free_spins(6)
+        with self.assertRaises(UnspecifiedMathRule):
+            port.award_free_spins(3, retrigger=True)
+        with self.assertRaises(ValueError):
+            port.award_free_spins(True)
+
     def test_base_and_feature_emit_explicit_payout_wild_and_cap_evidence(self):
         port = LocalRuntimeMathPort()
         base = port.evaluate_stops([0] * 5, "BASE")

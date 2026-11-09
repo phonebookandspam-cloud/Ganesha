@@ -17,7 +17,7 @@ The canonical manifest reports **58 required fields, 58 missing**. The partial s
 | Paytable / paylines / symbols | Empty objects | Complete symbol definitions, integer payouts, paylines and symbol mapping |
 | Feature rules | Partial user-authority reconciliation | Wild semantics, 4+ Scatter, 6+ Scatter, Free Spins retrigger, termination and all Buy-mode feature rules |
 | RNG | Empty object | RNG algorithm, seed derivation, stop weighting and reproducibility contract |
-| Purchase costs | Historical `1.0× / 100× / 100×` values observed in an old index | Current approved prices, purchase eligibility, mode distributions and Provider authorization |
+| Purchase costs | Historical `1.0× / 100× / 100×` values observed in an old index | User-defined target is BASE ×1 / MAGIC ×100 / EPIC ×500; canonical Math, mode distributions, eligibility and Provider authorization remain unavailable |
 | Golden vectors | Empty object | BASE, Free Spins, Buy-mode and maximum-payout input/output vectors |
 | Provider approval | No receipt or approval ID | Actual Math upload receipt and game-specific Provider approval |
 | Front contract | Historical Front path and SHA-256 recovered | Current production Front/RGS contract and Provider acceptance |
@@ -27,8 +27,9 @@ The recovered generic SDK metadata and historical Front hash are provenance clue
 ## Known rules versus unresolved rules
 
 - User-authoritative: exactly 3 Scatter in BASE awards exactly 10 Free Spins.
-- Unspecified: 4+ Scatter rewards, 6+ Scatter handling, Free Spins retrigger, all Buy-mode prices and probabilities, bonus-mode outcome distributions, complete Wild Expansion semantics and multiplier rules.
-- The partial manifest records 100× observations for MAGICBUY_V36 and EPICBUY_V37. These are historical observations, not approved current prices or a license to implement either Buy mode.
+- Current user-authoritative: 3 Scatter = 10 Free Spins; 4 Scatter = 12 Free Spins; 5 Scatter invokes the existing `EPICBUY_V37` feature embedded inside the already-paid BASE round, without another debit or Play, and remains BASE settlement; 6+ Scatter fails closed.
+- Current user-defined independent purchase multipliers: MAGIC BUY = ×100 and EPIC BUY = ×500. Both remain disabled pending canonical Math and Provider approval.
+- The partial manifest's 100× / 100× observations are historical and conflict with the current EPIC ×500 requirement. They are not approved current prices and do not authorize changing Books/LUT or implementing either Buy mode.
 - 96.50% RTP and 50,000× maximum payout remain design targets, not verified values.
 - The previous Draft-005 Divine Jackpot path is incompatible with Stake's published stateless-game approval requirements. A 50,000× target must be proven as a permitted single-bet outcome or redesigned with Provider clearance; no reachability or frequency is currently established.
 

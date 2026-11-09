@@ -59,8 +59,11 @@ class FrontendStaticTests(unittest.TestCase):
         self.assertIn("WILD_GANESHA:", app_script)
         self.assertIn("deriveExpandedWildDisplayBoard", app_script)
         self.assertIn("WILD_GANESHA", presentation_contract)
-        self.assertNotIn("MAGIC BUY · 100×", html)
-        self.assertNotIn("EPIC BUY · 200×", html)
+        self.assertIn("MAGIC BUY", html)
+        self.assertIn("EPIC BUY", html)
+        self.assertIn("×100 · LOCKED", html)
+        self.assertIn("×500 · LOCKED", html)
+        self.assertIn("Both purchases remain disabled pending canonical Math and Provider approval", html)
 
     def test_accessibility_basics_are_present(self):
         html = (ROOT / "frontend/index.html").read_text(encoding="utf-8")
@@ -107,7 +110,7 @@ class FrontendStaticTests(unittest.TestCase):
         self.assertIn('WALLET BALANCE', html)
         self.assertIn('NOT CONNECTED', html)
         self.assertIn('Bet configuration disabled', html)
-        self.assertIn('Bonus Buy remains default-off', html)
+        self.assertIn('Both purchases remain disabled pending canonical Math and Provider approval', html)
         self.assertIn("definition[3]", script)
         self.assertIn("definition[4]", script)
         self.assertIn("appendSymbolArtwork(cell, definition, symbols[row])", script)

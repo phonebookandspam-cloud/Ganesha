@@ -56,9 +56,15 @@ Machine-readable evidence: `artifacts/MATH_AUDIT_PINNED_SDK_20261107.json`.
 
 ## Buy-mode cost and weighted RTP addendum
 
-The R98 `math/index.json` and Frontend `MODE` both set `MAGICBUY_V36` cost to 100 and `EPICBUY_V37` cost to 100. The 55% MAGIC BUY and 35% EPIC BUY figures in the UI are weighted non-zero outcome rates, not purchase cost multipliers. Exact weighted distribution calculations using the pinned SDK confirm 96.5% RTP for both buy modes at cost 100, and 500x purchase-cost maximum win for both. No 55x Magic Buy cost mismatch exists in the current R98 source.
+The historical R98 `math/index.json` and Frontend `MODE` both set `MAGICBUY_V36` cost to 100 and `EPICBUY_V37` cost to 100. The 55% MAGIC BUY and 35% EPIC BUY figures in the UI are weighted non-zero outcome rates, not purchase cost multipliers. The weighted distribution calculations in this section are strictly historical observations at cost 100/100; they are **not valid results for the current user-defined cost contract** and must not be cited as current Buy-mode RTP or payout evidence.
 
 - MAGICBUY_V36: variance 62,509.400826 x²; standard deviation 250.018800945x; CVaR99.9% 2,586.466156x; max 50,000x base / 500x purchase cost; max-win frequency 1/10,000,000.
 - EPICBUY_V37: variance 80,635.819229 x²; standard deviation 283.964468252x; CVaR99.9% 2,601.726947x; max 50,000x base / 500x purchase cost; max-win frequency 1/10,000,000.
 
 Machine-readable addendum: `artifacts/MATH_BUY_MODE_AUDIT_ADDENDUM_20261107.json`.
+
+## Superseding user price contract — 2026-11-09
+
+The user has now explicitly fixed the independent purchase multipliers as **MAGIC BUY ×100** and **EPIC BUY ×500**. The historical 100/100 index is therefore nonconforming. This does not authorize a cost-only index edit: the corresponding canonical mode probability model, Books, LUT, RTP, variance, volatility and tail metrics must be regenerated and Provider-verified from canonical inputs. The Ganesha builder and package verifier now fail closed unless the mode-cost contract is exactly BASE ×1 / MAGIC ×100 / EPIC ×500. Both Front controls remain disabled until canonical Math and Provider approval.
+
+The BASE 5-Scatter path remains separate: it embeds the existing EPIC feature inside BASE, with no second debit or Play and BASE settlement. Its Provider-authoritative feature payload and BASE-unit conversion are still missing. See `docs/BUY_MODE_USER_CONTRACT_20261109.md` and `docs/SCATTER_FEATURE_CONTRACT_20261107.md`.

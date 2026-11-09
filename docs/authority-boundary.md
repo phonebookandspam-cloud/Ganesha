@@ -2,11 +2,18 @@
 
 Status: `BLOCKED_FROM_STAKE_RELEASE`.
 
-> **Current Scatter-rule supersession (2026-11-07):** This document preserves the earlier RC10 Exact-3 authority reconciliation as historical evidence. Its statements below that treat 4/5 Scatter as unspecified are superseded by [`SCATTER_FEATURE_CONTRACT_20261107.md`](SCATTER_FEATURE_CONTRACT_20261107.md), which records the later explicit user instruction: 3 = 10 Free Spins; 4 = 12 Free Spins; 5 = existing `EPICBUY_V37` embedded in the paid BASE round, with no second debit/Play and BASE settlement; 6+ and retriggers fail closed. Five-Scatter financial execution remains blocked until the exact Provider-authoritative payload and BASE-unit conversion are verified. This supersession does not make the draft Math canonical or upload-ready.
+## Superseding user contracts — 2026-11-09
 
-## Confirmed user-authority constraints from the later RC10 reconciliation
+- Independent MAGIC BUY is ×100; independent EPIC BUY is ×500. Historical Math index values of ×100 / ×100 are not conforming to the current requirement and must not be submitted or repaired by editing the index alone.
+- BASE 5 Scatter is a distinct embedded `EPICBUY_V37` feature inside the already-paid BASE round: no second debit, no second Play, BASE settlement. Its canonical Provider payload and BASE-unit conversion remain missing, so the path must fail closed.
+- BASE Scatter: 3 = 10 Free Spins; 4 = 12 Free Spins; 6+ fail closed. Free Spins retrigger remains unsupported.
+- The detailed current Buy contract is `docs/BUY_MODE_USER_CONTRACT_20261109.md`; the detailed Scatter contract is `docs/SCATTER_FEATURE_CONTRACT_20261107.md`.
+
+## Historical user-authority constraints from the 2026-11-01 RC10 reconciliation
 
 Source: `qa/work_20261101_ver1_release_candidate_rc10/worktree/qa/RC10_MATH_USER_AUTHORITY_RECONCILIATION_20261101.json` (2026-11-01), with supporting Markdown beside it.
+
+This source predates and is superseded by the 2026-11-07 Scatter addendum and 2026-11-09 Buy-mode contract above. The historical statements below must not be treated as current rules.
 
 - Initial BASE reveal: exactly 3 literal Lotus Scatter awards exactly 10 Free Spins.
 - 0–2 Scatter do not award that exact-3 feature.
@@ -29,14 +36,14 @@ The Full Scratch V1 draft introduced all of the following without canonical sour
 - 57.766× MAGIC BUY and 112.420× EPIC BUY prices with 25/50 starting spins.
 - A terminal 50,000× Divine Jackpot event.
 
-These are hypothetical research proposals. They are not interchangeable with the Stake title's user-authoritative Math. In particular, the current draft runtime and exact audit must not be used to claim compliance with the BASE Exact-3 rule.
+These are hypothetical research proposals. They are not interchangeable with the Stake title's user-authoritative Math. The current draft runtime and exact audit must not be used to claim canonical Math compliance with the current 3/4/5/6+ Scatter rules.
 
 ## Disposition
 
 - The current Math audit, Monte Carlo and crosscheck artifacts are retained for engineering history only and marked `SUPERSEDED_NOT_RELEASE_EVIDENCE`.
-- The visual frontend now states the known Exact-3 rule and explicitly marks unspecified rules; it disables all wager and Buy controls.
-- The active local `free_spins_awarded()` now returns exactly 10 only for BASE count=3, returns 0 for counts 0–2, and raises `UnspecifiedMathRule` for 4/5, 6+ and all retrigger cases. This is a fail-closed guard, not a claim that 4/5 have no other feature; a round encountering an unresolved case is aborted/refunded by the local reference service.
-- Draft-005 BASE awards 10/12/15 and retrigger +5/+7/+10 are not present in the active `GameConfig`; no 4/5 Scatter or retrigger award tuple is available to the active engine.
+- The visual frontend states the current user-defined 3/4/5/6+ Scatter rules and disables all wager and Buy controls.
+- The active local engine returns 10 for BASE count=3 and 12 for count=4; it raises `EmbeddedEpicFeatureUnavailable` for count=5 and fails closed for 6+ and unauthorized retriggers. This is local rule enforcement, not canonical Math or Provider approval.
+- Draft-005 progressive awards and retrigger awards are not present in the active `GameConfig`.
 - The local reference API is not exposed as a public wagering interface.
 - The historical Draft-005 MAGIC/EPIC cost and spin-count values are no longer present in active `GameConfig`, `simulation.py`, or `round_ev.py`. Full-round EV, Free Spins EV and Monte Carlo now fail closed without approved 4+ Scatter, retrigger and Buy rules. Bonus Buy execution requires an explicit Math-port `resolve_bonus_buy_terms` result; the default `DraftMathPort` supplies no such terms, so both Buy modes fail before debit. Test-only ports may supply fixture terms for contract tests, but this is not canonical Math approval or a production purchase path.
 - No Books/LUT, RC10 files, SDK, Studio state or Provider settings were modified by this Full Scratch work.
@@ -54,7 +61,7 @@ Official source reviewed 2026-11-04: https://stake-engine.com/docs/approval-guid
 1. Reattach the original 2026-09-27 user Math JSON or exact source file; record raw bytes and SHA-256.
 2. Recover the exact approved symbol set, reel strips, 20 paylines and paytable.
 3. Obtain approved probability models and all mode-specific input files.
-4. Obtain the Provider-authoritative five-Scatter embedded EPIC payload and BASE-unit conversion; independently verify the already user-authorized 3/4/5/6+ Scatter and no-retrigger contract against Provider Math.
+4. Obtain the Provider-authoritative embedded EPIC payload and BASE-unit conversion for 5 Scatter, and Provider confirmation of 6+ rejection and no-retrigger behavior; the user-authorized 3/4 awards are already specified.
 5. Obtain the canonical generator, version, source hash, RNG derivation and Provider-approved Golden Vectors.
 6. Bind all inputs to a source manifest and approval references before generating or changing Books/LUT.
 

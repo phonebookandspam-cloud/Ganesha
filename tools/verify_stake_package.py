@@ -111,7 +111,7 @@ def verify_math_directory(package_dir) -> dict:
         if book_path is None or lut_path is None:
             continue
 
-        csv_ids, csv_payouts, total_weight = [], [], 0
+        csv_ids, csv_id_set, csv_payouts, total_weight = [], set(), [], 0
         try:
             with lut_path.open("r", encoding="utf-8", newline="") as stream:
                 for line_number, row in enumerate(csv.reader(stream), start=1):
@@ -129,11 +129,12 @@ def verify_math_directory(package_dir) -> dict:
                             raise ValueError("line %d column %d exceeds uint64" % (line_number, column))
                         values.append(number)
                     simulation_id, weight, payout = values
-                    if simulation_id in csv_ids:
+                    if simulation_id in csv_id_set:
                         raise ValueError("duplicate simulation_number %d" % simulation_id)
                     if payout and (payout < 10 or payout % 10):
                         raise ValueError("line %d payout_multiplier must be zero or a multiple of 10 >= 10" % line_number)
                     csv_ids.append(simulation_id)
+                    csv_id_set.add(simulation_id)
                     csv_payouts.append(payout)
                     total_weight += weight
                     if total_weight > UINT64_MAX:
@@ -144,7 +145,7 @@ def verify_math_directory(package_dir) -> dict:
             _issue(report, "INVALID_LOOKUP_TABLE", "%s: %s" % (lut_path.name, exc))
             continue
 
-        book_ids, book_payouts, event_count = [], [], 0
+        book_ids, book_id_set, book_payouts, event_count = [], set(), [], 0
         try:
             import zstandard
             with book_path.open("rb") as raw:
@@ -159,13 +160,14 @@ def verify_math_directory(package_dir) -> dict:
                         simulation_id, events, payout = blob["id"], blob["events"], blob["payoutMultiplier"]
                         if type(simulation_id) is not int or not 0 <= simulation_id <= UINT64_MAX:
                             raise ValueError("line %d id must be a uint64 integer" % line_number)
-                        if simulation_id in book_ids:
+                        if simulation_id in book_id_set:
                             raise ValueError("duplicate book simulation id %d" % simulation_id)
                         if not isinstance(events, list) or not all(isinstance(event, dict) for event in events):
                             raise ValueError("line %d events must be an array of objects" % line_number)
                         if type(payout) is not int or not 0 <= payout <= UINT64_MAX:
                             raise ValueError("line %d payoutMultiplier must be a uint64 integer" % line_number)
                         book_ids.append(simulation_id)
+                        book_id_set.add(simulation_id)
                         book_payouts.append(payout)
                         event_count += len(events)
             if not book_ids:
@@ -329,6 +331,26 @@ def verify_frontend_directory(package_dir) -> dict:
     return report
 
 
+def verify_ganesha_math_directory(package_dir) -> dict:
+    """Apply Ganesha's exact BASE/MAGIC/EPIC mode and price contract."""
+    root = Path(package_dir).resolve()
+    report = verify_math_directory(root)
+    report["kind"] = "ganesha-stake-math-directory"
+    if report["status"] != "PASS":
+        return report
+    try:
+        index = _read_json(root / "index.json")
+        expected = {"BASE": 1.0, "MAGICBUY_V36": 100.0, "EPICBUY_V37": 500.0}
+        observed = {mode.get("name"): mode.get("cost") for mode in index["modes"]}
+        if observed != expected:
+            _issue(report, "GANESHA_MODE_COST_CONTRACT_MISMATCH",
+                   "Expected exactly BASE x1, MAGICBUY_V36 x100 and EPICBUY_V37 x500; observed %r" % observed)
+    except Exception as exc:
+        _issue(report, "GANESHA_MODE_COST_CONTRACT_INVALID", str(exc))
+    report["status"] = "PASS" if not report["issues"] else "BLOCKED"
+    return report
+
+
 def _verify_zip(zip_path: Path, verifier):
     report = {"kind": "stake-package-zip", "path": str(zip_path), "status": "BLOCKED", "issues": []}
     if not zip_path.is_file():
@@ -370,6 +392,12 @@ def verify_math_zip(zip_path) -> dict:
     return report
 
 
+def verify_ganesha_math_zip(zip_path) -> dict:
+    report = _verify_zip(Path(zip_path).resolve(), verify_ganesha_math_directory)
+    report["kind"] = "ganesha-stake-math-zip"
+    return report
+
+
 def verify_frontend_zip(zip_path) -> dict:
     report = _verify_zip(Path(zip_path).resolve(), verify_frontend_directory)
     report["kind"] = "stake-frontend-zip"
@@ -381,7 +409,7 @@ def main():
     parser.add_argument("kind", choices=("math-dir", "math-zip", "frontend-dir", "frontend-zip"))
     parser.add_argument("path")
     args = parser.parse_args()
-    verifier = {"math-dir": verify_math_directory, "math-zip": verify_math_zip,
+    verifier = {"math-dir": verify_ganesha_math_directory, "math-zip": verify_ganesha_math_zip,
                 "frontend-dir": verify_frontend_directory, "frontend-zip": verify_frontend_zip}[args.kind]
     report = verifier(args.path)
     print(json.dumps(report, ensure_ascii=False, indent=2))

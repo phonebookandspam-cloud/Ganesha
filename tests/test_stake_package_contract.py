@@ -8,7 +8,7 @@ import zstandard
 
 from tools.verify_stake_package import (
     verify_frontend_directory, verify_frontend_zip, verify_math_directory,
-    verify_math_zip,
+    verify_math_zip, verify_ganesha_math_directory,
 )
 
 
@@ -40,6 +40,31 @@ class StakePackageContractTests(unittest.TestCase):
         self.assertEqual(report["status"], "BLOCKED")
         self.assertIn("ERR_MISSING_FILE", {item["code"] for item in report["issues"]})
 
+    def _ganesha_math_package(self):
+        root = self._math_package()
+        modes = [{"name": "BASE", "cost": 1.0,
+                  "events": "books_base.jsonl.zst", "weights": "lookup_base.csv"}]
+        for name, cost in (("MAGICBUY_V36", 100.0), ("EPICBUY_V37", 500.0)):
+            book_name = "books_" + name + ".jsonl.zst"
+            lut_name = "lookup_" + name + ".csv"
+            record = {"id": 1, "events": [{"type": "test-event"}], "payoutMultiplier": 20}
+            (root / book_name).write_bytes(zstandard.ZstdCompressor().compress((json.dumps(record) + "\n").encode()))
+            (root / lut_name).write_text("1,100,20\n", encoding="utf-8")
+            modes.append({"name": name, "cost": cost, "events": book_name, "weights": lut_name})
+        (root / "index.json").write_text(json.dumps({"modes": modes}), encoding="utf-8")
+        return root
+
+    def test_ganesha_math_enforces_distinct_magic_100_and_epic_500_costs(self):
+        root = self._ganesha_math_package()
+        report = verify_ganesha_math_directory(root)
+        self.assertEqual(report["status"], "PASS", report["issues"])
+        index = json.loads((root / "index.json").read_text())
+        index["modes"][2]["cost"] = 100.0
+        (root / "index.json").write_text(json.dumps(index), encoding="utf-8")
+        blocked = verify_ganesha_math_directory(root)
+        self.assertEqual(blocked["status"], "BLOCKED")
+        self.assertIn("GANESHA_MODE_COST_CONTRACT_MISMATCH", {item["code"] for item in blocked["issues"]})
+
     def test_math_directory_checks_books_lut_ids_and_payouts_exactly(self):
         report = verify_math_directory(self._math_package())
         self.assertEqual(report["status"], "PASS", report["issues"])
@@ -52,6 +77,16 @@ class StakePackageContractTests(unittest.TestCase):
         self.assertIn("INVALID_LOOKUP_TABLE", {item["code"] for item in header["issues"]})
         overflow = verify_math_directory(self._math_package("1,18446744073709551616,20\n"))
         self.assertIn("INVALID_LOOKUP_TABLE", {item["code"] for item in overflow["issues"]})
+
+    def test_math_lookup_and_books_reject_duplicate_ids(self):
+        duplicate_lut = verify_math_directory(self._math_package("1,100,20\n1,100,20\n"))
+        self.assertIn("INVALID_LOOKUP_TABLE", {item["code"] for item in duplicate_lut["issues"]})
+        root = self._math_package("1,100,20\n2,100,20\n")
+        record = {"id": 1, "events": [{"type": "test-event"}], "payoutMultiplier": 20}
+        (root / "books_base.jsonl.zst").write_bytes(zstandard.ZstdCompressor().compress(
+            ((json.dumps(record) + "\n") * 2).encode("utf-8")))
+        duplicate_book = verify_math_directory(root)
+        self.assertIn("INVALID_COMPRESSED_BOOKS", {item["code"] for item in duplicate_book["issues"]})
 
     def test_math_directory_rejects_empty_modes_and_path_traversal(self):
         root = self._math_package()

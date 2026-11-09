@@ -2,9 +2,11 @@
 
 Date: 2026-11-09
 
-Target baseline: `sync/full-scratch-v1-r12d-2026-11-08` at `c28065d92d95c27ecbb07acca98299ce8f9a882c`
+Source snapshot: Full Scratch V1 local source HEAD `a6e7997e469730f67c10b9f5657c5a1edfbfb2c2` (worktree changes were overlaid without copying generated `artifacts/`, `dist/`, `node_modules/`, local databases or secrets).
 
-Integration branch: `integration/stake-engine-skills-2026-11-09`
+Remote parent: `integration/stake-engine-skills-2026-11-09` at `450535018a9f06ad823fed22039a78338131af60`.
+
+Active safe branch: `integration/ganesha-full-release-2026-11-09`.
 
 ## Repositories reviewed
 
@@ -12,8 +14,8 @@ Integration branch: `integration/stake-engine-skills-2026-11-09`
 |---|---|---|---|
 | https://github.com/engineio/math-sdk | Official Stake Engine Math SDK | Exact pinned validator, Books/LUT serialization, weighted distribution calculations, package validation | SDK is a generic framework, not Ganesha's canonical Math inputs. Pin exact commit; never regenerate game math from examples. |
 | https://github.com/topics/stakeengine | GitHub topic discovery | Discovery only; can locate additional ecosystem projects | Topic membership is not verification, endorsement, SDK authority, or license evidence. |
-| https://github.com/egorfedorov/Slot-Casino-Game-Developer-Skills-for-Stake-Engine | Third-party agent skill collection | Workflow decomposition, explicit Math/RGS/UX/compliance gates, evidence-oriented reporting | Repository metadata shows no declared license. Do not vendor its SKILL.md, scripts, or references wholesale. Its example event shape and approval checklist are not Provider contracts and may conflict with Ganesha rules. |
-| https://github.com/furic/stake-engine-client | Third-party TypeScript RGS client | Independent cross-check of endpoint shapes, response types, amount conversion, and replay surface | Repository metadata shows no declared license. Do not add dependency or copy source wholesale. Not official and not proof of Provider behavior. |
+| https://github.com/egorfedorov/Slot-Casino-Game-Developer-Skills-for-Stake-Engine | Third-party agent skill collection | Workflow decomposition, explicit Math/RGS/UX/compliance gates, evidence-oriented reporting | GitHub repository API reports `license: null`; no LICENSE file was found. Do not vendor its SKILL.md, scripts, or references wholesale. Its example event shape and approval checklist are not Provider contracts and may conflict with Ganesha rules. |
+| https://github.com/furic/stake-engine-client | Third-party TypeScript RGS client | Independent cross-check of endpoint shapes, response types, amount conversion, and replay surface | `package.json` declares `MIT`, but GitHub repository metadata reports `license: null` and no LICENSE file was found. Do not add dependency or copy source wholesale. Not official and not proof of Provider behavior. |
 | https://github.com/engineio/ts-client | Official Stake Engine TypeScript client | Primary comparison point for the project's pinned `stake-engine` client and request lifecycle | Keep exact package version/lockfile integrity pinned; Beta/client limitations remain. |
 
 ## Adopted project skills
@@ -56,8 +58,8 @@ The third-party approval checklist contains generic examples such as retrigger a
 - Added this provenance and adoption record.
 - Added `docs/skill-adoption/README.md` as the skills index.
 - Corrected the repository README and authority-boundary document to point to the later 2026-11-07 Scatter addendum, rather than leaving the earlier Exact-3-only interpretation presented as current.
-- Explicitly constrained the Stake upload boundary to the two deliverable roots `MATH/` and `Front/`. Math and Front End remain separate Studio imports/approval tracks; all SKILLs, source, tests, QA, SBOM, provenance, audit evidence and engineering tools stay in the repository and are not upload contents.
-- No production source, Math inputs, Books, LUTs, wallet behavior, RGS adapter behavior, npm dependencies, or SDK versions were changed in this adoption commit.
+- Explicitly constrained the Stake upload boundary to the two deliverable roots `math/` and `front/`. Math and Front End remain separate Studio imports/approval tracks; all SKILLs, source, tests, QA, SBOM, provenance, audit evidence and engineering tools stay in the repository and are not upload contents.
+- No third-party source code, skills, or runtime dependencies were copied. The project-local Ganesha skills are original instructions. The current branch separately updates the Ganesha Math builder/verifier to enforce the user-authoritative ×100/×500 cost contract and keeps Front purchases locked.
 
 ## Validation status
 
@@ -78,3 +80,8 @@ The third-party approval checklist contains generic examples such as retrigger a
 - https://github.com/furic/stake-engine-client/blob/main/src/constants.ts
 - https://github.com/furic/stake-engine-client/blob/main/src/client.ts
 - https://github.com/engineio/ts-client
+
+
+## 2026-11-09 Ganesha-specific contract integration
+
+The project-local build and package verification path now enforces the user-authoritative independent purchase multipliers: BASE ×1, MAGIC BUY ×100, EPIC BUY ×500. The frontend shows these only as locked target prices; it does not enable either purchase. The BASE 5-Scatter embedded EPIC feature remains a separate BASE settlement path and is blocked without the canonical Provider payload and BASE-unit conversion. The Ganesha Math builder and package verifier reject the historical ×100/×100 index.
